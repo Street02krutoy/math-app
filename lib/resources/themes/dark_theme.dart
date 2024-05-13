@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/resources/themes/light_theme.dart';
+import 'package:flutter_app/resources/themes/styles/dark_theme_colors.dart';
 import '/config/design.dart';
 import '/resources/themes/styles/color_styles.dart';
 import '/resources/themes/text_theme/default_text_theme.dart';

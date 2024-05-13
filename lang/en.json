@@ -1,6 +1,9 @@
 {
-  "documentation": "documentation",
-  "changelog": "changelog",
-  "micro-framework for Flutter": "micro-framework for Flutter",
-  "app_name": "SuperMath"
+  "profile_page": "Profile",
+  "achievements": "Achievements",
+  "progress": "Progress",
+  "list_of_themes": "List of themes",
+  "rating":"Rating:",
+  "done":"Done:",
+  "logout":"Logout"
 }
