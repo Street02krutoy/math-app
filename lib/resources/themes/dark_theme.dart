@@ -52,6 +52,7 @@ ThemeData darkTheme(ColorStyles color) {
     ),
     textTheme: darkTheme,
     colorScheme: ColorScheme.dark(background: color.background),
+    cardColor: color.cardColor,
   );
 }
 

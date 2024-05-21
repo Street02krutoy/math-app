@@ -1,178 +1,60 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_app/resources/widgets/round_image_widget.dart';
-import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
-import 'package:nylo_framework/nylo_framework.dart';
-import 'package:nylo_framework/theme/helper/ny_theme.dart';
 import 'package:flutter/material.dart';
-import '/bootstrap/extensions.dart';
-import '/resources/widgets/logo_widget.dart';
-import '/resources/widgets/safearea_widget.dart';
-import '/bootstrap/helpers.dart';
-import '/app/controllers/home_controller.dart';
+import 'package:flutter_app/resources/widgets/account_page_widget.dart';
+import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
+import 'package:flutter_app/resources/widgets/rating_page_widget.dart';
+import 'package:flutter_app/resources/widgets/themes_page_widget.dart';
+import 'package:nylo_framework/nylo_framework.dart';
 
-class HomePage extends NyStatefulWidget<HomeController> {
-  static const path = '/home';
+class HomePage extends NyStatefulWidget {
+  static const path = '/home-page';
 
-  HomePage({super.key}) : super(path, child: _HomePageState());
+  HomePage({super.key}) : super(path, child: _HomePagePageState());
 }
 
-class _HomePageState extends NyState<HomePage> {
-  /// The boot method is called before the [view] is rendered.
-  /// You can override this method to perform any async operations.
-  /// Try uncommenting the code below.
+class _HomePagePageState extends NyState<HomePage> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    AccountPage(),
+    ThemesPage(),
+    RatingPage(),
+  ];
+
+  @override
+  init() async {}
+
+  /// Use boot if you need to load data before the [view] is rendered.
   // @override
   // boot() async {
-  //   dump("boot");
-  //   await Future.delayed(Duration(seconds: 2));
+  //
   // }
 
-  /// If you would like to use the Skeletonizer loader,
-  /// uncomment the code below.
-  // bool get useSkeletonizer => true;
-
-  /// The Loading widget is shown while the [boot] method is running.
-  /// You can override this method to show a custom loading widget.
-  // @override
-  // Widget loading(BuildContext context) {
-  //   return Scaffold(
-  //       body: Center(child: Text("Loading..."))
-  //   );
-  // }
-
-  /// The [view] method should display your page.
   @override
   Widget view(BuildContext context) {
-    var theme = Theme.of(context);
-
     return Scaffold(
-        appBar: AppBar(
-          title: Text("profile_page".tr()),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              onPressed: widget.controller.login,
-              icon: const Icon(Icons.login),
-            ),
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              children: [
-                RoundImage(
-                    child: SizedBox(
-                      height: 600,
-                      width: 600,
-                      child: Container(
-                        color: theme.cardColor,
-                      ),
-                    ),
-                    roundColor: theme.primaryColor,
-                    radius: 60),
-                Text(
-                  "Name",
-                  style: TextStyle(fontSize: 20),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Card(
-                        child: SizedBox(
-                            height: 100,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.blue.shade600,
-                                      size: 40,
-                                    ),
-                                    Text(
-                                      "rating".tr(),
-                                      style: theme.primaryTextTheme.labelLarge
-                                          ?.apply(
-                                              fontSizeDelta: 4,
-                                              color: Colors.blue.shade600),
-                                    )
-                                  ],
-                                ),
-                                Text(
-                                  "123",
-                                  style: TextStyle(fontSize: 30),
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                    Expanded(
-                      child: Card(
-                        child: SizedBox(
-                          height: 100,
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.done,
-                                    color: Colors.blue.shade600,
-                                    size: 40,
-                                  ),
-                                  Text(
-                                    "done".tr(),
-                                    style: theme.primaryTextTheme.labelLarge
-                                        ?.apply(
-                                            fontSizeDelta: 4,
-                                            color: Colors.blue.shade600),
-                                  )
-                                ],
-                              ),
-                              Text(
-                                "123",
-                                style: TextStyle(fontSize: 30),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                TextIconButton(
-                    onTap: () async {
-                      await changeLanguage('en');
-                    },
-                    text: "achievements".tr(),
-                    icon: Icons.arrow_right),
-                TextIconButton(
-                    onTap: () {},
-                    text: "progress".tr(),
-                    icon: Icons.arrow_right),
-                TextIconButton(
-                    onTap: () {},
-                    text: "list_of_themes".tr(),
-                    icon: Icons.arrow_right),
-                Row(
-                  children: [
-                    Spacer(),
-                    ElevatedButton(
-                        onPressed: () async {
-                          await changeLanguage('ru');
-                        },
-                        child: Row(
-                          children: [Icon(Icons.logout), Text("logout".tr())],
-                        )),
-                    Spacer()
-                  ],
-                )
-              ],
-            ),
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'profile_page'.tr(),
           ),
-        ));
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'math_page'.tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.equalizer),
+            label: 'rating_page'.tr(),
+          ),
+        ],
+      ),
+    );
   }
-
-  bool get isThemeDark =>
-      ThemeProvider.controllerOf(context).currentThemeId ==
-      getEnv('DARK_THEME_ID');
 }

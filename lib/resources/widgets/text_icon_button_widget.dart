@@ -11,8 +11,9 @@ class TextIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Card(
+        color: Theme.of(context).cardColor,
         child: InkWell(
-          splashColor: Colors.blue.withAlpha(30),
+          splashColor: Theme.of(context).appBarTheme.backgroundColor,
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.all(8.0),

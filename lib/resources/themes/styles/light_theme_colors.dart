@@ -46,4 +46,8 @@ class LightThemeColors implements ColorStyles {
   Color get bottomTabBarLabelUnselected => Colors.black45;
   @override
   Color get bottomTabBarLabelSelected => Colors.black;
+
+  @override
+  // TODO: implement cardColor
+  Color get cardColor => throw UnimplementedError();
 }

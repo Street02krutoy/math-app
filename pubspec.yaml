@@ -63,3 +63,9 @@ flutter:
     - public/assets/app_icon/
     - lang/
     - .env
+  fonts:
+    - family: Tinkoff-Sans
+      fonts:
+        - asset: public/assets/fonts/T.ttf
+        - asset: public/assets/fonts/TB.ttf
+        - asset: public/assets/fonts/TM.ttf

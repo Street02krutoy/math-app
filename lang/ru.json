@@ -1,9 +1,13 @@
 {
     "profile_page": "Профиль",
+    "math_page":"Примеры",
+  "rating_page":"Рейтинг",
+  "themes_page":"Темы",
     "achievements": "Достижения",
     "progress": "Прогресс",
-    "list_of_themes": "Темы",
+    "list_of_themes": "Справка",
     "rating":"Рейтинг:",
     "done":"Завершено:",
-    "logout":"Выйти из аккаунта"
+    "logout":"Выйти из аккаунта",
+    "loading":"Загрузка"
   }

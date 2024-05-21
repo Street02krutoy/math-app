@@ -1,9 +1,13 @@
 {
   "profile_page": "Profile",
+  "math_page":"Math",
+  "rating_page":"Rating",
+  "themes_page":"Themes",
   "achievements": "Achievements",
   "progress": "Progress",
-  "list_of_themes": "List of themes",
+  "list_of_themes": "Reference",
   "rating":"Rating:",
   "done":"Done:",
-  "logout":"Logout"
+  "logout":"Logout",
+  "loading":"Loading"
 }

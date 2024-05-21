@@ -19,7 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 | You can use any font from Google Fonts library.
 | -------------------------------------------------------------------------- */
 
-final TextStyle appFont = GoogleFonts.montserrat();
+final TextStyle appFont = TextStyle(fontFamily: "Tinkoff-Sans");
 // e.g. final TextStyle appThemeFont = GoogleFonts.lato();
 
 /* App Logo

@@ -7,12 +7,12 @@ import '/resources/themes/styles/color_styles.dart';
 class DarkThemeColors implements ColorStyles {
   // general
   @override
-  Color get background => Color.fromARGB(255, 41, 41, 41);
+  Color get background => Color.fromRGBO(51, 51, 51, 1);
 
   @override
-  Color get primaryContent => Color.fromARGB(255, 194, 194, 194);
+  Color get primaryContent => Color.fromRGBO(238, 238, 238, 1);
   @override
-  Color get primaryAccent => const Color(0xFF9999aa);
+  Color get primaryAccent => const Color.fromRGBO(255, 221, 45, 1);
 
   @override
   Color get surfaceBackground => Colors.white70;
@@ -21,9 +21,9 @@ class DarkThemeColors implements ColorStyles {
 
   // app bar
   @override
-  Color get appBarBackground => Color.fromARGB(255, 105, 105, 105);
+  Color get appBarBackground => Color.fromRGBO(51, 51, 51, 1);
   @override
-  Color get appBarPrimaryContent => Colors.white;
+  Color get appBarPrimaryContent => Color.fromRGBO(238, 238, 238, 1);
 
   // buttons
   @override
@@ -33,7 +33,7 @@ class DarkThemeColors implements ColorStyles {
 
   // bottom tab bar
   @override
-  Color get bottomTabBarBackground => const Color(0xFF232c33);
+  Color get bottomTabBarBackground => Color.fromRGBO(51, 51, 51, 1);
 
   // bottom tab bar - icons
   @override
@@ -47,5 +47,6 @@ class DarkThemeColors implements ColorStyles {
   @override
   Color get bottomTabBarLabelSelected => Colors.white;
 
-  Color get cardColor => Colors.white;
+  @override
+  Color get cardColor => Color.fromRGBO(64, 64, 64, 1);
 }

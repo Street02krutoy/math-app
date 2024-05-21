@@ -48,6 +48,8 @@ abstract class ColorStyles extends BaseColorStyles {
   @override
   Color get bottomTabBarLabelSelected;
 
+  Color get cardColor;
+
   // e.g. add a new style
   // Uncomment the below:
   // Color get iconBackground;
