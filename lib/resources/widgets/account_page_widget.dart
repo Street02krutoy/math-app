@@ -7,6 +7,7 @@ import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:nylo_framework/theme/helper/ny_theme.dart';
 
 import '../../app/controllers/controller.dart';
 
@@ -39,7 +40,7 @@ class _AccountPageState extends NyState<AccountPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("profile_page".tr()),
+          title: Text("profile.page_name".tr()),
           actions: [
             IconButton(
               onPressed: AccountController().login,
@@ -53,12 +54,8 @@ class _AccountPageState extends NyState<AccountPage> {
             child: Column(
               children: [
                 RoundImage(
-                    child: SizedBox(
-                      height: 600,
-                      width: 600,
-                      child: Container(
-                        color: theme.cardColor,
-                      ),
+                    child: Container(
+                      color: theme.cardColor,
                     ),
                     roundColor: theme.cardColor,
                     radius: 60),
@@ -70,7 +67,7 @@ class _AccountPageState extends NyState<AccountPage> {
                   children: [
                     Expanded(
                       child: CustomCard(
-                          title: "rating".tr(),
+                          title: "profile.rating".tr(),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
@@ -80,7 +77,7 @@ class _AccountPageState extends NyState<AccountPage> {
                     ),
                     Expanded(
                       child: CustomCard(
-                          title: "done".tr(),
+                          title: "profile.done".tr(),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
@@ -94,15 +91,21 @@ class _AccountPageState extends NyState<AccountPage> {
                     onTap: () async {
                       await changeLanguage('en');
                     },
-                    text: "achievements".tr(),
+                    text: "profile.achievements".tr(),
                     icon: Icons.arrow_right),
                 TextIconButton(
-                    onTap: () {},
-                    text: "progress".tr(),
+                    onTap: () {
+                      NyTheme.set(context, id: "dark_theme");
+                      setState(() {});
+                    },
+                    text: "profile.progress".tr(),
                     icon: Icons.arrow_right),
                 TextIconButton(
-                    onTap: () {},
-                    text: "list_of_themes".tr(),
+                    onTap: () {
+                      NyTheme.set(context, id: "light_theme");
+                      setState(() {});
+                    },
+                    text: "profile.list_of_themes".tr(),
                     icon: Icons.arrow_right),
                 Row(
                   children: [
@@ -112,7 +115,10 @@ class _AccountPageState extends NyState<AccountPage> {
                           await changeLanguage('ru');
                         },
                         child: Row(
-                          children: [Icon(Icons.logout), Text("logout".tr())],
+                          children: [
+                            Icon(Icons.logout),
+                            Text("profile.logout".tr())
+                          ],
                         )),
                     Spacer()
                   ],

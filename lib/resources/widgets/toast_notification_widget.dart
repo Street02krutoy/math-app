@@ -17,11 +17,14 @@ class ToastNotification extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         height: 100,
         decoration: BoxDecoration(
-          color: context.isDarkMode ? "#282c34".toHexColor() : Colors.white,
+          color:
+              context.isDarkMode ? Theme.of(context).cardColor : Colors.white,
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: context.isDarkMode ? Colors.black12 : Colors.grey.withOpacity(0.1),
+              color: context.isDarkMode
+                  ? Colors.black12
+                  : Colors.grey.withOpacity(0.1),
               spreadRadius: 3,
               blurRadius: 5,
               offset: const Offset(0, 2),
@@ -41,9 +44,10 @@ class ToastNotification extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: _toastMeta.color,
-                    borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(8), topLeft: Radius.circular(8))
-                  ),
+                      color: _toastMeta.color,
+                      borderRadius: const BorderRadius.only(
+                          bottomLeft: Radius.circular(8),
+                          topLeft: Radius.circular(8))),
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   margin: const EdgeInsets.only(right: 12),
@@ -61,7 +65,10 @@ class ToastNotification extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
-                              .copyWith(color: context.isDarkMode ? Colors.white.withOpacity(0.8) : "#171717".toHexColor()),
+                              .copyWith(
+                                  color: context.isDarkMode
+                                      ? Colors.white.withOpacity(0.8)
+                                      : "#171717".toHexColor()),
                         ).fontWeightBold(),
                         Flexible(
                           child: Text(
@@ -71,7 +78,10 @@ class ToastNotification extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
-                                .copyWith(color: context.isDarkMode ? Colors.white70 : "#5d626b".toHexColor()),
+                                .copyWith(
+                                    color: context.isDarkMode
+                                        ? Colors.white70
+                                        : "#5d626b".toHexColor()),
                           ),
                         ),
                       ],
@@ -91,12 +101,13 @@ class ToastNotification extends StatelessWidget {
                 width: 30,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: context.isDarkMode ? Colors.white30 : "#f2f2f2".toHexColor(),
-                  borderRadius: BorderRadius.circular(20)
-                ),
+                    color: context.isDarkMode
+                        ? Colors.white30
+                        : "#f2f2f2".toHexColor(),
+                    borderRadius: BorderRadius.circular(20)),
                 child: Center(
                   child: IconButton(
-                    padding: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
                       onPressed: () {
                         if (_dismiss != null) {
                           _dismiss!();
@@ -104,9 +115,9 @@ class ToastNotification extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.close,
-                        color: context.isDarkMode ?
-                        Colors.white :
-                        "#878787".toHexColor(),
+                        color: context.isDarkMode
+                            ? Colors.white
+                            : "#878787".toHexColor(),
                         size: 18,
                       )),
                 ),

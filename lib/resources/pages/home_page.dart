@@ -43,15 +43,15 @@ class _HomePagePageState extends NyState<HomePage> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
-            label: 'profile_page'.tr(),
+            label: 'profile.page_name'.tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.book),
-            label: 'math_page'.tr(),
+            label: 'math.page_name'.tr(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.equalizer),
-            label: 'rating_page'.tr(),
+            label: 'rating.page_name'.tr(),
           ),
         ],
       ),

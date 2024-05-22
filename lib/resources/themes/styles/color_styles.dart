@@ -15,6 +15,8 @@ abstract class ColorStyles extends BaseColorStyles {
   @override
   Color get primaryAccent;
 
+  Color get secondary;
+
   @override
   Color get surfaceBackground;
   @override

@@ -49,4 +49,7 @@ class DarkThemeColors implements ColorStyles {
 
   @override
   Color get cardColor => Color.fromRGBO(64, 64, 64, 1);
+
+  @override
+  Color get secondary => Color.fromARGB(255, 71, 167, 247);
 }

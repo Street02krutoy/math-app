@@ -1,13 +1,35 @@
 {
-  "profile_page": "Profile",
-  "math_page":"Math",
-  "rating_page":"Rating",
-  "themes_page":"Themes",
-  "achievements": "Achievements",
-  "progress": "Progress",
-  "list_of_themes": "Reference",
-  "rating":"Rating:",
-  "done":"Done:",
-  "logout":"Logout",
-  "loading":"Loading"
+  
+  "profile":{
+    "page_name": "Profile",
+    "achievements": "Achievements",
+    "progress": "Progress",
+    "list_of_themes": "Reference",
+    "rating":"Rating:",
+    "done":"Done:",
+    "logout":"Logout"
+  },
+  "themes":{
+    "page_name":"Themes",
+    "difficulty":{
+      "0":"Easy",
+      "1":"Medium",
+      "2":"Hard",
+      "choose":"Choose difficulty"
+    }
+  },
+  "math":{
+    "page_name":"Math",
+    "skip":"Skip",
+    "next":"Next",
+    "solve":"Solve this expression"
+  },
+  "rating":{
+    "page_name":"Rating"
+  },
+  "general":{
+    "cancel":"Cancel",
+    "ok":"OK",
+    "loading":"Loading"
+  }
 }

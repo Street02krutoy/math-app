@@ -39,8 +39,24 @@ ThemeData darkTheme(ColorStyles color) {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: TextButton.styleFrom(
           foregroundColor: color.buttonPrimaryContent,
-          backgroundColor: color.buttonBackground),
+          backgroundColor: color.primaryAccent),
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: color.primaryContent,
+        backgroundColor: color.background,
+      ),
+    ),
+    // hintColor: color.secondary,
+    inputDecorationTheme: InputDecorationTheme(
+        labelStyle: TextStyle(color: color.secondary),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1.0, color: color.primaryAccent),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(width: 1.0, color: color.primaryAccent),
+            borderRadius: BorderRadius.all(Radius.circular(10)))),
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: color.bottomTabBarBackground,
       unselectedIconTheme:
@@ -51,7 +67,8 @@ ThemeData darkTheme(ColorStyles color) {
       selectedItemColor: color.bottomTabBarLabelSelected,
     ),
     textTheme: darkTheme,
-    colorScheme: ColorScheme.dark(background: color.background),
+    colorScheme: ColorScheme.dark(
+        background: color.background, secondary: color.secondary),
     cardColor: color.cardColor,
   );
 }

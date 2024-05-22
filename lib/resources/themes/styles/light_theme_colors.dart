@@ -50,4 +50,8 @@ class LightThemeColors implements ColorStyles {
   @override
   // TODO: implement cardColor
   Color get cardColor => throw UnimplementedError();
+
+  @override
+  // TODO: implement secondary
+  Color get secondary => throw UnimplementedError();
 }
