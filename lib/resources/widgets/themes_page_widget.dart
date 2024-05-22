@@ -55,7 +55,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
             return Padding(
               padding: const EdgeInsets.all(4.0),
               child: CustomCard(
-                  title: "title",
+                  title: Text("title"),
                   content: Text("description"),
                   onTap: () {
                     showDiffDialog(context);

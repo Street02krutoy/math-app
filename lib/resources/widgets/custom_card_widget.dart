@@ -6,9 +6,9 @@ class CustomCard extends StatelessWidget {
       {super.key,
       required this.title,
       required this.content,
-      required this.onTap,
+      this.onTap = null,
       required this.height});
-  final String title;
+  final Widget title;
 
   final Widget content;
   final double height;
@@ -25,20 +25,7 @@ class CustomCard extends StatelessWidget {
           child: SizedBox(
             height: height,
             child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge
-                          ?.apply(fontSizeDelta: 2),
-                    ),
-                  ],
-                ),
-                content
-              ],
+              children: [title, content],
             ),
           ),
         ),

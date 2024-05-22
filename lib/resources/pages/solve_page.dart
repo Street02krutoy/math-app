@@ -32,7 +32,7 @@ class _SolvePageState extends NyState<SolvePage> {
             children: [
               Spacer(),
               CustomCard(
-                  title: "math.solve".tr(),
+                  title: Text("math.solve".tr()),
                   content: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(

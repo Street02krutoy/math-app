@@ -1,15 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app/controllers/account_controller.dart';
-import 'package:flutter_app/app/controllers/home_controller.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:nylo_framework/theme/helper/ny_theme.dart';
-
-import '../../app/controllers/controller.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -67,22 +62,20 @@ class _AccountPageState extends NyState<AccountPage> {
                   children: [
                     Expanded(
                       child: CustomCard(
-                          title: "profile.rating".tr(),
+                          title: Text("profile.rating".tr()),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
                           ),
-                          onTap: () {},
                           height: 75),
                     ),
                     Expanded(
                       child: CustomCard(
-                          title: "profile.done".tr(),
+                          title: Text("profile.done".tr()),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
                           ),
-                          onTap: () {},
                           height: 75),
                     )
                   ],
