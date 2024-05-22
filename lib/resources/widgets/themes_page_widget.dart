@@ -13,7 +13,7 @@ class ThemesPage extends StatefulWidget {
   createState() => _ThemesPageState();
 }
 
-enum Difficulty { eazy, medium, hard }
+enum Difficulty { easy, medium, hard }
 
 class _ThemesPageState extends NyState<ThemesPage> {
   _ThemesPageState() {
@@ -87,7 +87,7 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
           RadioListTile<Difficulty>(
             activeColor: Theme.of(context).colorScheme.secondary,
             title: Text('themes.difficulty.0'.tr()),
-            value: Difficulty.eazy,
+            value: Difficulty.easy,
             groupValue: _difficulty,
             onChanged: (Difficulty? value) {
               setState(() {
