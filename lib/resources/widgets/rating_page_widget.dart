@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/resources/widgets/toast_notification_widget.dart';
+import 'package:flutter_app/resources/widgets/top_image_widgets.dart';
+import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class RatingPage extends StatefulWidget {
@@ -14,12 +15,22 @@ class _RatingPageState extends NyState<RatingPage> {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("rating.page_name".tr()),
-      ),
-      body: ToastNotification(ToastMeta(
-          title: "title", style: "style", description: "description")),
-    );
+        appBar: AppBar(
+          title: Text("rating.page_name".tr()),
+        ),
+        body: Row(
+          children: [
+            ProfileTop1(
+              name: "User",
+              child: Container(
+                color: theme.cardColor,
+              ),
+              rating: 58.2,
+            )
+          ],
+        ));
   }
 }
