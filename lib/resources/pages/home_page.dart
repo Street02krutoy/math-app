@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/resources/widgets/account_page_widget.dart';
-import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/rating_page_widget.dart';
 import 'package:flutter_app/resources/widgets/themes_page_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';

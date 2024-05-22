@@ -88,15 +88,17 @@ class _AccountPageState extends NyState<AccountPage> {
                     icon: Icons.arrow_right),
                 TextIconButton(
                     onTap: () {
-                      NyTheme.set(context, id: "dark_theme");
-                      setState(() {});
+                      setState(() {
+                        NyTheme.set(context, id: "dark_theme");
+                      });
                     },
                     text: "profile.progress".tr(),
                     icon: Icons.arrow_right),
                 TextIconButton(
                     onTap: () {
-                      NyTheme.set(context, id: "light_theme");
-                      setState(() {});
+                      setState(() {
+                        NyTheme.set(context, id: "light_theme");
+                      });
                     },
                     text: "profile.list_of_themes".tr(),
                     icon: Icons.arrow_right),

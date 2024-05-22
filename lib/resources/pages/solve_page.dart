@@ -31,17 +31,24 @@ class _SolvePageState extends NyState<SolvePage> {
           child: Column(
             children: [
               Spacer(),
-              CustomCard(
-                  title: Text("math.solve".tr()),
-                  content: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "8+9",
-                      textScaler: TextScaler.linear(2),
-                    ),
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomCard(
+                        title: Text("math.solve".tr(),
+                            textScaler: TextScaler.linear(1.5)),
+                        content: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "8+9",
+                            textScaler: TextScaler.linear(2),
+                          ),
+                        ),
+                        onTap: null,
+                        height: 100),
                   ),
-                  onTap: null,
-                  height: 100),
+                ],
+              ),
               SizedBox(
                 height: 20,
               ),

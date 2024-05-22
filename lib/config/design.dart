@@ -4,7 +4,6 @@ import '/resources/widgets/loader_widget.dart';
 import '/resources/widgets/logo_widget.dart';
 import '/resources/widgets/toast_notification_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /* Design
 |--------------------------------------------------------------------------
