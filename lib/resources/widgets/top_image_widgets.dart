@@ -60,7 +60,7 @@ class ProfileTop2 extends StatelessWidget {
               child: RoundImage(
                 child: child,
                 roundColor: Color.fromRGBO(147, 147, 147, 1),
-                radius: 60,
+                radius: 50,
               ),
             ),
             Image.asset("public/assets/images/top2_icon.png"),
@@ -101,7 +101,7 @@ class ProfileTop3 extends StatelessWidget {
               child: RoundImage(
                 child: child,
                 roundColor: Color.fromRGBO(168, 100, 0, 1),
-                radius: 60,
+                radius: 50,
               ),
             ),
             Image.asset("public/assets/images/top3_icon.png"),

@@ -18,19 +18,35 @@ class _RatingPageState extends NyState<RatingPage> {
     var theme = Theme.of(context);
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("rating.page_name".tr()),
-        ),
-        body: Row(
-          children: [
-            ProfileTop1(
-              name: "User",
-              child: Container(
-                color: theme.cardColor,
-              ),
-              rating: 58.2,
-            )
-          ],
-        ));
+      appBar: AppBar(
+        title: Text("rating.page_name".tr()),
+      ),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          ProfileTop2(
+            name: "User",
+            child: Container(
+              color: theme.cardColor,
+            ),
+            rating: 58.2,
+          ),
+          ProfileTop1(
+            name: "User",
+            child: Container(
+              color: theme.cardColor,
+            ),
+            rating: 58.2,
+          ),
+          ProfileTop3(
+            name: "User",
+            child: Container(
+              color: theme.cardColor,
+            ),
+            rating: 58.2,
+          )
+        ],
+      ),
+    );
   }
 }
