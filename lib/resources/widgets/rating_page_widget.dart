@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/models/rating.dart';
 import 'package:flutter_app/resources/widgets/top_image_widgets.dart';
-import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class RatingPage extends StatefulWidget {
@@ -13,15 +13,14 @@ class RatingPage extends StatefulWidget {
 class _RatingPageState extends NyState<RatingPage> {
   _RatingPageState() {}
 
-  List<Map> rating = [];
+  List<Rating> rating = [];
 
   @override
   void initState() {
-    for (int i = 1; i < 101; i++) {
-      rating.add({"position": i, "name": "User", "rating": 200 - i});
-    }
+    rating = List.generate(100, (index) {
+      return Rating("Name", index.toDouble(), index);
+    });
     super.initState();
-
   }
 
   @override
