@@ -11,7 +11,7 @@ class ProfileTop extends StatelessWidget {
 
   final String name;
   final Widget child;
-  final num rating;
+  final double rating;
   final int place;
   late final Color color;
   late final String path;

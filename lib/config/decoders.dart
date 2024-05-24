@@ -1,3 +1,4 @@
+import '/app/models/rating.dart';
 import '/app/controllers/account_controller.dart';
 import '/app/controllers/home_controller.dart';
 import '/app/models/user.dart';
@@ -17,6 +18,10 @@ final Map<Type, dynamic> modelDecoders = {
   User: (data) => User.fromJson(data),
 
   // User: (data) => User.fromJson(data),
+
+  List<Rating>: (data) => List.from(data).map((json) => Rating.fromJson(json)).toList(),
+
+  Rating: (data) => Rating.fromJson(data),
 };
 
 /* API Decoders
