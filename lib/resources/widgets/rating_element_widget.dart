@@ -9,9 +9,9 @@ class TopListItem extends StatelessWidget {
     this.borderColor = Colors.black,
   });
 
-  final int place;
-  final String name;
-  final num rating;
+  final int? place;
+  final String? name;
+  final num? rating;
   final Color borderColor;
 
   @override
@@ -22,28 +22,29 @@ class TopListItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.0),
             side: BorderSide(color: borderColor)),
         title: Text(
-          name,
+          name.toString(),
           textScaler: TextScaler.linear(2),
+          style: TextStyle(fontSize: 14,),
         ),
         leading: Text(
           place.toString(),
           textScaler: TextScaler.linear(2),
+          // style: TextStyle(fontSize: 14,),
         ),
-        trailing: Container(
-          width: 50,
-          child: Row(
-            children: [
-              Image.asset(
-                "public/assets/images/star.png",
-                width: 25,
-                height: 25,
-              ),
-              Text(
-                rating.toString(),
-                textScaler: TextScaler.linear(2),
-              ),
-            ],
-          ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              "public/assets/images/star.png",
+              width: 25,
+              height: 25,
+            ),
+            Text(
+              rating.toString(),
+              textScaler: TextScaler.linear(2),
+              style: TextStyle(fontSize: 14,),
+            ),
+          ],
         ),
       ),
       color: Theme.of(context).cardColor,

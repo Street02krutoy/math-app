@@ -19,10 +19,9 @@ class _RatingPageState extends NyState<RatingPage> {
   @override
   void initState() {
     rating = List.generate(100, (index) {
-      return Rating("Name", index.toDouble(), index);
+      return Rating("Name", index.toDouble() + 1, index + 1);
     });
     super.initState();
-
   }
 
   @override
@@ -66,20 +65,28 @@ class _RatingPageState extends NyState<RatingPage> {
                 )
               ],
             ),
-            TopListItem(
-              place: 342,
-              name: "You",
-              rating: 43,
-              borderColor: Color.fromRGBO(255, 199, 0, 1),
-            )
-            // ListView.builder(
-            //   itemCount: 100,
-            //   itemBuilder: (context, index) => TopListItem(
-            //     place: rating[index]["position"],
-            //     name: rating[index]["name"],
-            //     rating: rating[index]["rating"],
-            //   ),
-            // )
+            Padding(
+              padding: EdgeInsets.only(
+                top: 45,
+              ),
+              child: TopListItem(
+                place: 342,
+                name: "You",
+                rating: 43,
+                borderColor: Color.fromRGBO(255, 199, 0, 1),
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: rating.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) => TopListItem(
+                  place: rating[index].position,
+                  name: rating[index].name,
+                  rating: rating[index].rating,
+                ),
+              ),
+            ),
           ],
         ),
       ),
