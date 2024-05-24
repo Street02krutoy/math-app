@@ -62,13 +62,15 @@ class ProfileTop extends StatelessWidget {
         ),
         Row(
           children: [
-            Image.asset(
-              "public/assets/images/star.png",
-              width: 25,
-              height: 25,
-            ),
             Padding(
-              padding: EdgeInsets.only(right: 10),
+              padding: EdgeInsets.only(
+                right: 5,
+                bottom: 3,
+              ),
+              child: Icon(
+                Icons.star,
+                color: Colors.yellow,
+              ),
             ),
             Text(
               rating.toString(),
