@@ -21,17 +21,17 @@ class ProfileTop extends StatelessWidget {
     switch (place) {
       case 1:
         color = Color.fromRGBO(255, 199, 0, 1);
-        path = "public/assets/images/top1_icon.png";
+        path = "public/assets/images/top1_icon_.png";
         radius = 60;
         break;
       case 2:
         color = Color.fromRGBO(147, 147, 147, 1);
-        path = "public/assets/images/top2_icon.png";
+        path = "public/assets/images/top2_icon_.png";
         radius = 50;
         break;
       case 3:
         color = Color.fromRGBO(168, 100, 0, 1);
-        path = "public/assets/images/top3_icon.png";
+        path = "public/assets/images/top3_icon_.png";
         radius = 50;
         break;
     }
@@ -45,14 +45,18 @@ class ProfileTop extends StatelessWidget {
         Stack(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: 20),
+              padding: EdgeInsets.only(bottom: 40),
               child: RoundImage(
                 child: child,
                 roundColor: color,
                 radius: radius,
               ),
             ),
-            Image.asset(path),
+            Image.asset(
+              path,
+              width: 40,
+              height: 40,
+            ),
           ],
           alignment: AlignmentDirectional.bottomCenter,
         ),
