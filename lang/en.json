@@ -7,7 +7,12 @@
     "list_of_themes": "Reference",
     "rating":"Rating:",
     "done":"Done:",
-    "logout":"Logout"
+    "logout":"Logout",
+    "langdialog":{
+      "title": "Choose language",
+      "ru": "Russian",
+      "en": "English"
+    }
   },
   "themes":{
     "page_name":"Themes",
@@ -26,6 +31,15 @@
   },
   "rating":{
     "page_name":"Rating"
+  },
+  "achievements":{
+    "page_name":"Achievements"
+  },
+  "progress":{
+    "page_name":"Progress"
+  },
+  "reference":{
+    "page_name":"Reference"
   },
   "general":{
     "cancel":"Cancel",

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/app/controllers/account_controller.dart';
+import 'package:flutter_app/resources/pages/achievements_page.dart';
+import 'package:flutter_app/resources/pages/progress_page.dart';
+import 'package:flutter_app/resources/pages/reference_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
+import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:nylo_framework/theme/helper/ny_theme.dart';
 
@@ -38,8 +42,12 @@ class _AccountPageState extends NyState<AccountPage> {
           title: Text("profile.page_name".tr()),
           actions: [
             IconButton(
-              onPressed: AccountController().login,
-              icon: const Icon(Icons.login),
+              onPressed: () {
+                showDialog(
+                    builder: (context) => showLaunguageDialog(context),
+                    context: context);
+              },
+              icon: const Icon(Icons.language),
             ),
           ],
         ),
@@ -81,24 +89,20 @@ class _AccountPageState extends NyState<AccountPage> {
                   ],
                 ),
                 TextIconButton(
-                    onTap: () async {
-                      await changeLanguage('en');
+                    onTap: () {
+                      routeTo(AchievementsPage.path);
                     },
                     text: "profile.achievements".tr(),
                     icon: Icons.arrow_right),
                 TextIconButton(
                     onTap: () {
-                      setState(() {
-                        NyTheme.set(context, id: "dark_theme");
-                      });
+                      routeTo(ProgressPage.path);
                     },
                     text: "profile.progress".tr(),
                     icon: Icons.arrow_right),
                 TextIconButton(
                     onTap: () {
-                      setState(() {
-                        NyTheme.set(context, id: "light_theme");
-                      });
+                      routeTo(ReferencePage.path);
                     },
                     text: "profile.list_of_themes".tr(),
                     icon: Icons.arrow_right),
@@ -106,9 +110,7 @@ class _AccountPageState extends NyState<AccountPage> {
                   children: [
                     Spacer(),
                     ElevatedButton(
-                        onPressed: () async {
-                          await changeLanguage('ru');
-                        },
+                        onPressed: () async {},
                         child: Row(
                           children: [
                             Icon(Icons.logout),
@@ -121,6 +123,28 @@ class _AccountPageState extends NyState<AccountPage> {
               ],
             ),
           ),
+        ));
+  }
+
+  Widget showLaunguageDialog(BuildContext context) {
+    return AlertDialog(
+        title: Text("profile.langdialog.title".tr()),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextButton(
+                onPressed: () async {
+                  context.nav.pop();
+                  await changeLanguage('ru');
+                },
+                child: Text("profile.langdialog.ru".tr())),
+            TextButton(
+                onPressed: () async {
+                  context.nav.pop();
+                  await changeLanguage('en');
+                },
+                child: Text("profile.langdialog.en".tr()))
+          ],
         ));
   }
 }

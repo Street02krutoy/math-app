@@ -1,3 +1,6 @@
+import '/resources/pages/reference_page.dart';
+import '/resources/pages/progress_page.dart';
+import '/resources/pages/achievements_page.dart';
 import '/resources/pages/solve_page.dart';
 import '/resources/pages/home_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
@@ -25,4 +28,7 @@ appRouter() => nyRoutes((router) {
   //   router.route(AccountPage.path, (context) => AccountPage());
   // });
   router.route(SolvePage.path, (context) => SolvePage());
+  router.route(AchievementsPage.path, (context) => AchievementsPage());
+  router.route(ProgressPage.path, (context) => ProgressPage());
+  router.route(ReferencePage.path, (context) => ReferencePage());
 });

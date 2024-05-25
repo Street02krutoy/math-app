@@ -7,7 +7,12 @@
     "list_of_themes": "Справка",
     "rating":"Рейтинг:",
     "done":"Завершено:",
-    "logout":"Выйти из аккаунта"
+    "logout":"Выйти из аккаунта",
+    "langdialog":{
+      "title": "Выберите язык",
+      "ru": "Русский",
+      "en": "Английский"
+    }
   },
   "themes":{
     "page_name":"Темы",
@@ -26,6 +31,15 @@
   },
   "rating":{
     "page_name":"Рейтинг"
+  },
+  "achievements":{
+    "page_name":"Достижения"
+  },
+  "progress":{
+    "page_name":"Прогресс"
+  },
+  "reference":{
+    "page_name":"Справка"
   },
   "general":{
     "cancel":"Отмена",
