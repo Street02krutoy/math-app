@@ -115,35 +115,22 @@ class _AccountPageState extends NyState<AccountPage> {
                     ),
                   ],
                 ),
-                // TextIconButton(
-                //     onTap: () {
-                //       routeTo(AchievementsPage.path);
-                //     },
-                //     text: "profile.achievements.page_name".tr(),
-                //     icon: Icons.arrow_right),
-                // TextIconButton(
-                //     onTap: () {
-                //       routeTo(ProgressPage.path);
-                //     },
-                //     text: "profile.progress.page_name".tr(),
-                //     icon: Icons.arrow_right),
-                // TextIconButton(
-                //     onTap: () {
-                //       routeTo(ReferencePage.path);
-                //     },
-                //     text: "profile.list_of_themes.page_name".tr(),
-                //     icon: Icons.arrow_right),
-                ProfileButtonWidget(
-                  height: 95,
-                  title: Text("profile.progress.page_name".tr()),
-                  subtitle: Text("profile.progress.description".tr()),
-                  icon: Icon(
-                    Icons.trending_up,
-                    color: Colors.blue,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
                   ),
-                  onTap: () {
-                    routeTo(ProgressPage.path);
-                  },
+                  child: ProfileButtonWidget(
+                    height: 95,
+                    title: Text("profile.progress.page_name".tr()),
+                    subtitle: Text("profile.progress.description".tr()),
+                    icon: Icon(
+                      Icons.trending_up,
+                      color: Colors.blue,
+                    ),
+                    onTap: () {
+                      routeTo(ProgressPage.path);
+                    },
+                  ),
                 ),
                 ProfileButtonWidget(
                   height: 95,
@@ -157,46 +144,52 @@ class _AccountPageState extends NyState<AccountPage> {
                     routeTo(AchievementsPage.path);
                   },
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 130,
+                          title: Text("profile.settings.page_name".tr()),
+                          subtitle: Text("profile.settings.description".tr()),
+                          icon: Icon(
+                            Icons.settings,
+                            color: Colors.blue,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 130,
+                          title: Text("profile.support.page_name".tr()),
+                          subtitle: Text("profile.support.description".tr()),
+                          icon: Icon(
+                            Icons.announcement_outlined,
+                            color: Colors.blue,
+                          ),
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   children: [
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 165,
-                        title: Text("profile.settings.page_name".tr()),
-                        subtitle: Text("profile.settings.description".tr()),
-                        icon: Icon(
-                          Icons.settings,
-                          color: Colors.blue,
-                        ),
-                        onTap: () {},
-                      ),
-                    ),
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 165,
-                        title: Text("profile.support.page_name".tr()),
-                        subtitle: Text("profile.support.description".tr()),
-                        icon: Icon(
-                          Icons.announcement_outlined,
-                          color: Colors.blue,
-                        ),
-                        onTap: () {},
-                      ),
-                    ),
+                    Spacer(),
+                    ElevatedButton(
+                        onPressed: () async {},
+                        child: Row(
+                          children: [
+                            Icon(Icons.logout),
+                            Text("profile.logout".tr())
+                          ],
+                        )),
+                    Spacer()
                   ],
-                ),Row(
-                    children: [
-                      Spacer(),
-                      ElevatedButton(
-                          onPressed: () async {},
-                          child: Row(
-                            children: [
-                              Icon(Icons.logout),
-                              Text("profile.logout".tr())
-                            ],
-                          )),
-                      Spacer()
-                    ],
                 ),
               ],
             ),

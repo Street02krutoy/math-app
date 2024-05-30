@@ -21,13 +21,15 @@ class ProfileButtonWidget extends StatelessWidget {
       child: SizedBox(
         height: height,
         child: Card(
-          child: ListTile(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+          child: Center(
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              title: title,
+              subtitle: subtitle,
+              trailing: icon,
             ),
-            title: title,
-            subtitle: subtitle,
-            trailing: icon,
           ),
           color: Theme.of(context).cardColor,
           shadowColor: Colors.transparent,

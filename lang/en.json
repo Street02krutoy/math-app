@@ -3,19 +3,19 @@
     "page_name": "Profile",
     "achievements": {
       "page_name": "Achievements",
-      "description": "What kind of achievements are given and for what"
+      "description": "Your results and wins"
     },
     "progress": {
       "page_name": "Progress",
-      "description": "Look at the progress you've already made"
+      "description": "Tracking the progress of solving tasks"
     },
     "settings": {
       "page_name": "Settings",
-      "description": "Application type and functions"
+      "description": "Application type"
     },
     "support": {
       "page_name": "Tech. support",
-      "description": "Our bot will help you contact us to ask questions"
+      "description": "Contact us"
     },
     "list_of_themes": "Reference",
     "rating": "Rating:",
