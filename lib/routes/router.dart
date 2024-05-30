@@ -3,6 +3,7 @@ import '/resources/pages/progress_page.dart';
 import '/resources/pages/achievements_page.dart';
 import '/resources/pages/solve_page.dart';
 import '/resources/pages/home_page.dart';
+import 'package:flutter_app/resources/pages/settings_page.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 /* App Router
@@ -31,4 +32,5 @@ appRouter() => nyRoutes((router) {
   router.route(AchievementsPage.path, (context) => AchievementsPage());
   router.route(ProgressPage.path, (context) => ProgressPage());
   router.route(ReferencePage.path, (context) => ReferencePage());
+  router.route(SettingsPage.path, (context) => SettingsPage());
 });

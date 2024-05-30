@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
 import 'package:flutter_app/resources/pages/progress_page.dart';
-import 'package:flutter_app/resources/pages/reference_page.dart';
+import 'package:flutter_app/resources/pages/settings_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
-import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
@@ -159,7 +158,9 @@ class _AccountPageState extends NyState<AccountPage> {
                             Icons.settings,
                             color: Colors.blue,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            routeTo(SettingsPage.path);
+                          },
                         ),
                       ),
                       Expanded(
