@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/app/controllers/account_controller.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
 import 'package:flutter_app/resources/pages/progress_page.dart';
 import 'package:flutter_app/resources/pages/reference_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
+import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:flutter_app/resources/widgets/text_icon_button_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
-import 'package:nylo_framework/theme/helper/ny_theme.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -70,7 +69,21 @@ class _AccountPageState extends NyState<AccountPage> {
                   children: [
                     Expanded(
                       child: CustomCard(
-                          title: Text("profile.rating".tr()),
+                          title: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Text(
+                                "profile.rating".tr(),
+                                style: TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ],
+                          ),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
@@ -79,47 +92,112 @@ class _AccountPageState extends NyState<AccountPage> {
                     ),
                     Expanded(
                       child: CustomCard(
-                          title: Text("profile.done".tr()),
+                          title: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.check_circle,
+                                color: Colors.blue,
+                              ),
+                              Text(
+                                "profile.done".tr(),
+                                style: TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                            ],
+                          ),
                           content: Text(
                             "123",
                             textScaler: TextScaler.linear(2),
                           ),
                           height: 75),
-                    )
+                    ),
                   ],
                 ),
-                TextIconButton(
-                    onTap: () {
-                      routeTo(AchievementsPage.path);
-                    },
-                    text: "profile.achievements".tr(),
-                    icon: Icons.arrow_right),
-                TextIconButton(
-                    onTap: () {
-                      routeTo(ProgressPage.path);
-                    },
-                    text: "profile.progress".tr(),
-                    icon: Icons.arrow_right),
-                TextIconButton(
-                    onTap: () {
-                      routeTo(ReferencePage.path);
-                    },
-                    text: "profile.list_of_themes".tr(),
-                    icon: Icons.arrow_right),
+                // TextIconButton(
+                //     onTap: () {
+                //       routeTo(AchievementsPage.path);
+                //     },
+                //     text: "profile.achievements.page_name".tr(),
+                //     icon: Icons.arrow_right),
+                // TextIconButton(
+                //     onTap: () {
+                //       routeTo(ProgressPage.path);
+                //     },
+                //     text: "profile.progress.page_name".tr(),
+                //     icon: Icons.arrow_right),
+                // TextIconButton(
+                //     onTap: () {
+                //       routeTo(ReferencePage.path);
+                //     },
+                //     text: "profile.list_of_themes.page_name".tr(),
+                //     icon: Icons.arrow_right),
+                ProfileButtonWidget(
+                  height: 95,
+                  title: Text("profile.progress.page_name".tr()),
+                  subtitle: Text("profile.progress.description".tr()),
+                  icon: Icon(
+                    Icons.trending_up,
+                    color: Colors.blue,
+                  ),
+                  onTap: () {
+                    routeTo(ProgressPage.path);
+                  },
+                ),
+                ProfileButtonWidget(
+                  height: 95,
+                  title: Text("profile.achievements.page_name".tr()),
+                  subtitle: Text("profile.achievements.description".tr()),
+                  icon: Icon(
+                    Icons.offline_pin,
+                    color: Colors.blue,
+                  ),
+                  onTap: () {
+                    routeTo(AchievementsPage.path);
+                  },
+                ),
                 Row(
                   children: [
-                    Spacer(),
-                    ElevatedButton(
-                        onPressed: () async {},
-                        child: Row(
-                          children: [
-                            Icon(Icons.logout),
-                            Text("profile.logout".tr())
-                          ],
-                        )),
-                    Spacer()
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 165,
+                        title: Text("profile.settings.page_name".tr()),
+                        subtitle: Text("profile.settings.description".tr()),
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.blue,
+                        ),
+                        onTap: () {},
+                      ),
+                    ),
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 165,
+                        title: Text("profile.support.page_name".tr()),
+                        subtitle: Text("profile.support.description".tr()),
+                        icon: Icon(
+                          Icons.announcement_outlined,
+                          color: Colors.blue,
+                        ),
+                        onTap: () {},
+                      ),
+                    ),
                   ],
-                )
+                ),Row(
+                    children: [
+                      Spacer(),
+                      ElevatedButton(
+                          onPressed: () async {},
+                          child: Row(
+                            children: [
+                              Icon(Icons.logout),
+                              Text("profile.logout".tr())
+                            ],
+                          )),
+                      Spacer()
+                    ],
+                ),
               ],
             ),
           ),

@@ -46,7 +46,11 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
                   itemBuilder: (context, index) => AchievementWidget(
                       title: achievements[index]["title"],
                       description: achievements[index]["description"],
-                      image_url: achievements[index]["image_url"],
+                      child: Image.network(
+                        achievements[index]["image_url"],
+                        width: 60,
+                        height: 60,
+                      ),
                       is_done: achievements[index]["is_done"]),
                 ),
               ),

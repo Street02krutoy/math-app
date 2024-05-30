@@ -5,10 +5,11 @@ class AchievementWidget extends StatelessWidget {
       {super.key,
       required this.title,
       required this.description,
-      required this.image_url,
+      required this.child,
       required this.is_done});
 
-  final String title, description, image_url;
+  final String title, description;
+  final Widget child;
   final bool is_done;
   late final Color title_color, color;
 
@@ -38,11 +39,7 @@ class AchievementWidget extends StatelessWidget {
             fontSize: 14,
           ),
         ),
-        leading: Image.network(
-          image_url,
-          width: 60,
-          height: 60,
-        ),
+        leading: child,
         subtitle: Text(
           description,
           textScaler: TextScaler.linear(2),

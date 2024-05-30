@@ -1,49 +1,65 @@
 {
-  
-  "profile":{
+  "profile": {
     "page_name": "Профиль",
-    "achievements": "Достижения",
-    "progress": "Прогресс",
+    "achievements": {
+      "page_name": "Достижения",
+      "description": "Достижения, которые вы получили и можете получить"
+    },
+    "progress": {
+      "page_name": "Прогресс",
+      "description": "Отслеживайте свой прогресс в решении различных заданий"
+    },
+    "settings": {
+      "page_name": "Настройки",
+      "description": "Настройте внешинй вид приложения под себя"
+    },
+    "support": {
+      "page_name": "Тех. поддержка",
+      "description": "Наш бот поможет связаться с нами"
+    },
     "list_of_themes": "Справка",
-    "rating":"Рейтинг:",
-    "done":"Завершено:",
-    "logout":"Выйти из аккаунта",
-    "langdialog":{
+    "rating": "Рейтинг:",
+    "done": "Завершено:",
+    "logout": "Выйти из аккаунта",
+    "langdialog": {
       "title": "Выберите язык",
       "ru": "Русский",
       "en": "Английский"
     }
   },
-  "themes":{
-    "page_name":"Темы",
-    "difficulty":{
-      "0":"Лёгкий",
-      "1":"Средний",
-      "2":"Сложный",
-      "choose":"Выберите уровень сложности"
+  "themes": {
+    "page_name": "Темы",
+    "difficulty": {
+      "0": "Лёгкий",
+      "1": "Средний",
+      "2": "Сложный",
+      "choose": "Выберите уровень сложности"
     }
   },
-  "math":{
-    "page_name":"Примеры",
-    "skip":"Пропустить",
-    "next":"Следующий",
-    "solve":"Решите это выражение"
+  "math": {
+    "page_name": "Примеры",
+    "skip": "Пропустить",
+    "next": "Следующий",
+    "solve": "Решите это задание:"
   },
-  "rating":{
-    "page_name":"Рейтинг"
+  "rating": {
+    "page_name": "Рейтинг"
   },
-  "achievements":{
-    "page_name":"Достижения"
+  "achievements": {
+    "page_name": "Достижения"
   },
-  "progress":{
-    "page_name":"Прогресс"
+  "progress": {
+    "page_name": "Прогресс"
   },
-  "reference":{
-    "page_name":"Справка"
+  "reference": {
+    "page_name": "Справка"
   },
-  "general":{
-    "cancel":"Отмена",
-    "ok":"Ок",
-    "loading":"Загрузка"
+  "settings": {
+    "page_name": "Настройки"
+  },
+  "general": {
+    "cancel": "Отмена",
+    "ok": "Ок",
+    "loading": "Загрузка"
   }
 }

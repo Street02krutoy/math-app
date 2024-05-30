@@ -1,49 +1,65 @@
 {
-  
-  "profile":{
+  "profile": {
     "page_name": "Profile",
-    "achievements": "Achievements",
-    "progress": "Progress",
+    "achievements": {
+      "page_name": "Achievements",
+      "description": "What kind of achievements are given and for what"
+    },
+    "progress": {
+      "page_name": "Progress",
+      "description": "Look at the progress you've already made"
+    },
+    "settings": {
+      "page_name": "Settings",
+      "description": "Application type and functions"
+    },
+    "support": {
+      "page_name": "Tech. support",
+      "description": "Our bot will help you contact us to ask questions"
+    },
     "list_of_themes": "Reference",
-    "rating":"Rating:",
-    "done":"Done:",
-    "logout":"Logout",
-    "langdialog":{
+    "rating": "Rating:",
+    "done": "Done:",
+    "logout": "Logout",
+    "langdialog": {
       "title": "Choose language",
       "ru": "Russian",
       "en": "English"
     }
   },
-  "themes":{
-    "page_name":"Themes",
-    "difficulty":{
-      "0":"Easy",
-      "1":"Medium",
-      "2":"Hard",
-      "choose":"Choose difficulty"
+  "themes": {
+    "page_name": "Themes",
+    "difficulty": {
+      "0": "Easy",
+      "1": "Medium",
+      "2": "Hard",
+      "choose": "Choose difficulty"
     }
   },
-  "math":{
-    "page_name":"Math",
-    "skip":"Skip",
-    "next":"Next",
-    "solve":"Solve this expression"
+  "math": {
+    "page_name": "Math",
+    "skip": "Skip",
+    "next": "Next",
+    "solve": "Solve this expression:"
   },
-  "rating":{
-    "page_name":"Rating"
+  "rating": {
+    "page_name": "Rating"
   },
-  "achievements":{
-    "page_name":"Achievements"
+  "achievements": {
+    "page_name": "Achievements"
   },
-  "progress":{
-    "page_name":"Progress"
+  "progress": {
+    "page_name": "Progress"
   },
-  "reference":{
-    "page_name":"Reference"
+  "reference": {
+    "page_name": "Reference"
   },
-  "general":{
-    "cancel":"Cancel",
-    "ok":"OK",
-    "loading":"Loading"
+  "settings": {
+    "page_name": "Settings"
+  },
+  "general": {
+    "cancel": "Cancel",
+    "ok": "OK",
+    "loading": "Loading"
   }
 }
