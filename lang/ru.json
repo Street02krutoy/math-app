@@ -11,11 +11,11 @@
     },
     "settings": {
       "page_name": "Настройки",
-      "description": "Настройте внешинй вид приложения"
+      "description": "Вид приложения"
     },
     "support": {
-      "page_name": "Тех. поддержка",
-      "description": "Связь с разработчиками"
+      "page_name": "Поддержка",
+      "description": "Связаться с нами"
     },
     "list_of_themes": "Справка",
     "rating": "Рейтинг:",

@@ -122,9 +122,13 @@ class _AccountPageState extends NyState<AccountPage> {
                     height: 95,
                     title: Text("profile.progress.page_name".tr()),
                     subtitle: Text("profile.progress.description".tr()),
-                    icon: Icon(
-                      Icons.trending_up,
-                      color: Colors.blue,
+                    icon: RoundImage(
+                      roundColor: Colors.blue,
+                      radius: 20,
+                      child: Icon(
+                        Icons.trending_up,
+                        color: Colors.white,
+                      ),
                     ),
                     onTap: () {
                       routeTo(ProgressPage.path);
@@ -135,9 +139,13 @@ class _AccountPageState extends NyState<AccountPage> {
                   height: 95,
                   title: Text("profile.achievements.page_name".tr()),
                   subtitle: Text("profile.achievements.description".tr()),
-                  icon: Icon(
-                    Icons.offline_pin,
-                    color: Colors.blue,
+                  icon: RoundImage(
+                    roundColor: Colors.blue,
+                    radius: 20,
+                    child: Icon(
+                      Icons.offline_pin,
+                      color: Colors.white,
+                    ),
                   ),
                   onTap: () {
                     routeTo(AchievementsPage.path);
@@ -152,11 +160,25 @@ class _AccountPageState extends NyState<AccountPage> {
                       Expanded(
                         child: ProfileButtonWidget(
                           height: 130,
-                          title: Text("profile.settings.page_name".tr()),
-                          subtitle: Text("profile.settings.description".tr()),
-                          icon: Icon(
-                            Icons.settings,
-                            color: Colors.blue,
+                          title: Text(
+                            "profile.settings.page_name".tr(),
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "profile.settings.description".tr(),
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                          icon: RoundImage(
+                            roundColor: Colors.blue,
+                            radius: 20,
+                            child: Icon(
+                              Icons.settings,
+                              color: Colors.white,
+                            ),
                           ),
                           onTap: () {
                             routeTo(SettingsPage.path);
@@ -166,11 +188,25 @@ class _AccountPageState extends NyState<AccountPage> {
                       Expanded(
                         child: ProfileButtonWidget(
                           height: 130,
-                          title: Text("profile.support.page_name".tr()),
-                          subtitle: Text("profile.support.description".tr()),
-                          icon: Icon(
-                            Icons.announcement_outlined,
-                            color: Colors.blue,
+                          title: Text(
+                            "profile.support.page_name".tr(),
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
+                          ),
+                          subtitle: Text(
+                            "profile.support.description".tr(),
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                          icon: RoundImage(
+                            roundColor: Colors.blue,
+                            radius: 20,
+                            child: Icon(
+                              Icons.announcement_outlined,
+                              color: Colors.white,
+                            ),
                           ),
                           onTap: () {},
                         ),
