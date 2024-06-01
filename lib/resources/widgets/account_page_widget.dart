@@ -6,6 +6,7 @@ import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -197,7 +198,10 @@ class _AccountPageState extends NyState<AccountPage> {
                               color: Colors.white,
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            launchUrl(Uri.parse(
+                                "https://www.figma.com/design/BOJ0w9pZkkGM5zTslBhtYQ/NovgorodHack?node-id=0-1&t=1ZP3LJFCZ5gRxdYh-0"));
+                          },
                         ),
                       ),
                     ],
