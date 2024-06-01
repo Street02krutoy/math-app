@@ -5,7 +5,6 @@ import 'package:flutter_app/resources/pages/settings_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
-import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class AccountPage extends StatefulWidget {
@@ -38,16 +37,6 @@ class _AccountPageState extends NyState<AccountPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("profile.page_name".tr()),
-          actions: [
-            IconButton(
-              onPressed: () {
-                showDialog(
-                    builder: (context) => showLaunguageDialog(context),
-                    context: context);
-              },
-              icon: const Icon(Icons.language),
-            ),
-          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -231,28 +220,6 @@ class _AccountPageState extends NyState<AccountPage> {
               ],
             ),
           ),
-        ));
-  }
-
-  Widget showLaunguageDialog(BuildContext context) {
-    return AlertDialog(
-        title: Text("profile.langdialog.title".tr()),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(
-                onPressed: () async {
-                  context.nav.pop();
-                  await changeLanguage('ru');
-                },
-                child: Text("profile.langdialog.ru".tr())),
-            TextButton(
-                onPressed: () async {
-                  context.nav.pop();
-                  await changeLanguage('en');
-                },
-                child: Text("profile.langdialog.en".tr()))
-          ],
         ));
   }
 }

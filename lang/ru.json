@@ -55,7 +55,13 @@
     "page_name": "Справка"
   },
   "settings": {
-    "page_name": "Настройки"
+    "page_name": "Настройки",
+    "general": "Общие",
+    "language": "Язык",
+    "selected_language": "Русский",
+    "theme": "Тема",
+    "light": "Светлая",
+    "dark": "Тёмная"
   },
   "general": {
     "cancel": "Отмена",

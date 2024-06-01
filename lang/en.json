@@ -55,7 +55,13 @@
     "page_name": "Reference"
   },
   "settings": {
-    "page_name": "Settings"
+    "page_name": "Settings",
+    "general": "General",
+    "language": "Language",
+    "selected_language": "English",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark"
   },
   "general": {
     "cancel": "Cancel",
