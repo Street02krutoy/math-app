@@ -46,7 +46,6 @@ class _SettingsPageState extends NyState<SettingsPage> {
                   "settings.general".tr(),
                   textScaler: TextScaler.linear(2),
                   style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -55,6 +54,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
                     vertical: 10.0,
                   ),
                   child: InkWell(
+                    //TODO: make splashColor work
                     onTap: () {
                       showDialog(
                           builder: (context) => showLaunguageDialog(context),
@@ -72,6 +72,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
                         Text(
                           "settings.selected_language".tr(),
                           style: TextStyle(
+                            color: Theme.of(context).disabledColor,
                             fontSize: 24,
                             fontWeight: FontWeight.normal,
                           ),
@@ -86,7 +87,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
                   ),
                   child: InkWell(
                     onTap: () {
-                      // Function to change app theme
+                      //TODO: theme selection
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,6 +101,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
                         Text(
                           "settings.dark".tr(),
                           style: TextStyle(
+                            color: Theme.of(context).disabledColor,
                             fontSize: 24,
                             fontWeight: FontWeight.normal,
                           ),
