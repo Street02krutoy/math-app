@@ -4,13 +4,14 @@ class ProfileButtonWidget extends StatelessWidget {
   const ProfileButtonWidget({
     super.key,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     required this.icon,
     required this.height,
     this.onTap = null,
   });
 
-  final Widget title, subtitle, icon;
+  final Widget? title, subtitle;
+  final IconData? icon;
   final double height;
   final void Function()? onTap;
 
@@ -28,7 +29,17 @@ class ProfileButtonWidget extends StatelessWidget {
               ),
               title: title,
               subtitle: subtitle,
-              trailing: icon,
+              trailing: icon != null
+                  ? CircleAvatar(
+                      radius: 15,
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
+                      child: Icon(
+                        size: 20,
+                        icon,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    )
+                  : null,
             ),
           ),
           color: Theme.of(context).cardColor,

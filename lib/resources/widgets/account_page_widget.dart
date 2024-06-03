@@ -112,14 +112,7 @@ class _AccountPageState extends NyState<AccountPage> {
                     height: 95,
                     title: Text("profile.progress.page_name".tr()),
                     subtitle: Text("profile.progress.description".tr()),
-                    icon: RoundImage(
-                      roundColor: Colors.blue,
-                      radius: 20,
-                      child: Icon(
-                        Icons.trending_up,
-                        color: Colors.white,
-                      ),
-                    ),
+                    icon: Icons.trending_up,
                     onTap: () {
                       routeTo(ProgressPage.path);
                     },
@@ -129,14 +122,7 @@ class _AccountPageState extends NyState<AccountPage> {
                   height: 95,
                   title: Text("profile.achievements.page_name".tr()),
                   subtitle: Text("profile.achievements.description".tr()),
-                  icon: RoundImage(
-                    roundColor: Colors.blue,
-                    radius: 20,
-                    child: Icon(
-                      Icons.offline_pin,
-                      color: Colors.white,
-                    ),
-                  ),
+                  icon: Icons.offline_pin,
                   onTap: () {
                     routeTo(AchievementsPage.path);
                   },
@@ -162,14 +148,7 @@ class _AccountPageState extends NyState<AccountPage> {
                               fontSize: 14,
                             ),
                           ),
-                          icon: RoundImage(
-                            roundColor: Colors.blue,
-                            radius: 20,
-                            child: Icon(
-                              Icons.settings,
-                              color: Colors.white,
-                            ),
-                          ),
+                          icon: Icons.settings,
                           onTap: () {
                             routeTo(SettingsPage.path);
                           },
@@ -190,14 +169,7 @@ class _AccountPageState extends NyState<AccountPage> {
                               fontSize: 14,
                             ),
                           ),
-                          icon: RoundImage(
-                            roundColor: Colors.blue,
-                            radius: 20,
-                            child: Icon(
-                              Icons.announcement_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
+                          icon: Icons.announcement_outlined,
                           onTap: () {
                             launchUrl(Uri.parse(
                                 "https://www.figma.com/design/BOJ0w9pZkkGM5zTslBhtYQ/NovgorodHack?node-id=0-1&t=1ZP3LJFCZ5gRxdYh-0"));
