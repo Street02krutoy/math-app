@@ -87,7 +87,8 @@ class _AccountPageState extends NyState<AccountPage> {
                               children: [
                                 Icon(
                                   Icons.check_circle,
-                                  color: Colors.blue,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                                 Text(
                                   "profile.done".tr(),

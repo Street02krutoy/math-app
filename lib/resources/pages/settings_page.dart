@@ -46,7 +46,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
                   "settings.general".tr(),
                   textScaler: TextScaler.linear(2),
                   style: TextStyle(
-                    color: Colors.blue,
+                    color: Theme.of(context).colorScheme.secondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
