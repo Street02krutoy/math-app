@@ -17,7 +17,7 @@ ThemeData darkTheme(ColorStyles color) {
     useMaterial3: true,
     primaryColor: color.primaryContent,
     primaryColorDark: color.primaryContent,
-    focusColor: color.primaryContent,
+    focusColor: color.primaryAccent,
     scaffoldBackgroundColor: color.background,
     appBarTheme: AppBarTheme(
         surfaceTintColor: Colors.transparent,
@@ -66,7 +66,9 @@ ThemeData darkTheme(ColorStyles color) {
     ),
     textTheme: darkTheme,
     colorScheme: ColorScheme.dark(
-        background: color.background, secondary: color.secondary),
+        primary: color.primaryAccent,
+        background: color.background,
+        secondary: color.secondary),
     cardColor: color.cardColor,
   );
 }

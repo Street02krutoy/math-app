@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class LoginPage extends NyStatefulWidget {
@@ -25,7 +26,13 @@ class _LoginPageState extends NyState<LoginPage> {
       body: SafeArea(
         child: Center(
           child: Column(
-            children: [TextField(), TextField()],
+            children: [
+              TextButton(
+                  onPressed: () {
+                    ApiService.authenticate();
+                  },
+                  child: Text("general.auth".tr()))
+            ],
           ),
         ),
       ),

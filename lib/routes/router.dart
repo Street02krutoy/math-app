@@ -1,3 +1,6 @@
+import 'package:flutter_app/resources/pages/login_page.dart';
+import 'package:flutter_app/routes/guards/auth_route_guard.dart';
+
 import '/resources/pages/reference_page.dart';
 import '/resources/pages/progress_page.dart';
 import '/resources/pages/achievements_page.dart';
@@ -15,22 +18,26 @@ import 'package:nylo_framework/nylo_framework.dart';
 |-------------------------------------------------------------------------- */
 
 appRouter() => nyRoutes((router) {
-  router.route(HomePage.path, (context) => HomePage(), initialRoute: true);
-  // Add your routes here
+      router
+          .route(HomePage.path, (context) => HomePage(),
+              initialRoute: true, authPage: true)
+          .addRouteGuard(AuthRouteGuard());
+      // Add your routes here
 
-  // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);
+      // router.route(NewPage.path, (context) => NewPage(), transition: PageTransitionType.fade);
 
-  // Example using grouped routes
-  // router.group(() => {
-  //   "route_guards": [AuthRouteGuard()],
-  //   "prefix": "/dashboard"
-  // }, (router) {
-  //
-  //   router.route(AccountPage.path, (context) => AccountPage());
-  // });
-  router.route(SolvePage.path, (context) => SolvePage());
-  router.route(AchievementsPage.path, (context) => AchievementsPage());
-  router.route(ProgressPage.path, (context) => ProgressPage());
-  router.route(ReferencePage.path, (context) => ReferencePage());
-  router.route(SettingsPage.path, (context) => SettingsPage());
-});
+      // Example using grouped routes
+      // router.group(() => {
+      //   "route_guards": [AuthRouteGuard()],
+      //   "prefix": "/dashboard"
+      // }, (router) {
+      //
+      //   router.route(AccountPage.path, (context) => AccountPage());
+      // });
+      router.route(SolvePage.path, (context) => SolvePage());
+      router.route(AchievementsPage.path, (context) => AchievementsPage());
+      router.route(ProgressPage.path, (context) => ProgressPage());
+      router.route(ReferencePage.path, (context) => ReferencePage());
+      router.route(SettingsPage.path, (context) => SettingsPage());
+      router.route(LoginPage.path, (context) => LoginPage());
+    });

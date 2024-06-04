@@ -11,7 +11,7 @@
     },
     "settings": {
       "page_name": "Settings",
-      "description": "Application type"
+      "description": "Appearance and features"
     },
     "support": {
       "page_name": "Support",
@@ -60,8 +60,9 @@
     "language": "Language",
     "selected_language": "English",
     "theme": "Theme",
-    "light": "Light",
-    "dark": "Dark"
+    "system": "System theme",
+    "light": "Always light",
+    "dark": "Always dark"
   },
   "general": {
     "cancel": "Cancel",
