@@ -7,11 +7,13 @@ class CustomCard extends StatelessWidget {
       required this.title,
       required this.content,
       this.onTap = null,
-      required this.height});
+      this.height,
+      this.width});
   final Widget title;
 
   final Widget content;
-  final double height;
+  final double? height;
+  final double? width;
   final void Function()? onTap;
 
   @override
@@ -24,6 +26,7 @@ class CustomCard extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
             height: height,
+            width: width,
             child: Column(
               children: [title, content],
             ),

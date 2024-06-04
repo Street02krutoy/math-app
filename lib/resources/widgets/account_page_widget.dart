@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/app/providers/auth_provider.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
@@ -47,70 +49,84 @@ class _AccountPageState extends NyState<AccountPage> {
           child: Center(
             child: Column(
               children: [
-                RoundImage(
-                    child: Container(
-                      color: theme.cardColor,
-                    ),
-                    roundColor: theme.cardColor,
-                    radius: 60),
-                Text(
-                  "Name",
-                  textScaler: TextScaler.linear(2),
-                ),
                 Row(
                   children: [
                     Expanded(
                       child: CustomCard(
-                          title: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.star,
-                                color: Theme.of(context).focusColor,
-                              ),
-                              Text(
-                                "profile.rating".tr(),
-                                style: TextStyle(
-                                  fontSize: 19,
-                                ),
-                              ),
-                              Spacer(),
-                            ],
-                          ),
-                          content: Text(
-                            "123",
-                            textScaler: TextScaler.linear(2),
-                          ),
-                          height: 75),
+                        title: CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background,
+                          radius: 60,
+                        ),
+                        content: Text(
+                          "Name",
+                          textScaler: TextScaler.linear(2),
+                        ),
+                      ),
                     ),
                     Expanded(
-                      child: CustomCard(
-                          title: Row(
-                            mainAxisSize: MainAxisSize.min,
+                      child: Column(
+                        children: [
+                          Row(
                             children: [
-                              Icon(
-                                Icons.check,
-                                color: Theme.of(context).focusColor,
-                              ),
-                              Text(
-                                "profile.done".tr(),
-                                style: TextStyle(
-                                  fontSize: 19,
+                              Expanded(
+                                child: CustomCard(
+                                  title: Text(
+                                    "Rating",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  content: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 2),
+                                        child: Icon(
+                                          Icons.star,
+                                          size: 15,
+                                          color: Theme.of(context).focusColor,
+                                        ),
+                                      ),
+                                      Text(
+                                        "0",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      ),
+                                    ],
+                                  ),
+                                  height: 60,
                                 ),
                               ),
-                              Spacer(),
                             ],
                           ),
-                          content: Text(
-                            "123",
-                            textScaler: TextScaler.linear(2),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomCard(
+                                  title: Text(
+                                    "Place in top",
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                  content: Text(
+                                    "1",
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
+                                  ),
+                                  height: 60,
+                                ),
+                              ),
+                            ],
                           ),
-                          height: 75),
-                    ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
                 ProfileButtonWidget(
-                  height: 95,
+                  height: 87,
                   title: Text("profile.progress.page_name".tr()),
                   subtitle: Text("profile.progress.description".tr()),
                   icon: Icons.trending_up,
@@ -119,7 +135,7 @@ class _AccountPageState extends NyState<AccountPage> {
                   },
                 ),
                 ProfileButtonWidget(
-                  height: 95,
+                  height: 87,
                   title: Text("profile.achievements.page_name".tr()),
                   subtitle: Text("profile.achievements.description".tr()),
                   icon: Icons.offline_pin,
@@ -128,7 +144,7 @@ class _AccountPageState extends NyState<AccountPage> {
                   },
                 ),
                 ProfileButtonWidget(
-                  height: 95,
+                  height: 87,
                   title: Text(
                     "profile.settings.page_name".tr(),
                   ),
@@ -139,6 +155,17 @@ class _AccountPageState extends NyState<AccountPage> {
                   onTap: () {
                     routeTo(SettingsPage.path);
                   },
+                ),
+                ProfileButtonWidget(
+                  height: 87,
+                  title: Text(
+                    "profile.support.page_name".tr(),
+                  ),
+                  subtitle: Text(
+                    "profile.support.description".tr(),
+                  ),
+                  icon: Icons.contact_support,
+                  onTap: () {},
                 ),
               ],
             ),

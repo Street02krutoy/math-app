@@ -66,9 +66,7 @@ ThemeData darkTheme(ColorStyles color) {
     ),
     textTheme: darkTheme,
     colorScheme: ColorScheme.dark(
-        primary: color.primaryAccent,
-        background: color.background,
-        secondary: color.secondary),
+        background: color.background, secondary: color.secondary),
     cardColor: color.cardColor,
   );
 }

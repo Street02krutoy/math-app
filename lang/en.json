@@ -3,11 +3,11 @@
     "page_name": "Profile",
     "achievements": {
       "page_name": "Achievements",
-      "description": "Your results and wins"
+      "description": "Everything you achieved"
     },
     "progress": {
       "page_name": "Progress",
-      "description": "Tracking the progress of solving tasks"
+      "description": "Track your progress"
     },
     "settings": {
       "page_name": "Settings",
