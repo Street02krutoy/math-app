@@ -40,7 +40,7 @@ class _HomePagePageState extends NyState<HomePage> {
             setState(() {});
           })
         : null;
-    return !auth
+    return (!auth && getEnv("AUTHORISATION"))
         ? Scaffold(
             appBar: AppBar(title: Text("login.page_name".tr())),
             body: SafeArea(
