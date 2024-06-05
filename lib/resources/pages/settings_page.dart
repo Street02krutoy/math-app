@@ -25,20 +25,6 @@ class _SettingsPageState extends NyState<SettingsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("settings.page_name".tr()),
-        actions: [
-          Ink(
-            width: 40,
-            decoration: ShapeDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              shape: CircleBorder(),
-            ),
-            child: IconButton(
-              icon: const Icon(Icons.support),
-              color: Theme.of(context).primaryColor,
-              onPressed: () {},
-            ),
-          ),
-        ],
       ),
       body: SafeArea(
         child: Padding(
