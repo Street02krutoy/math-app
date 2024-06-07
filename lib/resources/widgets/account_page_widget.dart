@@ -42,7 +42,12 @@ class _AccountPageState extends NyState<AccountPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("profile.page_name".tr()),
-          actions: [],
+          actions: [
+            IconButton(
+              icon: Icon(Icons.edit),
+              onPressed: () {},
+            )
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -125,47 +130,55 @@ class _AccountPageState extends NyState<AccountPage> {
                     )
                   ],
                 ),
-                ProfileButtonWidget(
-                  height: 87,
-                  title: Text("profile.progress.page_name".tr()),
-                  subtitle: Text("profile.progress.description".tr()),
-                  icon: Icons.trending_up,
-                  onTap: () {
-                    routeTo(ProgressPage.path);
-                  },
+                Expanded(
+                  child: ProfileButtonWidget(
+                    height: 87,
+                    title: Text("profile.progress.page_name".tr()),
+                    subtitle: Text("profile.progress.description".tr()),
+                    icon: Icons.trending_up,
+                    onTap: () {
+                      routeTo(ProgressPage.path);
+                    },
+                  ),
                 ),
-                ProfileButtonWidget(
-                  height: 87,
-                  title: Text("profile.achievements.page_name".tr()),
-                  subtitle: Text("profile.achievements.description".tr()),
-                  icon: Icons.offline_pin,
-                  onTap: () {
-                    routeTo(AchievementsPage.path);
-                  },
+                Expanded(
+                  child: ProfileButtonWidget(
+                    height: 87,
+                    title: Text("profile.achievements.page_name".tr()),
+                    subtitle: Text("profile.achievements.description".tr()),
+                    icon: Icons.offline_pin,
+                    onTap: () {
+                      routeTo(AchievementsPage.path);
+                    },
+                  ),
                 ),
-                ProfileButtonWidget(
-                  height: 87,
-                  title: Text(
-                    "profile.settings.page_name".tr(),
+                Expanded(
+                  child: ProfileButtonWidget(
+                    height: 87,
+                    title: Text(
+                      "profile.settings.page_name".tr(),
+                    ),
+                    subtitle: Text(
+                      "profile.settings.description".tr(),
+                    ),
+                    icon: Icons.settings,
+                    onTap: () {
+                      routeTo(SettingsPage.path);
+                    },
                   ),
-                  subtitle: Text(
-                    "profile.settings.description".tr(),
-                  ),
-                  icon: Icons.settings,
-                  onTap: () {
-                    routeTo(SettingsPage.path);
-                  },
                 ),
-                ProfileButtonWidget(
-                  height: 87,
-                  title: Text(
-                    "profile.support.page_name".tr(),
+                Expanded(
+                  child: ProfileButtonWidget(
+                    height: 87,
+                    title: Text(
+                      "profile.support.page_name".tr(),
+                    ),
+                    subtitle: Text(
+                      "profile.support.description".tr(),
+                    ),
+                    icon: Icons.contact_support,
+                    onTap: () {},
                   ),
-                  subtitle: Text(
-                    "profile.support.description".tr(),
-                  ),
-                  icon: Icons.contact_support,
-                  onTap: () {},
                 ),
               ],
             ),

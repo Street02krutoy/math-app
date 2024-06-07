@@ -138,6 +138,12 @@ class ApiService extends NyApiService {
         description: dioException.message ?? "",
         style: ToastNotificationStyleType.DANGER);
   }
+
+  Future<dynamic> getRating(Dio dio) async {
+    return network(request: (request) {
+      return request.get("/asd");
+    });
+  }
 }
 
 class TokenObject {
