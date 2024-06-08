@@ -6,26 +6,14 @@ class AchievementWidget extends StatelessWidget {
       required this.title,
       required this.description,
       required this.child,
-      required this.is_done});
+      required this.done});
 
   final String title, description;
   final Widget child;
-  final bool is_done;
-  late final Color title_color, color;
-
-  void init(BuildContext context) {
-    if (is_done) {
-      title_color = Color.fromRGBO(255, 199, 0, 1);
-      color = Theme.of(context).colorScheme.secondary;
-    } else {
-      title_color = Colors.white24;
-      color = Theme.of(context).cardColor;
-    }
-  }
+  final bool done;
 
   @override
   Widget build(BuildContext context) {
-    init(context);
     return Card(
       child: ListTile(
         shape: RoundedRectangleBorder(
@@ -35,7 +23,9 @@ class AchievementWidget extends StatelessWidget {
           title,
           textScaler: TextScaler.linear(2),
           style: TextStyle(
-            color: title_color,
+            color: done
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).disabledColor,
             fontSize: 14,
           ),
         ),
@@ -44,12 +34,11 @@ class AchievementWidget extends StatelessWidget {
           description,
           textScaler: TextScaler.linear(2),
           style: TextStyle(
-            color: Colors.black,
             fontSize: 10,
           ),
         ),
       ),
-      color: color,
+      color: Theme.of(context).cardColor,
       shadowColor: Colors.transparent,
       borderOnForeground: true,
     );

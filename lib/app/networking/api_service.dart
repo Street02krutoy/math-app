@@ -59,6 +59,7 @@ class ApiService extends NyApiService {
     final d = await c.getTokenResponse();
     _token = TokenObject(
         expiresAt: d.expiresAt ?? DateTime.now(), token: d.accessToken ?? "");
+    StorageKey.userToken.store(d.accessToken);
 
     await Auth.login(await c.getUserInfo());
     dump(Auth.user());

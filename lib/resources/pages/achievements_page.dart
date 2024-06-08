@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:flutter_app/resources/widgets/achievement_widget.dart';
@@ -46,12 +48,18 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
                   itemBuilder: (context, index) => AchievementWidget(
                       title: achievements[index]["title"],
                       description: achievements[index]["description"],
-                      child: Image.network(
-                        achievements[index]["image_url"],
-                        width: 60,
-                        height: 60,
+                      child: ImageFiltered(
+                        imageFilter: achievements[index]["is_done"]
+                            ? ImageFilter.blur()
+                            : ImageFilter.blur(
+                                sigmaX: 5, sigmaY: 5, tileMode: TileMode.decal),
+                        child: Image.network(
+                          achievements[index]["image_url"],
+                          width: 60,
+                          height: 60,
+                        ),
                       ),
-                      is_done: achievements[index]["is_done"]),
+                      done: achievements[index]["is_done"]),
                 ),
               ),
             ],

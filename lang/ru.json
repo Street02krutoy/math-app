@@ -49,7 +49,8 @@
     "page_name": "Достижения"
   },
   "progress": {
-    "page_name": "Прогресс"
+    "page_name": "Прогресс",
+    "done":"Сделано {{done}}"
   },
   "reference": {
     "page_name": "Справка"
