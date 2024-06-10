@@ -11,7 +11,20 @@ class SolvePage extends NyStatefulWidget {
 }
 
 class _SolvePageState extends NyState<SolvePage> {
-  ApiService apiService = ApiService();
+  final ApiService apiService = ApiService();
+  final TextEditingController answerController = TextEditingController();
+
+  @override
+  void dispose() {
+    answerController.dispose();
+    super.dispose();
+  }
+
+  void nextTask() {
+    setState(() {
+      answerController.clear();
+    });
+  }
 
   @override
   init() async {}
@@ -61,6 +74,7 @@ class _SolvePageState extends NyState<SolvePage> {
                       height: 20,
                     ),
                     TextField(
+                      controller: answerController,
                       autofocus: true,
                       keyboardType: TextInputType.number,
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -72,7 +86,10 @@ class _SolvePageState extends NyState<SolvePage> {
                       children: [
                         Expanded(
                           child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                // Skip task
+                                nextTask();
+                              },
                               child: Text(
                                 "math.skip".tr(),
                               )),
@@ -82,7 +99,15 @@ class _SolvePageState extends NyState<SolvePage> {
                         ),
                         Expanded(
                           child: ElevatedButton(
-                              onPressed: () {}, child: Text("math.next".tr())),
+                              onPressed: () async {
+                                // Answer task
+                                if (answerController.text.isEmpty) return;
+                                if (answerController.text == task["solution"]) {
+                                  await apiService.solvedTask(data["id"], data["complexity"]);
+                                  print("Right!");
+                                }
+                                nextTask();
+                              }, child: Text("math.next".tr())),
                         )
                       ],
                     ),

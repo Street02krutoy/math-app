@@ -23,7 +23,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
     stateName = ThemesPage.state;
   }
 
-  ApiService apiService = ApiService();
+  final ApiService apiService = ApiService();
 
   @override
   init() async {}

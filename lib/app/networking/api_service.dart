@@ -177,6 +177,12 @@ class ApiService extends NyApiService {
       return request.get("/api/user/achievements?lang=$lang");
     });
   }
+
+  Future solvedTask(int id, int complexity) async {
+    return await network(request: (request) {
+      return request.patch("/api/user/solved_task/$id?complexity=$complexity");
+    });
+  }
 }
 
 
