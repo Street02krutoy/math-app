@@ -144,16 +144,23 @@ class ApiService extends NyApiService {
 
   // ВСЕ ЕБАНЫЕ ЗАПРОСЫ К АПИ
 
-  Future<dynamic> getUser() async {
+  Future getUser() async {
     return await network(request: (request) {
       return request.get("/api/user");
     }, );
   }
 
-  Future<dynamic> getTopics() async {
+  Future getTopics() async {
     String lang = await NyStorage.read("com.srit.math.lang");
     return await network(request: (request) {
       return request.get("/api/user/topics?lang=$lang");
+    });
+  }
+
+  Future getTopicDescription(int id) async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/topic_description?lang=$lang&id=$id");
     });
   }
 }

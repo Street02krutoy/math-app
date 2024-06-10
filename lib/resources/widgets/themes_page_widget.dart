@@ -25,12 +25,9 @@ class _ThemesPageState extends NyState<ThemesPage> {
   }
 
   ApiService apiService = ApiService();
-  late Future<List<Map>> themes;
 
   @override
-  init() async {
-    themes = apiService.getTopics() as Future<List<Map>>;
-  }
+  init() async {}
 
   @override
   boot() {
@@ -54,6 +51,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
 
   @override
   Widget build(BuildContext context) {
+    Future themes = apiService.getTopics();
     return Scaffold(
       appBar: AppBar(
         title: Text("themes.page_name".tr()),
@@ -61,23 +59,28 @@ class _ThemesPageState extends NyState<ThemesPage> {
       body: FutureBuilder(
         future: themes,
         builder: (context, snapshot) {
-          if (snapshot.hasData)
+          if (snapshot.hasData) {
+            List list_of_themes = snapshot.data!;
             return GridView.count(
                 crossAxisCount: 2,
-                children: List.generate(snapshot.data!.length, (index) {
-                  if (index != 0) {
+                children: List.generate(list_of_themes.length, (index) {
+                  if (list_of_themes[index]["id"] != 0) {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: CustomCard(
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("title"),
+                              Flexible(
+                                child: Text(list_of_themes[index]["name"]),
+                              ),
                               InkWell(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)),
-                                onTap: () {
-                                  routeTo(ThemeInfoPage.path);
+                                onTap: () async {
+                                  apiService.getTopicDescription(list_of_themes[index]["id"]).then((value) {
+                                  routeTo(ThemeInfoPage.path, data: value["description"]);
+                                  });
                                 },
                                 child: CircleAvatar(
                                   radius: 15,
@@ -91,7 +94,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
                               ),
                             ],
                           ),
-                          content: Text("description"),
+                          content: Text(list_of_themes[index]["photo"]),
                           onTap: () {
                             showDiffDialog(context);
                           },
@@ -110,6 +113,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
                     );
                   }
                 }));
+          }
           return Scaffold(
             appBar: AppBar(
               title: Text("themes.page_name".tr()),
