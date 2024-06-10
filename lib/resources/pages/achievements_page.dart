@@ -14,7 +14,9 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
   ApiService apiService = ApiService();
 
   @override
-  init() async {}
+  init() async {
+    fetch();
+  }
 
   /// Use boot if you need to load data before the [view] is rendered.
   // @override
@@ -22,9 +24,14 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
   //
   // }
 
+  fetch() {
+    achievementsf = apiService.getAchievements();
+  }
+
+  Future achievementsf = Future.delayed(Duration(days: 99));
+
   @override
   Widget view(BuildContext context) {
-    Future achievementsf = apiService.getAchievements();
     return Scaffold(
         appBar: AppBar(title: Text("achievements.page_name".tr())),
         body: FutureBuilder(
@@ -46,12 +53,13 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
                                   description: achievements[index]
                                       ["description"],
                                   child: ImageFiltered(
-                                    imageFilter: achievements[index]["unlocked"] == 1
-                                        ? ImageFilter.blur()
-                                        : ImageFilter.blur(
-                                            sigmaX: 5,
-                                            sigmaY: 5,
-                                            tileMode: TileMode.decal),
+                                    imageFilter:
+                                        achievements[index]["unlocked"] == 1
+                                            ? ImageFilter.blur()
+                                            : ImageFilter.blur(
+                                                sigmaX: 5,
+                                                sigmaY: 5,
+                                                tileMode: TileMode.decal),
                                     child: Image.network(
                                       getEnv("API_BASE_URL") +
                                           "/api/user/achievement_photo/" +
@@ -60,7 +68,9 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
                                       height: 60,
                                     ),
                                   ),
-                                  done: achievements[index]["unlocked"] == 0 ? false : true),
+                                  done: achievements[index]["unlocked"] == 0
+                                      ? false
+                                      : true),
                             ),
                           ),
                         ),

@@ -31,7 +31,7 @@ class _LoginPageState extends NyState<LoginPage> {
                   onPressed: () {
                     ApiService.authenticate();
                   },
-                  child: Text("general.auth".tr()))
+                  child: Text("login.error".tr()))
             ],
           ),
         ),

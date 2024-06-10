@@ -157,22 +157,23 @@ class ApiService extends NyApiService {
   }
 
   Future getTopics() async {
-    String lang = await NyStorage.read("com.srit.math.lang");
-    dump("/api/user/topics?lang=$lang");
-    return await network<dynamic>(request: (request) {
-      return request.get("/api/user/topics?lang=$lang");
-    });
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
+    return await network<dynamic>(
+        request: (request) {
+          return request.get("/api/user/topics?lang=$lang");
+        },
+        connectionTimeout: Duration(minutes: 1));
   }
 
   Future getTopicDescription(int id) async {
-    String lang = await NyStorage.read("com.srit.math.lang");
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
     return await network(request: (request) {
       return request.get("/api/user/topic_description/${id}?lang=$lang");
     });
   }
 
   Future getTask(int id, int complexity) async {
-    String lang = await NyStorage.read("com.srit.math.lang");
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
     return await network(request: (request) {
       return request
           .get("/api/user/task/$id?lang=$lang&complexity=$complexity");
@@ -180,7 +181,7 @@ class ApiService extends NyApiService {
   }
 
   Future getAchievements() async {
-    String lang = await NyStorage.read("com.srit.math.lang");
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
     return await network(request: (request) {
       return request.get("/api/user/achievements?lang=$lang");
     });

@@ -26,7 +26,13 @@ class _ThemesPageState extends NyState<ThemesPage> {
   final ApiService apiService = ApiService();
 
   @override
-  init() async {}
+  init() async {
+    fetch();
+  }
+
+  fetch() {
+    themes = apiService.getTopics();
+  }
 
   @override
   boot() {
@@ -37,6 +43,8 @@ class _ThemesPageState extends NyState<ThemesPage> {
       body: Text("general.loading".tr()),
     );
   }
+
+  Future themes = Future.delayed(Duration(days: 10));
 
   @override
   stateUpdated(dynamic data) async {
@@ -51,7 +59,6 @@ class _ThemesPageState extends NyState<ThemesPage> {
 
   @override
   Widget build(BuildContext context) {
-    Future themes = apiService.getTopics();
     return Scaffold(
       appBar: AppBar(
         title: Text("themes.page_name".tr()),

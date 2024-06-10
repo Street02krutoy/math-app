@@ -27,18 +27,22 @@ class _AccountPageState extends NyState<AccountPage> {
   final ApiService apiService = ApiService();
 
   @override
-  init() async {}
+  init() async {
+    fetch();
+  }
 
   @override
   stateUpdated(dynamic data) async {
     // e.g. to update this state from another class
     // updateState(AccountPage.state, data: "example payload");
   }
+  Future userf = Future.delayed(Duration(days: 99));
+  fetch() {
+    userf = apiService.getUser();
+  }
 
   @override
   Widget build(BuildContext context) {
-    Future userf = apiService.getUser();
-
     return Scaffold(
       appBar: AppBar(
         title: Text("profile.page_name".tr()),

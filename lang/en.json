@@ -70,5 +70,9 @@
     "cancel": "Cancel",
     "ok": "OK",
     "loading": "Loading"
+  },
+  "login":{
+    "page_name":"Login",
+    "error":"If authorization screen havent apeeared, press here"
   }
 }
