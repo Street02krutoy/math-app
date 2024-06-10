@@ -41,7 +41,10 @@
     "page_name": "Math",
     "skip": "Skip",
     "next": "Next",
-    "solve": "Solve this expression:"
+    "solve": "Solve this expression:",
+    "right": "You solved this right",
+    "error": "Right solution {{right}}",
+    "error_title": "Incorrect solution"
   },
   "rating": {
     "page_name": "Rating"
@@ -69,7 +72,9 @@
   "general": {
     "cancel": "Cancel",
     "ok": "OK",
-    "loading": "Loading"
+    "loading": "Loading",
+    "info":"Info"
+    
   },
   "login":{
     "page_name":"Login",

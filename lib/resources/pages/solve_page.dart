@@ -103,11 +103,26 @@ class _SolvePageState extends NyState<SolvePage> {
                                 // Answer task
                                 if (answerController.text.isEmpty) return;
                                 if (answerController.text == task["solution"]) {
-                                  await apiService.solvedTask(data["id"], data["complexity"]);
+                                  await apiService.solvedTask(
+                                      data["id"], data["complexity"]);
                                   print("Right!");
+                                  showToastInfo(
+                                      title: "general.info".tr(),
+                                      description: "math.right".tr(),
+                                      style:
+                                          ToastNotificationStyleType.SUCCESS);
+                                } else {
+                                  showToastInfo(
+                                      title: "math.error_title".tr(),
+                                      description: "math.error".tr(arguments: {
+                                        "right": task["solution"]
+                                      }),
+                                      style:
+                                          ToastNotificationStyleType.WARNING);
                                 }
                                 nextTask();
-                              }, child: Text("math.next".tr())),
+                              },
+                              child: Text("math.next".tr())),
                         )
                       ],
                     ),
