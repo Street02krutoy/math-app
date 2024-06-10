@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/solve_page.dart';
 import 'package:flutter_app/resources/pages/theme_info_page.dart';
@@ -24,13 +23,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
     stateName = ThemesPage.state;
   }
 
-  ApiService apiService = ApiService();
-  late Future<List<Map>> themes;
+  final ApiService apiService = ApiService();
 
   @override
-  init() async {
-    themes = apiService.getTopics() as Future<List<Map>>;
-  }
+  init() async {}
 
   @override
   boot() {
@@ -48,12 +44,14 @@ class _ThemesPageState extends NyState<ThemesPage> {
     // updateState(ThemesPage.state, data: "example payload");
   }
 
-  void showDiffDialog(BuildContext context) {
-    showDialog(context: context, builder: ((context) => PopUpDifficulty()));
+  void showDiffDialog(BuildContext context, int id) {
+    showDialog(
+        context: context, builder: ((context) => PopUpDifficulty(id: id)));
   }
 
   @override
   Widget build(BuildContext context) {
+    Future themes = apiService.getTopics();
     return Scaffold(
       appBar: AppBar(
         title: Text("themes.page_name".tr()),
@@ -61,23 +59,32 @@ class _ThemesPageState extends NyState<ThemesPage> {
       body: FutureBuilder(
         future: themes,
         builder: (context, snapshot) {
-          if (snapshot.hasData)
+          if (snapshot.hasData) {
+            List list_of_themes = snapshot.data!;
             return GridView.count(
                 crossAxisCount: 2,
-                children: List.generate(snapshot.data!.length, (index) {
-                  if (index != 0) {
+                children: List.generate(list_of_themes.length, (index) {
+                  if (list_of_themes[index]["id"] != "placeholder") {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: CustomCard(
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("title"),
+                              Flexible(
+                                child: Text(list_of_themes[index]["name"]),
+                              ),
                               InkWell(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)),
-                                onTap: () {
-                                  routeTo(ThemeInfoPage.path);
+                                onTap: () async {
+                                  apiService
+                                      .getTopicDescription(
+                                          list_of_themes[index]["id"])
+                                      .then((value) {
+                                    routeTo(ThemeInfoPage.path,
+                                        data: value["description"]);
+                                  });
                                 },
                                 child: CircleAvatar(
                                   radius: 15,
@@ -91,9 +98,12 @@ class _ThemesPageState extends NyState<ThemesPage> {
                               ),
                             ],
                           ),
-                          content: Text("description"),
+                          content: Image.network(getEnv("API_BASE_URL") +
+                              "/api/user/topic_photo/" +
+                              list_of_themes[index]["id"].toString()),
                           onTap: () {
-                            showDiffDialog(context);
+                            showDiffDialog(
+                                context, list_of_themes[index]["id"]);
                           },
                           height: 100),
                     );
@@ -110,14 +120,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
                     );
                   }
                 }));
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("themes.page_name".tr()),
-            ),
-            body: Center(
-              child: Column(
-                children: [Spacer(), CircularProgressIndicator(), Spacer()],
-              ),
+          }
+          return Center(
+            child: Column(
+              children: [Spacer(), CircularProgressIndicator(), Spacer()],
             ),
           );
         },
@@ -127,7 +133,9 @@ class _ThemesPageState extends NyState<ThemesPage> {
 }
 
 class PopUpDifficulty extends StatefulWidget {
-  PopUpDifficulty({super.key});
+  PopUpDifficulty({super.key, required this.id});
+
+  final int id;
 
   @override
   State<PopUpDifficulty> createState() => _PopUpDifficultyState();
@@ -187,8 +195,21 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
           onPressed: _difficulty == null
               ? null
               : () {
+                  int complexity;
+                  switch (_difficulty!) {
+                    case Difficulty.easy:
+                      complexity = 1;
+                      break;
+                    case Difficulty.medium:
+                      complexity = 2;
+                      break;
+                    case Difficulty.hard:
+                      complexity = 3;
+                      break;
+                  }
                   Navigator.pop(context, 'OK');
-                  routeTo(SolvePage.path);
+                  routeTo(SolvePage.path,
+                      data: {"complexity": complexity, "id": widget.id});
                 },
           child: Text('general.ok'.tr()),
         ),

@@ -146,7 +146,7 @@ class ApiService extends NyApiService {
 
   // ВСЕ ЕБАНЫЕ ЗАПРОСЫ К АПИ
 
-  Future<dynamic> getUser() async {
+  Future getUser() async {
     return await network(
       request: (request) {
         return request.get("/api/user");
@@ -154,10 +154,38 @@ class ApiService extends NyApiService {
     );
   }
 
-  Future<dynamic> getTopics() async {
+  Future getTopics() async {
     String lang = await NyStorage.read("com.srit.math.lang");
     return await network(request: (request) {
       return request.get("/api/user/topics?lang=$lang");
+    });
+  }
+
+  Future getTopicDescription(int id) async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/topic_description/${id}?lang=$lang");
+    });
+  }
+
+  Future getTask(int id, int complexity) async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request
+          .get("/api/user/task/$id?lang=$lang&complexity=$complexity");
+    });
+  }
+
+  Future getAchievements() async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/achievements?lang=$lang");
+    });
+  }
+
+  Future solvedTask(int id, int complexity) async {
+    return await network(request: (request) {
+      return request.patch("/api/user/solved_task/$id?complexity=$complexity");
     });
   }
 }
