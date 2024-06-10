@@ -74,11 +74,11 @@ class ApiService extends NyApiService {
     if (getEnv('APP_DEBUG') == true) PrettyDioLogger: PrettyDioLogger()
   };
 
-  Future fetchTestData() async {
-    return await network(
-      request: (request) => request.get("/endpoint-path"),
-    );
-  }
+  // Future fetchTestData() async {
+  //   return await network(
+  //     request: (request) => request.get("/endpoint-path"),
+  //   );
+  // }
 
   /* Helpers
   |-------------------------------------------------------------------------- */
@@ -143,7 +143,7 @@ class ApiService extends NyApiService {
   }
 
   Future<dynamic> getUser() async {
-    return network(request: (request) {
+    return await network(request: (request) {
       return request.get("/api/user");
     });
   }
