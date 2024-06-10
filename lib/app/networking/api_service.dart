@@ -142,12 +142,14 @@ class ApiService extends NyApiService {
         style: ToastNotificationStyleType.DANGER);
   }
 
-  // ВСЕ ЕБАНЫЕ ЗАПРОСЫ К АПИ
+  // ВСЕ ЗАПРОСЫ К АПИ
 
   Future getUser() async {
-    return await network(request: (request) {
-      return request.get("/api/user");
-    }, );
+    return await network(
+      request: (request) {
+        return request.get("/api/user");
+      },
+    );
   }
 
   Future getTopics() async {
@@ -167,7 +169,8 @@ class ApiService extends NyApiService {
   Future getTask(int id, int complexity) async {
     String lang = await NyStorage.read("com.srit.math.lang");
     return await network(request: (request) {
-      return request.get("/api/user/task/$id?lang=$lang&complexity=$complexity");
+      return request
+          .get("/api/user/task/$id?lang=$lang&complexity=$complexity");
     });
   }
 
@@ -180,13 +183,19 @@ class ApiService extends NyApiService {
 
   Future solvedTask(int id, int complexity) async {
     return await network(request: (request) {
-      return request.patch("/api/user/solved_task/$id?complexity=$complexity");
+      return request
+          .patch("/api/user/solved_task/$id", data: {"complexity": complexity});
     });
   }
+
+  Future getUsersRating() async {
+    return await network(
+      request: (request) {
+        return request.get("/api/user/rating");
+      },
+    );
+  }
 }
-
-
-
 
 class TokenObject {
   final DateTime expiresAt;

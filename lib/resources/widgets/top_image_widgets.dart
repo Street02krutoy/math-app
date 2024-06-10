@@ -9,9 +9,9 @@ class ProfileTop extends StatelessWidget {
       required this.name,
       required this.place});
 
-  final String name;
+  final String? name;
   final Widget child;
-  final double rating;
+  final String? rating;
   final int place;
   late final Color color;
   late final String path;
@@ -40,7 +40,7 @@ class ProfileTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-    return Column(
+    return (name != null && rating != null) ? Column(
       children: [
         Stack(
           children: [
@@ -61,7 +61,7 @@ class ProfileTop extends StatelessWidget {
           alignment: AlignmentDirectional.bottomCenter,
         ),
         Text(
-          name,
+          name!,
           textScaler: TextScaler.linear(2),
         ),
         Row(
@@ -77,7 +77,7 @@ class ProfileTop extends StatelessWidget {
               ),
             ),
             Text(
-              rating.toString(),
+              rating!,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -85,6 +85,6 @@ class ProfileTop extends StatelessWidget {
           ],
         )
       ],
-    );
+    ) : Spacer();
   }
 }

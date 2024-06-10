@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
-import 'package:flutter_app/app/providers/auth_provider.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
 import 'package:flutter_app/resources/pages/progress_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
@@ -27,6 +24,8 @@ class _AccountPageState extends NyState<AccountPage> {
     stateName = AccountPage.state;
   }
 
+  final ApiService apiService = ApiService();
+
   @override
   init() async {}
 
@@ -38,154 +37,173 @@ class _AccountPageState extends NyState<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+    Future userf = apiService.getUser();
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text("profile.page_name".tr()),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                routeTo(TestPage.path);
-              },
-            )
-          ],
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              children: [
-                Row(
+      appBar: AppBar(
+        title: Text("profile.page_name".tr()),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit),
+            onPressed: () {
+              // routeTo(TestPage.path);
+            },
+          )
+        ],
+      ),
+      body: FutureBuilder(
+        future: userf,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            Map user = snapshot.data;
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: CustomCard(
-                        title: CircleAvatar(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.background,
-                          radius: 60,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomCard(
+                            title: CircleAvatar(
+                              backgroundColor:
+                                  Theme.of(context).colorScheme.background,
+                              radius: 60,
+                            ),
+                            content: Text(
+                              Auth.user()["preferred_username"],
+                              textScaler: TextScaler.linear(2),
+                            ),
+                          ),
                         ),
-                        content: Text(
-                          Auth.user()["preferred_username"],
-                          textScaler: TextScaler.linear(2),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Row(
+                        Expanded(
+                          child: Column(
                             children: [
-                              Expanded(
-                                child: CustomCard(
-                                  title: Text(
-                                    "profile.rating".tr(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  content: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 2),
-                                        child: Icon(
-                                          Icons.star,
-                                          size: 15,
-                                          color: Theme.of(context).focusColor,
-                                        ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomCard(
+                                      title: Text(
+                                        "profile.rating".tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
                                       ),
-                                      Text(
-                                        "0",
+                                      content: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(right: 2),
+                                            child: Icon(
+                                              Icons.star,
+                                              size: 15,
+                                              color:
+                                                  Theme.of(context).focusColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            user["rating"].toString(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge,
+                                          ),
+                                        ],
+                                      ),
+                                      height: 60,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomCard(
+                                      title: Text(
+                                        "profile.top".tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
+                                      ),
+                                      content: Text(
+                                        user["place_in_top"].toString(),
                                         style: Theme.of(context)
                                             .textTheme
                                             .titleLarge,
                                       ),
-                                    ],
+                                      height: 60,
+                                    ),
                                   ),
-                                  height: 60,
-                                ),
+                                ],
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: CustomCard(
-                                  title: Text(
-                                    "profile.top".tr(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                  content: Text(
-                                    "1",
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                  height: 60,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                        )
+                      ],
+                    ),
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 87,
+                        title: Text("profile.progress.page_name".tr()),
+                        subtitle: Text("profile.progress.description".tr()),
+                        icon: Icons.trending_up,
+                        onTap: () {
+                          routeTo(ProgressPage.path);
+                        },
                       ),
-                    )
+                    ),
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 87,
+                        title: Text("profile.achievements.page_name".tr()),
+                        subtitle: Text("profile.achievements.description".tr()),
+                        icon: Icons.offline_pin,
+                        onTap: () {
+                          routeTo(AchievementsPage.path);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 87,
+                        title: Text(
+                          "profile.settings.page_name".tr(),
+                        ),
+                        subtitle: Text(
+                          "profile.settings.description".tr(),
+                        ),
+                        icon: Icons.settings,
+                        onTap: () {
+                          routeTo(SettingsPage.path);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ProfileButtonWidget(
+                        height: 87,
+                        title: Text(
+                          "profile.support.page_name".tr(),
+                        ),
+                        subtitle: Text(
+                          "profile.support.description".tr(),
+                        ),
+                        icon: Icons.contact_support,
+                        onTap: () {},
+                      ),
+                    ),
                   ],
                 ),
-                Expanded(
-                  child: ProfileButtonWidget(
-                    height: 87,
-                    title: Text("profile.progress.page_name".tr()),
-                    subtitle: Text("profile.progress.description".tr()),
-                    icon: Icons.trending_up,
-                    onTap: () {
-                      routeTo(ProgressPage.path);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: ProfileButtonWidget(
-                    height: 87,
-                    title: Text("profile.achievements.page_name".tr()),
-                    subtitle: Text("profile.achievements.description".tr()),
-                    icon: Icons.offline_pin,
-                    onTap: () {
-                      routeTo(AchievementsPage.path);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: ProfileButtonWidget(
-                    height: 87,
-                    title: Text(
-                      "profile.settings.page_name".tr(),
-                    ),
-                    subtitle: Text(
-                      "profile.settings.description".tr(),
-                    ),
-                    icon: Icons.settings,
-                    onTap: () {
-                      routeTo(SettingsPage.path);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: ProfileButtonWidget(
-                    height: 87,
-                    title: Text(
-                      "profile.support.page_name".tr(),
-                    ),
-                    subtitle: Text(
-                      "profile.support.description".tr(),
-                    ),
-                    icon: Icons.contact_support,
-                    onTap: () {},
-                  ),
-                ),
-              ],
+              ),
+            );
+          }
+          return Center(
+            child: Column(
+              children: [Spacer(), CircularProgressIndicator(), Spacer()],
             ),
-          ),
-        ));
+          );
+        },
+      ),
+    );
   }
 }
