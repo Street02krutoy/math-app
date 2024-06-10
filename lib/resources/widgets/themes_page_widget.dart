@@ -25,11 +25,11 @@ class _ThemesPageState extends NyState<ThemesPage> {
   }
 
   ApiService apiService = ApiService();
-  late List<Map> themes;
+  late Future<List<Map>> themes;
 
   @override
   init() async {
-    themes = await apiService.getTopics();
+    themes = apiService.getTopics() as Future<List<Map>>;
   }
 
   @override
@@ -58,53 +58,70 @@ class _ThemesPageState extends NyState<ThemesPage> {
       appBar: AppBar(
         title: Text("themes.page_name".tr()),
       ),
-      body: GridView.count(
-          crossAxisCount: 2,
-          children: List.generate(themes.length, (index) {
-            if (index != 0) {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: CustomCard(
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("title"),
-                        InkWell(
-                          borderRadius: BorderRadius.all(Radius.circular(100)),
-                          onTap: () {
-                            routeTo(ThemeInfoPage.path);
-                          },
-                          child: CircleAvatar(
-                            radius: 15,
-                            backgroundColor:
-                                context.theme.colorScheme.secondary,
-                            child: Icon(
-                              Icons.question_mark,
-                              color: context.theme.primaryColor,
-                            ),
+      body: FutureBuilder(
+        future: themes,
+        builder: (context, snapshot) {
+          if (snapshot.hasData)
+            return GridView.count(
+                crossAxisCount: 2,
+                children: List.generate(snapshot.data!.length, (index) {
+                  if (index != 0) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: CustomCard(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("title"),
+                              InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
+                                onTap: () {
+                                  routeTo(ThemeInfoPage.path);
+                                },
+                                child: CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor:
+                                      context.theme.colorScheme.secondary,
+                                  child: Icon(
+                                    Icons.question_mark,
+                                    color: context.theme.primaryColor,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                    content: Text("description"),
-                    onTap: () {
-                      showDiffDialog(context);
-                    },
-                    height: 100),
-              );
-            } else {
-              return Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: CustomCard(
-                    title: Text("themes.mixed".tr()),
-                    content: Text("themes.mixdesc"),
-                    onTap: () {
-                      routeTo(MixedThemesPage.path);
-                    },
-                    height: 100),
-              );
-            }
-          })),
+                          content: Text("description"),
+                          onTap: () {
+                            showDiffDialog(context);
+                          },
+                          height: 100),
+                    );
+                  } else {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: CustomCard(
+                          title: Text("themes.mixed".tr()),
+                          content: Text("themes.mixdesc"),
+                          onTap: () {
+                            routeTo(MixedThemesPage.path);
+                          },
+                          height: 100),
+                    );
+                  }
+                }));
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("themes.page_name".tr()),
+            ),
+            body: Center(
+              child: Column(
+                children: [Spacer(), CircularProgressIndicator(), Spacer()],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
