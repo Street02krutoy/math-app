@@ -5,6 +5,7 @@ import 'package:flutter_app/resources/pages/solve_page.dart';
 import 'package:flutter_app/resources/pages/theme_info_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
+import "package:flutter_app/app/networking/api_service.dart";
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ThemesPage extends StatefulWidget {
@@ -23,8 +24,13 @@ class _ThemesPageState extends NyState<ThemesPage> {
     stateName = ThemesPage.state;
   }
 
+  ApiService apiService = ApiService();
+  late List<Map> themes;
+
   @override
-  init() async {}
+  init() async {
+    themes = await apiService.getTopics();
+  }
 
   @override
   boot() {
@@ -54,7 +60,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
       ),
       body: GridView.count(
           crossAxisCount: 2,
-          children: List.generate(21, (index) {
+          children: List.generate(themes.length, (index) {
             if (index != 0) {
               return Padding(
                 padding: const EdgeInsets.all(4.0),

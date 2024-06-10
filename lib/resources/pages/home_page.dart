@@ -13,7 +13,7 @@ class HomePage extends NyStatefulWidget {
 }
 
 class _HomePagePageState extends NyState<HomePage> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   final List<Widget> _pages = [
     AccountPage(),

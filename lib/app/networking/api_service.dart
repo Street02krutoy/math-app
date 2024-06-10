@@ -142,12 +142,24 @@ class ApiService extends NyApiService {
         style: ToastNotificationStyleType.DANGER);
   }
 
+  // ВСЕ ЕБАНЫЕ ЗАПРОСЫ К АПИ
+
   Future<dynamic> getUser() async {
     return await network(request: (request) {
       return request.get("/api/user");
+    }, );
+  }
+
+  Future<dynamic> getTopics() async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/topics?lang=$lang");
     });
   }
 }
+
+
+
 
 class TokenObject {
   final DateTime expiresAt;
