@@ -29,9 +29,9 @@ class _HomePagePageState extends NyState<HomePage> {
   // / Use boot if you need to load data before the [view] is rendered.
   @override
   boot() async {
-    dynamic e = await NyStorage.read("com.srit.math.lang");
-    dump(e);
-    await changeLanguage(e != null ? e : "ru");
+    dynamic lang = await NyStorage.read("com.srit.math.lang");
+    dump(lang);
+    if (lang != null) await changeLanguage(lang);
     auth = await Auth.loggedIn();
   }
 
