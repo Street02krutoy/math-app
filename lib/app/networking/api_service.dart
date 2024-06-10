@@ -160,7 +160,14 @@ class ApiService extends NyApiService {
   Future getTopicDescription(int id) async {
     String lang = await NyStorage.read("com.srit.math.lang");
     return await network(request: (request) {
-      return request.get("/api/user/topic_description?lang=$lang&id=$id");
+      return request.get("/api/user/topic_description/${id}?lang=$lang");
+    });
+  }
+
+  Future getTask(int id, int complexity) async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/task/$id?lang=$lang&complexity=$complexity");
     });
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/solve_page.dart';
 import 'package:flutter_app/resources/pages/theme_info_page.dart';
@@ -45,8 +44,9 @@ class _ThemesPageState extends NyState<ThemesPage> {
     // updateState(ThemesPage.state, data: "example payload");
   }
 
-  void showDiffDialog(BuildContext context) {
-    showDialog(context: context, builder: ((context) => PopUpDifficulty()));
+  void showDiffDialog(BuildContext context, int id) {
+    showDialog(
+        context: context, builder: ((context) => PopUpDifficulty(id: id)));
   }
 
   @override
@@ -64,7 +64,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
             return GridView.count(
                 crossAxisCount: 2,
                 children: List.generate(list_of_themes.length, (index) {
-                  if (list_of_themes[index]["id"] != 0) {
+                  if (list_of_themes[index]["id"] != "placeholder") {
                     return Padding(
                       padding: const EdgeInsets.all(4.0),
                       child: CustomCard(
@@ -78,8 +78,12 @@ class _ThemesPageState extends NyState<ThemesPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(100)),
                                 onTap: () async {
-                                  apiService.getTopicDescription(list_of_themes[index]["id"]).then((value) {
-                                  routeTo(ThemeInfoPage.path, data: value["description"]);
+                                  apiService
+                                      .getTopicDescription(
+                                          list_of_themes[index]["id"])
+                                      .then((value) {
+                                    routeTo(ThemeInfoPage.path,
+                                        data: value["description"]);
                                   });
                                 },
                                 child: CircleAvatar(
@@ -94,9 +98,12 @@ class _ThemesPageState extends NyState<ThemesPage> {
                               ),
                             ],
                           ),
-                          content: Text(list_of_themes[index]["photo"]),
+                          content: Image.network(getEnv("API_BASE_URL") +
+                              "/api/user/topic_photo/" +
+                              list_of_themes[index]["id"].toString()),
                           onTap: () {
-                            showDiffDialog(context);
+                            showDiffDialog(
+                                context, list_of_themes[index]["id"]);
                           },
                           height: 100),
                     );
@@ -114,14 +121,9 @@ class _ThemesPageState extends NyState<ThemesPage> {
                   }
                 }));
           }
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("themes.page_name".tr()),
-            ),
-            body: Center(
-              child: Column(
-                children: [Spacer(), CircularProgressIndicator(), Spacer()],
-              ),
+          return Center(
+            child: Column(
+              children: [Spacer(), CircularProgressIndicator(), Spacer()],
             ),
           );
         },
@@ -131,7 +133,9 @@ class _ThemesPageState extends NyState<ThemesPage> {
 }
 
 class PopUpDifficulty extends StatefulWidget {
-  PopUpDifficulty({super.key});
+  PopUpDifficulty({super.key, required this.id});
+
+  final int id;
 
   @override
   State<PopUpDifficulty> createState() => _PopUpDifficultyState();
@@ -191,8 +195,21 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
           onPressed: _difficulty == null
               ? null
               : () {
+                  int complexity;
+                  switch (_difficulty!) {
+                    case Difficulty.easy:
+                      complexity = 1;
+                      break;
+                    case Difficulty.medium:
+                      complexity = 2;
+                      break;
+                    case Difficulty.hard:
+                      complexity = 3;
+                      break;
+                  }
                   Navigator.pop(context, 'OK');
-                  routeTo(SolvePage.path);
+                  routeTo(SolvePage.path,
+                      data: {"complexity": complexity, "id": widget.id});
                 },
           child: Text('general.ok'.tr()),
         ),
