@@ -40,51 +40,58 @@ class ProfileTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-    return (name != null && rating != null && child != null) ? Column(
-      children: [
-        Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 40),
-              child: RoundImage(
-                child: child!,
-                roundColor: color,
-                radius: radius,
+    return (name != null && rating != null && child != null)
+        ? Column(
+            children: [
+              Stack(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 40),
+                    child: RoundImage(
+                      child: child!,
+                      roundColor: color,
+                      radius: radius,
+                    ),
+                  ),
+                  Image.asset(
+                    path,
+                    width: 40,
+                    height: 40,
+                  ),
+                ],
+                alignment: AlignmentDirectional.bottomCenter,
               ),
-            ),
-            Image.asset(
-              path,
-              width: 40,
-              height: 40,
-            ),
-          ],
-          alignment: AlignmentDirectional.bottomCenter,
-        ),
-        Text(
-          name!,
-          textScaler: TextScaler.linear(2),
-        ),
-        Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                right: 5,
-                bottom: 3,
+              Text(
+                name!,
+                textScaler: TextScaler.linear(2),
               ),
-              child: Icon(
-                Icons.star,
-                color: Colors.yellow,
-              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      right: 5,
+                      bottom: 3,
+                    ),
+                    child: Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                  ),
+                  Text(
+                    rating!,
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          )
+        : RoundImage(
+            child: Container(
+              color: Theme.of(context).canvasColor,
             ),
-            Text(
-              rating!,
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-          ],
-        )
-      ],
-    ) : Spacer();
+            roundColor: Theme.of(context).canvasColor,
+            radius: radius);
   }
 }

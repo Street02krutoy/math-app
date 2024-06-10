@@ -1,8 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 
 class UploadPhotoService {
   File? photo = null;
@@ -11,11 +11,9 @@ class UploadPhotoService {
 
   late NavigatorState _navigator;
 
-  late ScaffoldMessengerState _scaffoldMessenger;
 
   UploadPhotoService(this.context) {
     _navigator = Navigator.of(context);
-    _scaffoldMessenger = ScaffoldMessenger.of(context);
   }
 
   Future<void> _pickFile() async {
@@ -35,19 +33,11 @@ class UploadPhotoService {
     }
   }
 
-  void _closeDialog(String text) {
-    text != ""
-        ? _scaffoldMessenger.showSnackBar(SnackBar(
-            content: Text(text),
-          ))
-        : null;
-    _navigator.pop();
-  }
-
-  Future<void> _uploadFile() async {}
-
-  Future<void> _cancelUpload() async {
-    _closeDialog("");
+  Future<void> _uploadFile() async {
+    if (photo != null) {
+      ApiService().putUserPhoto(photo!);
+      _navigator.pop();
+    }
   }
 
   Future<void> showUploadDialog() async {

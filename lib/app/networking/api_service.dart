@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import '/config/decoders.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'dart:io';
 
 /* ApiService
 | -------------------------------------------------------------------------
@@ -207,6 +208,18 @@ class ApiService extends NyApiService {
     return await network(
       request: (request) {
         return request.get("/api/user/progress?lang=$lang");
+      },
+    );
+  }
+
+  Future putUserPhoto(File file) async {
+    String fileName = file.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "file": await MultipartFile.fromFile(file.path, filename: fileName),
+    });
+    return await network(
+      request: (request) {
+        return request.put("/api/user/photo", data: formData);
       },
     );
   }

@@ -70,15 +70,22 @@ class _AccountPageState extends NyState<AccountPage> {
                       children: [
                         Expanded(
                           child: CustomCard(
-                            title: InkWell(
-                              onTap: () {
-                                UploadPhotoService(context).showUploadDialog();
-                              },
-                              child: CircleAvatar(
-                                backgroundColor:
-                                    Theme.of(context).colorScheme.background,
-                                radius: 60,
-                              ),
+                            title: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                CircleAvatar(
+                                  child: Image.network(getEnv("API_BASE_URL") +
+                                      "/api/user/photo"),
+                                  radius: 60,
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    UploadPhotoService(context)
+                                        .showUploadDialog();
+                                  },
+                                  icon: Icon(Icons.add_a_photo_sharp),
+                                ),
+                              ],
                             ),
                             content: Text(
                               Auth.user()["preferred_username"],

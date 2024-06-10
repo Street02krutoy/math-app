@@ -59,9 +59,9 @@ class _RatingPageState extends NyState<RatingPage> {
                         ProfileTop(
                           place: 1,
                           name: real_rating[0]["username"],
-                          child: Container(
-                            color: theme.cardColor,
-                          ),
+                          child: Image.network(getEnv("API_BASE_URL") +
+                              "/api/user/leader_photo/" +
+                              real_rating[0]["id"]),
                           rating: real_rating[0]["rating"].toString(),
                         ),
                         ProfileTop(
