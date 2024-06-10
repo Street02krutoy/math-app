@@ -170,6 +170,13 @@ class ApiService extends NyApiService {
       return request.get("/api/user/task/$id?lang=$lang&complexity=$complexity");
     });
   }
+
+  Future getAchievements() async {
+    String lang = await NyStorage.read("com.srit.math.lang");
+    return await network(request: (request) {
+      return request.get("/api/user/achievements?lang=$lang");
+    });
+  }
 }
 
 
