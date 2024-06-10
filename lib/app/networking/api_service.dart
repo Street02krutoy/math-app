@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/config/storage_keys.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -70,9 +71,7 @@ class ApiService extends NyApiService {
 
   @override
   // ignore: overridden_fields
-  final interceptors = {
-    if (getEnv('APP_DEBUG') == true) PrettyDioLogger: PrettyDioLogger()
-  };
+  final interceptors = {PrettyDioLogger: PrettyDioLogger()};
 
   // Future fetchTestData() async {
   //   return await network(
@@ -91,6 +90,7 @@ class ApiService extends NyApiService {
 
   @override
   Future<RequestHeaders> setAuthHeaders(RequestHeaders headers) async {
+    dump("value");
     String? myAuthToken = await StorageKey.userToken.read();
     if (myAuthToken != null) {
       headers.addBearerToken(myAuthToken);
@@ -108,7 +108,9 @@ class ApiService extends NyApiService {
 
   @override
   Future<bool> shouldRefreshToken() async {
-    return true;
+    bool e = JwtDecoder.isExpired(await StorageKey.userToken.read());
+    dump(e);
+    return e;
   }
 
   /* Refresh Token
@@ -156,7 +158,8 @@ class ApiService extends NyApiService {
 
   Future getTopics() async {
     String lang = await NyStorage.read("com.srit.math.lang");
-    return await network(request: (request) {
+    dump("/api/user/topics?lang=$lang");
+    return await network<dynamic>(request: (request) {
       return request.get("/api/user/topics?lang=$lang");
     });
   }
