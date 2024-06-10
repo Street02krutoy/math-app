@@ -108,7 +108,7 @@ class ApiService extends NyApiService {
 
   @override
   Future<bool> shouldRefreshToken() async {
-    return false;
+    return true;
   }
 
   /* Refresh Token
@@ -121,8 +121,10 @@ class ApiService extends NyApiService {
   @override
   refreshToken(Dio dio) async {
     dynamic response =
-        (await dio.get("https://example.com/refresh-token")).data;
+        (await dio.get("${getEnv("SSO_URL")}/protocol/openid-connect/token"))
+            .data;
     // Save the new token
+
     await StorageKey.userToken.store(response['token']);
   }
 
