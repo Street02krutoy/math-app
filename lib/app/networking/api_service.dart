@@ -108,7 +108,7 @@ class ApiService extends NyApiService {
 
   @override
   Future<bool> shouldRefreshToken() async {
-    return false;
+    return true;
   }
 
   /* Refresh Token
@@ -121,8 +121,10 @@ class ApiService extends NyApiService {
   @override
   refreshToken(Dio dio) async {
     dynamic response =
-        (await dio.get("https://example.com/refresh-token")).data;
+        (await dio.get("${getEnv("SSO_URL")}/protocol/openid-connect/token"))
+            .data;
     // Save the new token
+
     await StorageKey.userToken.store(response['token']);
   }
 
@@ -145,9 +147,11 @@ class ApiService extends NyApiService {
   // ВСЕ ЕБАНЫЕ ЗАПРОСЫ К АПИ
 
   Future<dynamic> getUser() async {
-    return await network(request: (request) {
-      return request.get("/api/user");
-    }, );
+    return await network(
+      request: (request) {
+        return request.get("/api/user");
+      },
+    );
   }
 
   Future<dynamic> getTopics() async {
@@ -157,9 +161,6 @@ class ApiService extends NyApiService {
     });
   }
 }
-
-
-
 
 class TokenObject {
   final DateTime expiresAt;
