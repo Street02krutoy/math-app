@@ -200,6 +200,15 @@ class ApiService extends NyApiService {
       },
     );
   }
+
+  Future getUserProgress() async {
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
+    return await network(
+      request: (request) {
+        return request.get("/api/user/progress?lang=$lang");
+      },
+    );
+  }
 }
 
 class TokenObject {

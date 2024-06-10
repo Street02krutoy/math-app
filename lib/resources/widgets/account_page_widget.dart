@@ -43,12 +43,12 @@ class _AccountPageState extends NyState<AccountPage> {
       appBar: AppBar(
         title: Text("profile.page_name".tr()),
         actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              // routeTo(TestPage.path);
-            },
-          )
+          // IconButton(
+          //   icon: Icon(Icons.edit),
+          //   onPressed: () {
+          //     // routeTo(TestPage.path);
+          //   },
+          // )
         ],
       ),
       body: FutureBuilder(
@@ -189,7 +189,10 @@ class _AccountPageState extends NyState<AccountPage> {
                           "profile.support.description".tr(),
                         ),
                         icon: Icons.contact_support,
-                        onTap: () {},
+                        onTap: () {
+                          launchUrl(
+                              Uri.parse("https://t.me/mathushasupportbot"));
+                        },
                       ),
                     ),
                   ],

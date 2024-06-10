@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/resources/widgets/progress_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -12,8 +13,16 @@ class ProgressPage extends NyStatefulWidget {
 }
 
 class _ProgressPageState extends NyState<ProgressPage> {
+  Future fetch() async {
+    _future = ApiService().getUserProgress();
+  }
+
   @override
-  init() async {}
+  init() async {
+    fetch();
+  }
+
+  Future<dynamic> _future = Future.delayed(Duration(days: 99));
 
   /// Use boot if you need to load data before the [view] is rendered.
   // @override
@@ -24,39 +33,59 @@ class _ProgressPageState extends NyState<ProgressPage> {
 
   @override
   Widget view(BuildContext context) {
-    dataSource = [
-      DoughnutData(name: "name", count: 98),
-      DoughnutData(name: "name", count: 12),
-    ];
     return Scaffold(
       appBar: AppBar(title: Text("progress.page_name".tr())),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 200,
-                child: SfCircularChart(
-                  legend: Legend(isVisible: true),
-                  series: [
-                    DoughnutSeries<DoughnutData, String>(
-                      //explode: true,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            fetch();
+          },
+          child: FutureBuilder(
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                dataSource = List.generate(snapshot.data!.length, (int index) {
+                  return DoughnutData(
+                      name: snapshot.data[index]["name"],
+                      count: snapshot.data[index]["solved_tasks"]);
+                });
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 200,
+                        child: SfCircularChart(
+                          legend: Legend(isVisible: true),
+                          series: [
+                            DoughnutSeries<DoughnutData, String>(
+                              //explode: true,
 
-                      dataSource: dataSource,
-                      xValueMapper: (datum, int index) =>
-                          "${datum.name} - ${datum.count}",
-                      yValueMapper: (datum, int index) => datum.count,
-                      //dataLabelSettings: DataLabelSettings(isVisible: true)
-                    ),
-                  ],
+                              dataSource: dataSource,
+                              xValueMapper: (datum, int index) =>
+                                  "${datum.name} - ${datum.count}",
+                              yValueMapper: (datum, int index) => datum.count,
+                              //dataLabelSettings: DataLabelSettings(isVisible: true)
+                            ),
+                          ],
+                        ),
+                      ),
+                      Column(
+                        children: List<Widget>.generate(10, (int index) {
+                          return ProgressWidget(
+                              title: snapshot.data[index]["name"],
+                              done: snapshot.data[index]["solved_tasks"]);
+                        }),
+                      )
+                    ],
+                  ),
+                );
+              }
+              return Center(
+                child: Column(
+                  children: [Spacer(), CircularProgressIndicator(), Spacer()],
                 ),
-              ),
-              Column(
-                children: List<Widget>.generate(10, (int index) {
-                  return ProgressWidget(title: "title", done: index);
-                }),
-              )
-            ],
+              );
+            },
+            future: _future,
           ),
         ),
       ),

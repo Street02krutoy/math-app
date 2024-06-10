@@ -33,7 +33,7 @@ class _RatingPageState extends NyState<RatingPage> {
             List real_rating = rating["rating"];
             return RefreshIndicator(
               onRefresh: () async {
-                return null;
+                setState(() {});
               },
               child: Padding(
                 padding: EdgeInsets.all(8.0),
@@ -71,8 +71,8 @@ class _RatingPageState extends NyState<RatingPage> {
                               : null,
                           child: real_rating.length >= 3
                               ? Image.network(getEnv("API_BASE_URL") +
-                              "/api/user/leader_photo/" +
-                              real_rating[2]["id"])
+                                  "/api/user/leader_photo/" +
+                                  real_rating[2]["id"])
                               : null,
                           rating: real_rating.length >= 3
                               ? real_rating[2]["rating"].toString()
