@@ -62,11 +62,11 @@ class _SolvePageState extends NyState<SolvePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   task["problem"],
-                                  textScaler: TextScaler.linear(2),
+                                  textScaler: data["id"] != 15 ? TextScaler.linear(2) : TextScaler.linear(1),
                                 ),
                               ),
                               onTap: null,
-                              height: 100),
+                              height: data["id"] != 15 ? 100 : 130),
                         ),
                       ],
                     ),
