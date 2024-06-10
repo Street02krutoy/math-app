@@ -3,12 +3,11 @@ import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
 import 'package:flutter_app/resources/pages/progress_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
-import 'package:flutter_app/resources/pages/test_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
-import 'package:flutter_app/resources/widgets/round_image_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_app/util/pick_photo_service.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -36,7 +35,9 @@ class _AccountPageState extends NyState<AccountPage> {
     // e.g. to update this state from another class
     // updateState(AccountPage.state, data: "example payload");
   }
+
   Future userf = Future.delayed(Duration(days: 99));
+
   fetch() {
     userf = apiService.getUser();
   }
@@ -69,10 +70,15 @@ class _AccountPageState extends NyState<AccountPage> {
                       children: [
                         Expanded(
                           child: CustomCard(
-                            title: CircleAvatar(
-                              backgroundColor:
-                                  Theme.of(context).colorScheme.background,
-                              radius: 60,
+                            title: InkWell(
+                              onTap: () {
+                                UploadPhotoService(context).showUploadDialog();
+                              },
+                              child: CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.background,
+                                radius: 60,
+                              ),
                             ),
                             content: Text(
                               Auth.user()["preferred_username"],

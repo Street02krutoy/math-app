@@ -79,5 +79,11 @@
   "login":{
     "page_name":"Login",
     "error":"If authorization screen havent apeeared, press here"
+  },
+  "pick_photo": {
+    "not_chosen": "File does not chosen or have unallowed format",
+    "upload": "Upload a file",
+    "select": "Select",
+    "file_name": "File was not chosen"
   }
 }
