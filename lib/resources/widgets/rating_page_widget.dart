@@ -44,11 +44,17 @@ class _RatingPageState extends NyState<RatingPage> {
                       children: [
                         ProfileTop(
                           place: 2,
-                          name: real_rating.length >= 2 ? real_rating[1]["username"] : null,
-                          child: Container(
-                            color: theme.cardColor,
-                          ),
-                          rating: real_rating.length >= 2 ? real_rating[1]["rating"].toString() : null,
+                          name: real_rating.length >= 2
+                              ? real_rating[1]["username"]
+                              : null,
+                          child: real_rating.length >= 2
+                              ? Image.network(getEnv("API_BASE_URL") +
+                                  "/api/user/leader_photo/" +
+                                  real_rating[1]["id"])
+                              : null,
+                          rating: real_rating.length >= 2
+                              ? real_rating[1]["rating"].toString()
+                              : null,
                         ),
                         ProfileTop(
                           place: 1,
@@ -60,11 +66,17 @@ class _RatingPageState extends NyState<RatingPage> {
                         ),
                         ProfileTop(
                           place: 3,
-                          name: real_rating.length >= 3 ? real_rating[2]["username"] : null,
-                          child: Container(
-                            color: theme.cardColor,
-                          ),
-                          rating: real_rating.length >= 3 ? real_rating[2]["rating"].toString() : null,
+                          name: real_rating.length >= 3
+                              ? real_rating[2]["username"]
+                              : null,
+                          child: real_rating.length >= 3
+                              ? Image.network(getEnv("API_BASE_URL") +
+                              "/api/user/leader_photo/" +
+                              real_rating[2]["id"])
+                              : null,
+                          rating: real_rating.length >= 3
+                              ? real_rating[2]["rating"].toString()
+                              : null,
                         )
                       ],
                     ),

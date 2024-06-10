@@ -10,7 +10,7 @@ class ProfileTop extends StatelessWidget {
       required this.place});
 
   final String? name;
-  final Widget child;
+  final Widget? child;
   final String? rating;
   final int place;
   late final Color color;
@@ -40,14 +40,14 @@ class ProfileTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     init();
-    return (name != null && rating != null) ? Column(
+    return (name != null && rating != null && child != null) ? Column(
       children: [
         Stack(
           children: [
             Padding(
               padding: EdgeInsets.only(bottom: 40),
               child: RoundImage(
-                child: child,
+                child: child!,
                 roundColor: color,
                 radius: radius,
               ),
