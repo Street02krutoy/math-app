@@ -95,6 +95,8 @@ class ApiService extends NyApiService {
     if (myAuthToken != null) {
       headers.addBearerToken(myAuthToken);
     }
+    dump(headers);
+
     return headers;
   }
 
@@ -140,9 +142,9 @@ class ApiService extends NyApiService {
         style: ToastNotificationStyleType.DANGER);
   }
 
-  Future<dynamic> getRating(Dio dio) async {
+  Future<dynamic> getUser() async {
     return network(request: (request) {
-      return request.get("/asd");
+      return request.get("/api/user");
     });
   }
 }

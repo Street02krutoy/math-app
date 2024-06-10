@@ -1,3 +1,6 @@
+import '/resources/pages/test_page.dart';
+import '/resources/pages/theme_info_page.dart';
+import '/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/login_page.dart';
 import 'package:flutter_app/routes/guards/auth_route_guard.dart';
 
@@ -40,4 +43,7 @@ appRouter() => nyRoutes((router) {
       router.route(ReferencePage.path, (context) => ReferencePage());
       router.route(SettingsPage.path, (context) => SettingsPage());
       router.route(LoginPage.path, (context) => LoginPage());
-    });
+      router.route(MixedThemesPage.path, (context) => MixedThemesPage());
+  router.route(ThemeInfoPage.path, (context) => ThemeInfoPage());
+  router.route(TestPage.path, (context) => TestPage());
+});

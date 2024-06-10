@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/solve_page.dart';
+import 'package:flutter_app/resources/pages/theme_info_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
+import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 
 class ThemesPage extends StatefulWidget {
@@ -52,16 +55,49 @@ class _ThemesPageState extends NyState<ThemesPage> {
       body: GridView.count(
           crossAxisCount: 2,
           children: List.generate(21, (index) {
-            return Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: CustomCard(
-                  title: Text("title"),
-                  content: Text("description"),
-                  onTap: () {
-                    showDiffDialog(context);
-                  },
-                  height: 100),
-            );
+            if (index != 0) {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: CustomCard(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("title"),
+                        InkWell(
+                          borderRadius: BorderRadius.all(Radius.circular(100)),
+                          onTap: () {
+                            routeTo(ThemeInfoPage.path);
+                          },
+                          child: CircleAvatar(
+                            radius: 15,
+                            backgroundColor:
+                                context.theme.colorScheme.secondary,
+                            child: Icon(
+                              Icons.question_mark,
+                              color: context.theme.primaryColor,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    content: Text("description"),
+                    onTap: () {
+                      showDiffDialog(context);
+                    },
+                    height: 100),
+              );
+            } else {
+              return Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: CustomCard(
+                    title: Text("themes.mixed".tr()),
+                    content: Text("themes.mixdesc"),
+                    onTap: () {
+                      routeTo(MixedThemesPage.path);
+                    },
+                    height: 100),
+              );
+            }
           })),
     );
   }

@@ -19,7 +19,8 @@
     },
     "list_of_themes": "Reference",
     "rating": "Rating:",
-    "done": "Done:",
+    "top": "Top place:",
+
     "logout": "Logout",
     "langdialog": {
       "title": "Choose language",

@@ -18,18 +18,21 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).cardColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SizedBox(
-          height: height,
-          width: width,
-          child: Column(
-            children: [
-              title,
-              content,
-            ],
+    return InkWell(
+      onTap: onTap,
+      child: Card(
+        color: Theme.of(context).cardColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            height: height,
+            width: width,
+            child: Column(
+              children: [
+                title,
+                content,
+              ],
+            ),
           ),
         ),
       ),

@@ -19,7 +19,7 @@ class _RatingPageState extends NyState<RatingPage> {
   @override
   void initState() {
     rating = List.generate(100, (index) {
-      return Rating("Name", index.toDouble() + 1, index + 1);
+      return Rating("Name", index.toDouble() + 1, 100 - index);
     });
     super.initState();
   }
@@ -32,62 +32,67 @@ class _RatingPageState extends NyState<RatingPage> {
       appBar: AppBar(
         title: Text("rating.page_name".tr()),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ProfileTop(
-                  place: 2,
-                  name: "User",
-                  child: Container(
-                    color: theme.cardColor,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          return null;
+        },
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ProfileTop(
+                    place: 2,
+                    name: "User",
+                    child: Container(
+                      color: theme.cardColor,
+                    ),
+                    rating: 58.2,
                   ),
-                  rating: 58.2,
-                ),
-                ProfileTop(
-                  place: 1,
-                  name: "User",
-                  child: Container(
-                    color: theme.cardColor,
+                  ProfileTop(
+                    place: 1,
+                    name: "User",
+                    child: Container(
+                      color: theme.cardColor,
+                    ),
+                    rating: 58.2,
                   ),
-                  rating: 58.2,
-                ),
-                ProfileTop(
-                  place: 3,
-                  name: "User",
-                  child: Container(
-                    color: theme.cardColor,
-                  ),
-                  rating: 58.2,
-                )
-              ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                top: 45,
+                  ProfileTop(
+                    place: 3,
+                    name: "User",
+                    child: Container(
+                      color: theme.cardColor,
+                    ),
+                    rating: 58.2,
+                  )
+                ],
               ),
-              child: TopListItem(
-                place: 342,
-                name: "You",
-                rating: 43,
-                borderColor: Color.fromRGBO(255, 199, 0, 1),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: rating.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => TopListItem(
-                  place: rating[index].position,
-                  name: rating[index].name,
-                  rating: rating[index].rating,
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 45,
+                ),
+                child: TopListItem(
+                  place: 342,
+                  name: "You",
+                  rating: 43,
+                  borderColor: Color.fromRGBO(255, 199, 0, 1),
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: ListView.builder(
+                  itemCount: rating.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => TopListItem(
+                    place: rating[index].position,
+                    name: rating[index].name,
+                    rating: rating[index].rating,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

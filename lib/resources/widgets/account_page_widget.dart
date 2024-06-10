@@ -6,6 +6,7 @@ import 'package:flutter_app/app/providers/auth_provider.dart';
 import 'package:flutter_app/resources/pages/achievements_page.dart';
 import 'package:flutter_app/resources/pages/progress_page.dart';
 import 'package:flutter_app/resources/pages/settings_page.dart';
+import 'package:flutter_app/resources/pages/test_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/resources/widgets/round_image_widget.dart';
@@ -45,7 +46,9 @@ class _AccountPageState extends NyState<AccountPage> {
           actions: [
             IconButton(
               icon: Icon(Icons.edit),
-              onPressed: () {},
+              onPressed: () {
+                routeTo(TestPage.path);
+              },
             )
           ],
         ),
@@ -64,7 +67,7 @@ class _AccountPageState extends NyState<AccountPage> {
                           radius: 60,
                         ),
                         content: Text(
-                          "Name",
+                          Auth.user()["preferred_username"],
                           textScaler: TextScaler.linear(2),
                         ),
                       ),
@@ -77,7 +80,7 @@ class _AccountPageState extends NyState<AccountPage> {
                               Expanded(
                                 child: CustomCard(
                                   title: Text(
-                                    "Rating",
+                                    "profile.rating".tr(),
                                     style:
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),
@@ -111,7 +114,7 @@ class _AccountPageState extends NyState<AccountPage> {
                               Expanded(
                                 child: CustomCard(
                                   title: Text(
-                                    "Place in top",
+                                    "profile.top".tr(),
                                     style:
                                         Theme.of(context).textTheme.bodyLarge,
                                   ),

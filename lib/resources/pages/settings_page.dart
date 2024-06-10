@@ -137,6 +137,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
             onPressed: () async {
               context.nav.pop();
               await changeLanguage('ru');
+              NyStorage.store("com.srit.math.lang", "ru");
             },
             child: Text(
               "profile.langdialog.ru".tr(),
@@ -146,6 +147,7 @@ class _SettingsPageState extends NyState<SettingsPage> {
             onPressed: () async {
               context.nav.pop();
               await changeLanguage('en');
+              NyStorage.store("com.srit.math.lang", "en");
             },
             child: Text(
               "profile.langdialog.en".tr(),
