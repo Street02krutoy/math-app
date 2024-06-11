@@ -75,8 +75,10 @@ class _AccountPageState extends NyState<AccountPage> {
                               children: [
                                 CircleAvatar(
                                   child: Image.network(getEnv("API_BASE_URL") +
-                                      "/api/user/photo"),
+                                      "/api/user/leader_photo/" +
+                                      user["id"]),
                                   radius: 60,
+                                  backgroundColor: Theme.of(context).canvasColor,
                                 ),
                                 IconButton(
                                   onPressed: () {
