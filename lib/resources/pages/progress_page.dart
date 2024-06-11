@@ -39,8 +39,10 @@ class _ProgressPageState extends NyState<ProgressPage> {
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
-            fetch();
-            setState(() {});
+            setState(() {
+              fetch();
+            });
+            await _future;
           },
           child: FutureBuilder(
             builder: (context, snapshot) {

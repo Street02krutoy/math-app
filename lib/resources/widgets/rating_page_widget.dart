@@ -17,7 +17,7 @@ class _RatingPageState extends NyState<RatingPage> {
   final ApiService apiService = ApiService();
   static Future? ratingf;
 
-  fetch() async {
+  fetch() {
     ratingf = apiService.getUsersRating();
   }
 
@@ -42,7 +42,10 @@ class _RatingPageState extends NyState<RatingPage> {
             List real_rating = rating["rating"];
             return RefreshIndicator(
               onRefresh: () async {
-                return await fetch();
+                setState(() {
+                  fetch();
+                });
+                await ratingf;
               },
               child: Padding(
                 padding: EdgeInsets.all(8.0),

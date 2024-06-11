@@ -27,10 +27,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
 
   @override
   init() async {
-    if (themes == null) await fetch();
+    if (themes == null) fetch();
   }
 
-  fetch() async {
+  fetch() {
     themes = apiService.getTopics();
   }
 
@@ -67,15 +67,18 @@ class _ThemesPageState extends NyState<ThemesPage> {
         future: themes,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List list_of_themes = snapshot.data!;
+            List themesList = snapshot.data!;
             return RefreshIndicator(
               onRefresh: () async {
-                await fetch();
+                setState(() {
+                  fetch();
+                });
+                await themes;
               },
               child: GridView.count(
                   crossAxisCount: 2,
-                  children: List.generate(list_of_themes.length, (index) {
-                    if (list_of_themes[index]["id"] != "placeholder") {
+                  children: List.generate(themesList.length, (index) {
+                    if (themesList[index]["id"] != "placeholder") {
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: CustomCard(
@@ -83,7 +86,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Flexible(
-                                  child: Text(list_of_themes[index]["name"]),
+                                  child: Text(themesList[index]["name"]),
                                 ),
                                 InkWell(
                                   borderRadius:
@@ -91,10 +94,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
                                   onTap: () async {
                                     apiService
                                         .getTopicDescription(
-                                            list_of_themes[index]["id"])
+                                            themesList[index]["id"])
                                         .then((value) {
                                       routeTo(ThemeInfoPage.path, data: {
-                                        "name": list_of_themes[index]["name"],
+                                        "name": themesList[index]["name"],
                                         "description": value["description"]
                                       });
                                     });
@@ -114,11 +117,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
                             content: Image.network(
                               getEnv("API_BASE_URL") +
                                   "/api/user/topic_photo/" +
-                                  list_of_themes[index]["id"].toString(),
+                                  themesList[index]["id"].toString(),
                             ),
                             onTap: () {
-                              showDiffDialog(
-                                  context, list_of_themes[index]["id"]);
+                              showDiffDialog(context, themesList[index]["id"]);
                             },
                             height: 100),
                       );

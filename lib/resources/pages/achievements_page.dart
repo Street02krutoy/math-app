@@ -15,7 +15,7 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
 
   @override
   init() async {
-    if (achievementsf == null) await fetch();
+    fetch();
   }
 
   /// Use boot if you need to load data before the [view] is rendered.
@@ -24,7 +24,7 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
   //
   // }
 
-  fetch() async {
+  fetch() {
     achievementsf = apiService.getAchievements();
   }
 
@@ -42,8 +42,10 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
                 return SafeArea(
                   child: RefreshIndicator(
                     onRefresh: () async {
-                      await fetch();
-                      setState(() {});
+                      setState(() {
+                        fetch();
+                      });
+                      await achievementsf;
                     },
                     child: Padding(
                       padding: EdgeInsets.all(8.0),
