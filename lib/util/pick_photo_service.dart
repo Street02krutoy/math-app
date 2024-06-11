@@ -45,7 +45,7 @@ class UploadPhotoService {
     if (photo != null) {
       return showDialog<void>(
         context: context,
-        barrierDismissible: true,
+        barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text("pick_photo.upload".tr()),
