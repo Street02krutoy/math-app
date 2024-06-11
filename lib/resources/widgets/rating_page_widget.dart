@@ -39,7 +39,7 @@ class _RatingPageState extends NyState<RatingPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Map rating = snapshot.data;
-            List real_rating = rating["rating"];
+            List userRating = rating["rating"];
             return RefreshIndicator(
               onRefresh: () async {
                 setState(() {
@@ -56,38 +56,38 @@ class _RatingPageState extends NyState<RatingPage> {
                       children: [
                         ProfileTop(
                           place: 2,
-                          name: real_rating.length >= 2
-                              ? real_rating[1]["username"]
+                          name: userRating.length >= 2
+                              ? userRating[1]["username"]
                               : null,
-                          child: real_rating.length >= 2
+                          child: userRating.length >= 2
                               ? Image.network(getEnv("API_BASE_URL") +
                                   "/api/user/leader_photo/" +
-                                  real_rating[1]["id"])
+                                  userRating[1]["id"])
                               : null,
-                          rating: real_rating.length >= 2
-                              ? real_rating[1]["rating"].toString()
+                          rating: userRating.length >= 2
+                              ? userRating[1]["rating"].toString()
                               : null,
                         ),
                         ProfileTop(
                           place: 1,
-                          name: real_rating[0]["username"],
+                          name: userRating[0]["username"],
                           child: Image.network(getEnv("API_BASE_URL") +
                               "/api/user/leader_photo/" +
-                              real_rating[0]["id"]),
-                          rating: real_rating[0]["rating"].toString(),
+                              userRating[0]["id"]),
+                          rating: userRating[0]["rating"].toString(),
                         ),
                         ProfileTop(
                           place: 3,
-                          name: real_rating.length >= 3
-                              ? real_rating[2]["username"]
+                          name: userRating.length >= 3
+                              ? userRating[2]["username"]
                               : null,
-                          child: real_rating.length >= 3
+                          child: userRating.length >= 3
                               ? Image.network(getEnv("API_BASE_URL") +
                                   "/api/user/leader_photo/" +
-                                  real_rating[2]["id"])
+                                  userRating[2]["id"])
                               : null,
-                          rating: real_rating.length >= 3
-                              ? real_rating[2]["rating"].toString()
+                          rating: userRating.length >= 3
+                              ? userRating[2]["rating"].toString()
                               : null,
                         )
                       ],
@@ -103,15 +103,14 @@ class _RatingPageState extends NyState<RatingPage> {
                         borderColor: Color.fromRGBO(255, 199, 0, 1),
                       ),
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: real_rating.length,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => TopListItem(
-                          place: index + 1,
-                          name: real_rating[index]["username"],
-                          rating: real_rating[index]["rating"],
-                        ),
+                    ListView.builder(
+                      itemCount: userRating.length,
+                      shrinkWrap: true,
+                      // physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) => TopListItem(
+                        place: index + 1,
+                        name: userRating[index]["username"],
+                        rating: userRating[index]["rating"],
                       ),
                     ),
                   ],
