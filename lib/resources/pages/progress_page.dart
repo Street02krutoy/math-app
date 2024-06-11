@@ -14,15 +14,16 @@ class ProgressPage extends NyStatefulWidget {
 
 class _ProgressPageState extends NyState<ProgressPage> {
   Future fetch() async {
+    dump("s");
     _future = ApiService().getUserProgress();
   }
 
   @override
   init() async {
-    fetch();
+    _future == null ? fetch() : null;
   }
 
-  Future<dynamic> _future = Future.delayed(Duration(days: 99));
+  static Future<dynamic>? _future;
 
   /// Use boot if you need to load data before the [view] is rendered.
   // @override
@@ -39,6 +40,7 @@ class _ProgressPageState extends NyState<ProgressPage> {
         child: RefreshIndicator(
           onRefresh: () async {
             fetch();
+            setState(() {});
           },
           child: FutureBuilder(
             builder: (context, snapshot) {

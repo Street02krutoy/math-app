@@ -15,11 +15,20 @@ class _RatingPageState extends NyState<RatingPage> {
   _RatingPageState() {}
 
   final ApiService apiService = ApiService();
+  static Future? ratingf;
+
+  fetch() async {
+    ratingf = apiService.getUsersRating();
+  }
+
+  @override
+  init() async {
+    if (ratingf == null) await fetch();
+  }
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    Future ratingf = apiService.getUsersRating();
 
     return Scaffold(
       appBar: AppBar(
@@ -33,7 +42,7 @@ class _RatingPageState extends NyState<RatingPage> {
             List real_rating = rating["rating"];
             return RefreshIndicator(
               onRefresh: () async {
-                setState(() {});
+                return await fetch();
               },
               child: Padding(
                 padding: EdgeInsets.all(8.0),

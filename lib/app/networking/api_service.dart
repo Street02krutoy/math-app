@@ -62,8 +62,11 @@ class ApiService extends NyApiService {
     // close the webview when finished
     closeInAppWebView();
     final d = await c.getTokenResponse();
+    final a = await c.refreshToken;
     _token = TokenObject(
-        expiresAt: d.expiresAt ?? DateTime.now(), token: d.accessToken ?? "");
+        expiresAt: d.expiresAt ?? DateTime.now(),
+        token: d.accessToken ?? "",
+        refresh: a ?? "");
     StorageKey.userToken.store(d.accessToken);
 
     await Auth.login(await c.getUserInfo());
@@ -126,9 +129,15 @@ class ApiService extends NyApiService {
 
   @override
   refreshToken(Dio dio) async {
-    dynamic response =
-        (await dio.get("${getEnv("SSO_URL")}/protocol/openid-connect/token"))
-            .data;
+    dump("e");
+    dynamic response = (await Dio(BaseOptions(baseUrl: getEnv("SSO_URL")))
+            .post("/protocol/openid-connect/token", data: {
+      "grant_type": "refresh_token",
+      "client_id": getEnv("CLIENT_ID"),
+      "refresh_token": _token!.refresh,
+    }))
+        .data;
+    dump(response);
     // Save the new token
 
     await StorageKey.userToken.store(response['token']);
@@ -228,14 +237,19 @@ class ApiService extends NyApiService {
   }
 
   Future logout() async {
-    return await Dio(BaseOptions(baseUrl: getEnv("SSO_URL")))
-        .get("/protocol/openid-connect/logout");
+    return await Dio(BaseOptions(
+      baseUrl: getEnv("SSO_URL"),
+    )).get("/protocol/openid-connect/logout").then((respose) {
+      dump(respose.data);
+    });
   }
 }
 
 class TokenObject {
   final DateTime expiresAt;
   final String token;
+  final String refresh;
 
-  TokenObject({required this.expiresAt, required this.token});
+  TokenObject(
+      {required this.expiresAt, required this.token, required this.refresh});
 }

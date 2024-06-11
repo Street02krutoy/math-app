@@ -27,7 +27,7 @@ class _AccountPageState extends NyState<AccountPage> {
 
   @override
   init() async {
-    fetch();
+    if (userf == null) await fetch();
   }
 
   @override
@@ -36,9 +36,9 @@ class _AccountPageState extends NyState<AccountPage> {
     // updateState(AccountPage.state, data: "example payload");
   }
 
-  Future userf = Future.delayed(Duration(days: 99));
+  static Future? userf;
 
-  fetch() {
+  fetch() async {
     userf = apiService.getUser();
   }
 
@@ -61,158 +61,165 @@ class _AccountPageState extends NyState<AccountPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             Map user = snapshot.data;
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomCard(
-                            title: Stack(
-                              alignment: Alignment.center,
+            return RefreshIndicator(
+              onRefresh: () async {
+                await fetch();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomCard(
+                              title: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  CircleAvatar(
+                                    child: Image.network(
+                                        getEnv("API_BASE_URL") +
+                                            "/api/user/photo"),
+                                    radius: 60,
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      UploadPhotoService(context)
+                                          .showUploadDialog();
+                                    },
+                                    icon: Icon(Icons.add_a_photo_sharp),
+                                  ),
+                                ],
+                              ),
+                              content: Text(
+                                Auth.user()["preferred_username"],
+                                textScaler: TextScaler.linear(2),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
                               children: [
-                                CircleAvatar(
-                                  child: Image.network(getEnv("API_BASE_URL") +
-                                      "/api/user/photo"),
-                                  radius: 60,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: CustomCard(
+                                        title: Text(
+                                          "profile.rating".tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                        content: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 2),
+                                              child: Icon(
+                                                Icons.star,
+                                                size: 15,
+                                                color: Theme.of(context)
+                                                    .focusColor,
+                                              ),
+                                            ),
+                                            Text(
+                                              user["rating"].toString(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge,
+                                            ),
+                                          ],
+                                        ),
+                                        height: 60,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                IconButton(
-                                  onPressed: () {
-                                    UploadPhotoService(context)
-                                        .showUploadDialog();
-                                  },
-                                  icon: Icon(Icons.add_a_photo_sharp),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: CustomCard(
+                                        title: Text(
+                                          "profile.top".tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyLarge,
+                                        ),
+                                        content: Text(
+                                          user["place_in_top"].toString(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .titleLarge,
+                                        ),
+                                        height: 60,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                            content: Text(
-                              Auth.user()["preferred_username"],
-                              textScaler: TextScaler.linear(2),
-                            ),
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 87,
+                          title: Text("profile.progress.page_name".tr()),
+                          subtitle: Text("profile.progress.description".tr()),
+                          icon: Icons.trending_up,
+                          onTap: () {
+                            routeTo(ProgressPage.path);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 87,
+                          title: Text("profile.achievements.page_name".tr()),
+                          subtitle:
+                              Text("profile.achievements.description".tr()),
+                          icon: Icons.offline_pin,
+                          onTap: () {
+                            routeTo(AchievementsPage.path);
+                          },
+                        ),
+                      ),
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 87,
+                          title: Text(
+                            "profile.settings.page_name".tr(),
                           ),
-                        ),
-                        Expanded(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomCard(
-                                      title: Text(
-                                        "profile.rating".tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      content: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 2),
-                                            child: Icon(
-                                              Icons.star,
-                                              size: 15,
-                                              color:
-                                                  Theme.of(context).focusColor,
-                                            ),
-                                          ),
-                                          Text(
-                                            user["rating"].toString(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .titleLarge,
-                                          ),
-                                        ],
-                                      ),
-                                      height: 60,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomCard(
-                                      title: Text(
-                                        "profile.top".tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      content: Text(
-                                        user["place_in_top"].toString(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleLarge,
-                                      ),
-                                      height: 60,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
+                          subtitle: Text(
+                            "profile.settings.description".tr(),
                           ),
-                        )
-                      ],
-                    ),
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 87,
-                        title: Text("profile.progress.page_name".tr()),
-                        subtitle: Text("profile.progress.description".tr()),
-                        icon: Icons.trending_up,
-                        onTap: () {
-                          routeTo(ProgressPage.path);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 87,
-                        title: Text("profile.achievements.page_name".tr()),
-                        subtitle: Text("profile.achievements.description".tr()),
-                        icon: Icons.offline_pin,
-                        onTap: () {
-                          routeTo(AchievementsPage.path);
-                        },
-                      ),
-                    ),
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 87,
-                        title: Text(
-                          "profile.settings.page_name".tr(),
+                          icon: Icons.settings,
+                          onTap: () {
+                            routeTo(SettingsPage.path);
+                          },
                         ),
-                        subtitle: Text(
-                          "profile.settings.description".tr(),
-                        ),
-                        icon: Icons.settings,
-                        onTap: () {
-                          routeTo(SettingsPage.path);
-                        },
                       ),
-                    ),
-                    Expanded(
-                      child: ProfileButtonWidget(
-                        height: 87,
-                        title: Text(
-                          "profile.support.page_name".tr(),
+                      Expanded(
+                        child: ProfileButtonWidget(
+                          height: 87,
+                          title: Text(
+                            "profile.support.page_name".tr(),
+                          ),
+                          subtitle: Text(
+                            "profile.support.description".tr(),
+                          ),
+                          icon: Icons.contact_support,
+                          onTap: () {
+                            launchUrl(
+                                Uri.parse("https://t.me/mathushasupportbot"));
+                          },
                         ),
-                        subtitle: Text(
-                          "profile.support.description".tr(),
-                        ),
-                        icon: Icons.contact_support,
-                        onTap: () {
-                          launchUrl(
-                              Uri.parse("https://t.me/mathushasupportbot"));
-                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             );

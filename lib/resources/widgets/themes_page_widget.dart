@@ -27,10 +27,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
 
   @override
   init() async {
-    fetch();
+    if (themes == null) await fetch();
   }
 
-  fetch() {
+  fetch() async {
     themes = apiService.getTopics();
   }
 
@@ -44,7 +44,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
     );
   }
 
-  Future themes = Future.delayed(Duration(days: 10));
+  static Future? themes;
 
   @override
   stateUpdated(dynamic data) async {
@@ -68,69 +68,74 @@ class _ThemesPageState extends NyState<ThemesPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List list_of_themes = snapshot.data!;
-            return GridView.count(
-                crossAxisCount: 2,
-                children: List.generate(list_of_themes.length, (index) {
-                  if (list_of_themes[index]["id"] != "placeholder") {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: CustomCard(
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: Text(list_of_themes[index]["name"]),
-                              ),
-                              InkWell(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                                onTap: () async {
-                                  apiService
-                                      .getTopicDescription(
-                                          list_of_themes[index]["id"])
-                                      .then((value) {
-                                    routeTo(ThemeInfoPage.path, data: {
-                                      "name": list_of_themes[index]["name"],
-                                      "description": value["description"]
+            return RefreshIndicator(
+              onRefresh: () async {
+                await fetch();
+              },
+              child: GridView.count(
+                  crossAxisCount: 2,
+                  children: List.generate(list_of_themes.length, (index) {
+                    if (list_of_themes[index]["id"] != "placeholder") {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: CustomCard(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: Text(list_of_themes[index]["name"]),
+                                ),
+                                InkWell(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(100)),
+                                  onTap: () async {
+                                    apiService
+                                        .getTopicDescription(
+                                            list_of_themes[index]["id"])
+                                        .then((value) {
+                                      routeTo(ThemeInfoPage.path, data: {
+                                        "name": list_of_themes[index]["name"],
+                                        "description": value["description"]
+                                      });
                                     });
-                                  });
-                                },
-                                child: CircleAvatar(
-                                  radius: 15,
-                                  backgroundColor:
-                                      context.theme.colorScheme.secondary,
-                                  child: Icon(
-                                    Icons.question_mark,
-                                    color: context.theme.primaryColor,
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 15,
+                                    backgroundColor:
+                                        context.theme.colorScheme.secondary,
+                                    child: Icon(
+                                      Icons.question_mark,
+                                      color: context.theme.primaryColor,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          content: Image.network(
-                            getEnv("API_BASE_URL") +
-                                "/api/user/topic_photo/" +
-                                list_of_themes[index]["id"].toString(),
-                          ),
-                          onTap: () {
-                            showDiffDialog(
-                                context, list_of_themes[index]["id"]);
-                          },
-                          height: 100),
-                    );
-                  } else {
-                    return Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: CustomCard(
-                          title: Text("themes.mixed".tr()),
-                          content: Text("themes.mixdesc"),
-                          onTap: () {
-                            routeTo(MixedThemesPage.path);
-                          },
-                          height: 100),
-                    );
-                  }
-                }));
+                              ],
+                            ),
+                            content: Image.network(
+                              getEnv("API_BASE_URL") +
+                                  "/api/user/topic_photo/" +
+                                  list_of_themes[index]["id"].toString(),
+                            ),
+                            onTap: () {
+                              showDiffDialog(
+                                  context, list_of_themes[index]["id"]);
+                            },
+                            height: 100),
+                      );
+                    } else {
+                      return Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: CustomCard(
+                            title: Text("themes.mixed".tr()),
+                            content: Text("themes.mixdesc"),
+                            onTap: () {
+                              routeTo(MixedThemesPage.path);
+                            },
+                            height: 100),
+                      );
+                    }
+                  })),
+            );
           }
           return Center(
             child: Column(
