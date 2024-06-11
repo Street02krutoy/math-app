@@ -48,10 +48,8 @@ class LightThemeColors implements ColorStyles {
   Color get bottomTabBarLabelSelected => Colors.black;
 
   @override
-  // TODO: implement cardColor
-  Color get cardColor => throw UnimplementedError();
+  Color get cardColor => Color.fromRGBO(64, 64, 64, 1);
 
   @override
-  // TODO: implement secondary
-  Color get secondary => throw UnimplementedError();
+  Color get secondary => Color.fromARGB(255, 71, 167, 247);
 }

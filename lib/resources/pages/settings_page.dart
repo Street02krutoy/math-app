@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_app/app/networking/api_service.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
 import 'package:nylo_framework/nylo_framework.dart';
+import 'package:nylo_framework/theme/helper/ny_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends NyStatefulWidget {
@@ -88,41 +91,88 @@ class _SettingsPageState extends NyState<SettingsPage> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.0,
-                      ),
-                      child: InkWell(
-                        onTap: () {
-                          //TODO: theme selection
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "settings.theme".tr(),
-                              style: TextStyle(
-                                fontSize: 24,
-                              ),
-                            ),
-                            Text(
-                              "settings.dark".tr(),
-                              style: TextStyle(
-                                color: Theme.of(context).disabledColor,
-                                fontSize: 24,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //     vertical: 10.0,
+                    //   ),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Text(
+                    //         isThemeDark
+                    //             ? "settings.theme.dark".tr()
+                    //             : "settings.theme.light".tr(),
+                    //         style: TextStyle(
+                    //           fontSize: 24,
+                    //         ),
+                    //       ),
+                    //       Switch(
+                    //           value: isThemeDark,
+                    //           onChanged: (_) {
+                    //             NyTheme.set(context,
+                    //                 id: getEnv(isThemeDark != true
+                    //                     ? 'DARK_THEME_ID'
+                    //                     : 'LIGHT_THEME_ID'));
+                    //             setState(() {});
+                    //             dump(ThemeProvider.controllerOf(context)
+                    //                 .currentThemeId);
+                    //           }),
+                    //     ],
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
+              Spacer(),
+              Row(
+                children: [
+                  Spacer(),
+                  ElevatedButton(
+                      onPressed: () {
+                        ApiService().logout();
+                      },
+                      child: Text("settings.logout".tr())),
+                  Spacer()
+                ],
+              )
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  bool get isThemeDark =>
+      ThemeProvider.controllerOf(context).currentThemeId ==
+      getEnv('DARK_THEME_ID');
+
+  Widget showThemeDialog(BuildContext context) {
+    return AlertDialog(
+      title: Text("profile.themedialog.title".tr()),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextButton(
+            onPressed: () async {
+              context.nav.pop();
+              NyTheme.set(context, id: getEnv('LIGHT_THEME_ID'));
+              setState(() {});
+            },
+            child: Text(
+              "profile.themedialog.light".tr(),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              context.nav.pop();
+              NyTheme.set(context, id: getEnv('DARK_THEME_ID'));
+              setState(() {});
+            },
+            child: Text(
+              "profile.themedialog.dark".tr(),
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -66,8 +66,8 @@
     "selected_language": "English",
     "theme": "Theme",
     "system": "System theme",
-    "light": "Always light",
-    "dark": "Always dark"
+    "light": "Light theme",
+    "dark": "Dark theme"
   },
   "general": {
     "cancel": "Cancel",

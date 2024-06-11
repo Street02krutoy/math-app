@@ -64,8 +64,8 @@
     "language": "Язык",
     "selected_language": "Русский",
     "theme": "Тема",
-    "light": "Светлая",
-    "dark": "Тёмная"
+    "light": "Светлая тема",
+    "dark": "Тёмная тема"
   },
   "general": {
     "cancel": "Отмена",

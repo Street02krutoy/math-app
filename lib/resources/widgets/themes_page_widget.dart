@@ -105,9 +105,11 @@ class _ThemesPageState extends NyState<ThemesPage> {
                               ),
                             ],
                           ),
-                          content: Image.network(getEnv("API_BASE_URL") +
-                              "/api/user/topic_photo/" +
-                              list_of_themes[index]["id"].toString()),
+                          content: Image.network(
+                            getEnv("API_BASE_URL") +
+                                "/api/user/topic_photo/" +
+                                list_of_themes[index]["id"].toString(),
+                          ),
                           onTap: () {
                             showDiffDialog(
                                 context, list_of_themes[index]["id"]);

@@ -29,7 +29,9 @@ class _LoginPageState extends NyState<LoginPage> {
             children: [
               TextButton(
                   onPressed: () {
-                    ApiService.authenticate();
+                    ApiService.authenticate().catchError((e) {
+                      showToastNotification(context, description: e.toString());
+                    });
                   },
                   child: Text("login.error".tr()))
             ],

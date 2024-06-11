@@ -42,11 +42,15 @@ class ApiService extends NyApiService {
 
     // create a function to open a browser with an url
     urlLauncher(String url) async {
-      if (await canLaunchUrlString(url)) {
-        await launchUrlString(url);
-      } else {
-        throw 'Could not launch $url';
+      try {
+        await launchUrl(Uri.parse(url));
+      } catch (e) {
+        throw e;
       }
+      // if (await canLaunchUrlString(url)) {
+      // } else {
+      //   throw 'Could not launch $url';
+      // }
     }
 
     // create an authenticator
@@ -222,6 +226,11 @@ class ApiService extends NyApiService {
         return request.put("/api/user/photo", data: formData);
       },
     );
+  }
+
+  Future logout() async {
+    return await Dio(BaseOptions(baseUrl: getEnv("SSO_URL")))
+        .get("/protocol/openid-connect/logout");
   }
 }
 
