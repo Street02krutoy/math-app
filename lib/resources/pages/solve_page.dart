@@ -66,7 +66,7 @@ class _SolvePageState extends NyState<SolvePage> {
                                 ),
                               ),
                               onTap: null,
-                              height: data["id"] != 15 ? 100 : 130),
+                              height: data["id"] != 15 ? 100 : 150),
                         ),
                       ],
                     ),

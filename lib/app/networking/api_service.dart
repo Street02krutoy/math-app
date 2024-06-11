@@ -4,7 +4,6 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import '/config/decoders.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'dart:io';

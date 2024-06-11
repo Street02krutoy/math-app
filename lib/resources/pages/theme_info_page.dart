@@ -21,14 +21,14 @@ class _ThemeInfoPageState extends NyState<ThemeInfoPage> {
   Widget view(BuildContext context) {
     var data = widget.data();
     return Scaffold(
-      appBar: AppBar(title: Text("info.page_name")),
+      appBar: AppBar(title: Text(data["name"])),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: SingleChildScrollView(
             child: Flexible(
               child: Text(
-                data,
+                data["description"],
                 textScaler: TextScaler.linear(2),
               ),
             ),

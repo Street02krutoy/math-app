@@ -89,8 +89,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
                                       .getTopicDescription(
                                           list_of_themes[index]["id"])
                                       .then((value) {
-                                    routeTo(ThemeInfoPage.path,
-                                        data: value["description"]);
+                                    routeTo(ThemeInfoPage.path, data: {
+                                      "name": list_of_themes[index]["name"],
+                                      "description": value["description"]
+                                    });
                                   });
                                 },
                                 child: CircleAvatar(
