@@ -35,7 +35,7 @@ class UploadPhotoService {
 
   Future<void> _uploadFile() async {
     if (photo != null) {
-      ApiService().putUserPhoto(photo!);
+      await ApiService().putUserPhoto(photo!);
       _navigator.pop();
     }
   }
