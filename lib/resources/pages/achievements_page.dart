@@ -15,7 +15,7 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
 
   @override
   init() async {
-    fetch();
+    if (achievementsf == null) await fetch();
   }
 
   /// Use boot if you need to load data before the [view] is rendered.
@@ -24,11 +24,11 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
   //
   // }
 
-  fetch() {
+  fetch() async {
     achievementsf = apiService.getAchievements();
   }
 
-  Future achievementsf = Future.delayed(Duration(days: 99));
+  static Future? achievementsf;
 
   @override
   Widget view(BuildContext context) {
@@ -40,45 +40,52 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
               if (snapshot.hasData) {
                 List achievements = snapshot.data;
                 return SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: achievements.length,
-                            itemBuilder: (context, index) => Expanded(
-                              child: AchievementWidget(
-                                  title: achievements[index]["name"],
-                                  description: achievements[index]
-                                      ["description"],
-                                  child: ImageFiltered(
-                                    imageFilter:
-                                        achievements[index]["unlocked"] == 1
-                                            ? ImageFilter.blur()
-                                            : ImageFilter.blur(
-                                                sigmaX: 5,
-                                                sigmaY: 5,
-                                                tileMode: TileMode.decal),
-                                    child: Image.network(
-                                      getEnv("API_BASE_URL") +
-                                          "/api/user/achievement_photo/" +
-                                          achievements[index]["id"].toString(),
-                                      width: 60,
-                                      height: 60,
-                                    ),
-                                  ),
-                                  done: achievements[index]["unlocked"] == 0
-                                      ? false
-                                      : true),
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      await fetch();
+                      setState(() {});
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: achievements.length,
+                        itemBuilder: (context, index) => AchievementWidget(
+                            title: achievements[index]["name"],
+                            description: achievements[index]["description"],
+                            child: ImageFiltered(
+                              imageFilter: achievements[index]["unlocked"] == 1
+                                  ? ImageFilter.blur()
+                                  : ImageFilter.blur(
+                                      sigmaX: 5,
+                                      sigmaY: 5,
+                                      tileMode: TileMode.decal),
+                              child: Image.network(
+                                getEnv("API_BASE_URL") +
+                                    "/api/user/achievement_photo/" +
+                                    achievements[index]["id"].toString(),
+                                width: 60,
+                                height: 60,
+                              ),
                             ),
-                          ),
-                        ),
-                      ],
+                            done: achievements[index]["unlocked"] == 0
+                                ? false
+                                : true),
+                      ),
                     ),
                   ),
                 );
               }
+              if (snapshot.hasError)
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text("error"),
+                        content: Text(snapshot.error.toString()),
+                      );
+                    },
+                    barrierDismissible: false);
               return Center(
                 child: Column(
                   children: [Spacer(), CircularProgressIndicator(), Spacer()],
