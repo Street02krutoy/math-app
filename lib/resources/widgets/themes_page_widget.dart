@@ -52,9 +52,13 @@ class _ThemesPageState extends NyState<ThemesPage> {
     // updateState(ThemesPage.state, data: "example payload");
   }
 
-  void showDiffDialog(BuildContext context, int id) {
+  void showDiffDialog(BuildContext context, int id, String placeholder) {
     showDialog(
-        context: context, builder: ((context) => PopUpDifficulty(id: id)));
+        context: context,
+        builder: ((context) => PopUpDifficulty(
+              id: id,
+              placeholder: placeholder,
+            )));
   }
 
   @override
@@ -120,7 +124,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
                                   themesList[index]["id"].toString(),
                             ),
                             onTap: () {
-                              showDiffDialog(context, themesList[index]["id"]);
+                              showDiffDialog(context, themesList[index]["id"], themesList[index]["placeholder"]);
                             },
                             height: 100),
                       );
@@ -151,9 +155,10 @@ class _ThemesPageState extends NyState<ThemesPage> {
 }
 
 class PopUpDifficulty extends StatefulWidget {
-  PopUpDifficulty({super.key, required this.id});
+  PopUpDifficulty({super.key, required this.id, required this.placeholder});
 
   final int id;
+  final String placeholder;
 
   @override
   State<PopUpDifficulty> createState() => _PopUpDifficultyState();
@@ -226,8 +231,11 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
                       break;
                   }
                   Navigator.pop(context, 'OK');
-                  routeTo(SolvePage.path,
-                      data: {"complexity": complexity, "id": widget.id});
+                  routeTo(SolvePage.path, data: {
+                    "complexity": complexity,
+                    "id": widget.id,
+                    "placeholder": widget.placeholder
+                  });
                 },
           child: Text('general.ok'.tr()),
         ),
