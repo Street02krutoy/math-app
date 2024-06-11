@@ -67,7 +67,8 @@
     "theme": "Theme",
     "system": "System theme",
     "light": "Light theme",
-    "dark": "Dark theme"
+    "dark": "Dark theme",
+    "logout": "Logout"
   },
   "general": {
     "cancel": "Cancel",
