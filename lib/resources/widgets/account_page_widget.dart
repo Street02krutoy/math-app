@@ -73,15 +73,17 @@ class _AccountPageState extends NyState<AccountPage> {
                             title: Stack(
                               alignment: Alignment.center,
                               children: [
-                                CircleAvatar(
-                                  child: Image.network(
-                                    getEnv("API_BASE_URL") +
-                                        "/api/user/leader_photo/" +
-                                        user["id"],
+                                ClipOval(
+                                  child: CircleAvatar(
+                                    child: Image.network(
+                                      getEnv("API_BASE_URL") +
+                                          "/api/user/leader_photo/" +
+                                          user["id"],
+                                    ),
+                                    radius: 60,
+                                    backgroundColor:
+                                        Theme.of(context).canvasColor,
                                   ),
-                                  radius: 60,
-                                  backgroundColor:
-                                      Theme.of(context).canvasColor,
                                 ),
                                 IconButton(
                                   onPressed: () {
