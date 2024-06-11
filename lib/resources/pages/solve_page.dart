@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import "package:flutter_app/app/networking/api_service.dart";
@@ -51,7 +50,9 @@ class _SolvePageState extends NyState<SolvePage> {
                 padding: const EdgeInsets.all(40.0),
                 child: Column(
                   children: [
-                    Spacer(),
+                    Spacer(
+                      flex: 6,
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -62,7 +63,9 @@ class _SolvePageState extends NyState<SolvePage> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   task["problem"],
-                                  textScaler: data["id"] != 15 ? TextScaler.linear(2) : TextScaler.linear(1),
+                                  textScaler: data["id"] != 15
+                                      ? TextScaler.linear(2)
+                                      : TextScaler.linear(1),
                                 ),
                               ),
                               onTap: null,
@@ -77,7 +80,12 @@ class _SolvePageState extends NyState<SolvePage> {
                       controller: answerController,
                       autofocus: true,
                       keyboardType: TextInputType.number,
-                      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                      decoration: InputDecoration(
+                          labelText: "math.placeholder".tr(),
+                          hintText: data["placeholder"],
+                          labelStyle: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                          )),
                     ),
                     SizedBox(
                       height: 20,
@@ -126,7 +134,142 @@ class _SolvePageState extends NyState<SolvePage> {
                         )
                       ],
                     ),
-                    Spacer(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              ">",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "≥",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "≤",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "<",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "x",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "√",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "/",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: OutlinedButton(
+                            child: Text(
+                              "∞",
+                              textScaler: TextScaler.linear(2),
+                            ),
+                            style: ButtonStyle(
+                              backgroundColor: WidgetStatePropertyAll<Color>(
+                                  Theme.of(context).cardColor),
+                            ),
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
+                    Spacer(
+                      flex: 6,
+                    ),
                   ],
                 ),
               ),

@@ -44,7 +44,8 @@
     "solve": "Solve this expression:",
     "right": "You solved this right",
     "error": "Right solution {{right}}",
-    "error_title": "Incorrect solution"
+    "error_title": "Incorrect solution",
+    "placeholder": "Answer format:"
   },
   "rating": {
     "page_name": "Rating"
