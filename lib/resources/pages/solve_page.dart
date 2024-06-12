@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import "package:flutter_app/app/networking/api_service.dart";
+import "package:flutter_app/resources/widgets/keyboard_button_widget.dart";
 
 class SolvePage extends NyStatefulWidget {
   static const path = '/solve';
@@ -140,64 +141,40 @@ class _SolvePageState extends NyState<SolvePage> {
                     Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              ">",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: ">",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "≥",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "≥",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "≤",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "≤",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "<",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "<",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                       ],
@@ -205,64 +182,40 @@ class _SolvePageState extends NyState<SolvePage> {
                     Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "x",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "x",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "√",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "√",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "/",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "/",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                         SizedBox(
                           width: 10,
                         ),
                         Expanded(
-                          child: OutlinedButton(
-                            child: Text(
-                              "∞",
-                              textScaler: TextScaler.linear(2),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor: WidgetStatePropertyAll<Color>(
-                                  Theme.of(context).cardColor),
-                            ),
-                            onPressed: () {},
+                          child: KeyboardButtonWidget(
+                            text: "∞",
+                            controller: answerController,
+                            context: context,
                           ),
                         ),
                       ],
