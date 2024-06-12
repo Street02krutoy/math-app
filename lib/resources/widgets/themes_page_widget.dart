@@ -3,6 +3,7 @@ import 'package:flutter_app/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/solve_page.dart';
 import 'package:flutter_app/resources/pages/theme_info_page.dart';
 import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
+import 'package:flutter_app/resources/widgets/theme_card_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
 import "package:flutter_app/app/networking/api_service.dart";
 import 'package:nylo_framework/nylo_framework.dart';
@@ -85,7 +86,7 @@ class _ThemesPageState extends NyState<ThemesPage> {
                     if (themesList[index]["id"] != "placeholder") {
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: CustomCard(
+                        child: ThemeCard(
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
