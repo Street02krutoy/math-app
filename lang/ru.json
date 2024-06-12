@@ -55,7 +55,7 @@
   },
   "progress": {
     "page_name": "Прогресс",
-    "done": "Сделано {{done}}"
+    "done": "Решено: {{done}}"
   },
   "reference": {
     "page_name": "Справка"

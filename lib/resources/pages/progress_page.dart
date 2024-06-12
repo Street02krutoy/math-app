@@ -52,34 +52,42 @@ class _ProgressPageState extends NyState<ProgressPage> {
                       name: snapshot.data[index]["name"],
                       count: snapshot.data[index]["solved_tasks"]);
                 });
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 200,
-                        child: SfCircularChart(
-                          legend: Legend(isVisible: true),
-                          series: [
-                            DoughnutSeries<DoughnutData, String>(
-                              //explode: true,
+                return SafeArea(
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 320,
+                            child: SfCircularChart(
 
-                              dataSource: dataSource,
-                              xValueMapper: (datum, int index) =>
-                                  "${datum.name} - ${datum.count}",
-                              yValueMapper: (datum, int index) => datum.count,
-                              //dataLabelSettings: DataLabelSettings(isVisible: true)
+                              legend: Legend(isVisible: true),
+                              series: [
+                                DoughnutSeries<DoughnutData, String>(
+                                  //explode: true,
+
+                                  dataSource: dataSource,
+                                  xValueMapper: (datum, int index) =>
+                                      "${datum.name} - ${datum.count}",
+                                  yValueMapper: (datum, int index) =>
+                                      datum.count,
+                                  //dataLabelSettings: DataLabelSettings(isVisible: true)
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                          Column(
+                            children: List<Widget>.generate(
+                                snapshot.data.length, (int index) {
+                              return ProgressWidget(
+                                  title: snapshot.data[index]["name"],
+                                  done: snapshot.data[index]["solved_tasks"]);
+                            }),
+                          )
+                        ],
                       ),
-                      Column(
-                        children: List<Widget>.generate(10, (int index) {
-                          return ProgressWidget(
-                              title: snapshot.data[index]["name"],
-                              done: snapshot.data[index]["solved_tasks"]);
-                        }),
-                      )
-                    ],
+                    ),
                   ),
                 );
               }
@@ -99,6 +107,7 @@ class _ProgressPageState extends NyState<ProgressPage> {
 
 class DoughnutData {
   DoughnutData({required this.name, required this.count});
+
   final String name;
   final int count;
 }

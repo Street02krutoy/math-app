@@ -56,7 +56,7 @@
   },
   "progress": {
     "page_name": "Progress",
-    "done":"Done {{done}}"
+    "done":"Done: {{done}}"
   },
   "reference": {
     "page_name": "Reference"
