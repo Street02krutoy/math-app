@@ -71,7 +71,7 @@ class _AccountPageState extends NyState<AccountPage> {
                         Expanded(
                           child: CustomCard(
                             title: Stack(
-                              alignment: Alignment.center,
+                              alignment: Alignment.bottomRight,
                               children: [
                                 ClipOval(
                                   child: CircleAvatar(

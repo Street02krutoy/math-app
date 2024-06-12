@@ -111,12 +111,11 @@ class _SolvePageState extends NyState<SolvePage> {
                               onPressed: () async {
                                 // Answer task
                                 if (answerController.text.isEmpty) return;
-                                if (answerController.text == task["solution"]) {
+                                if (task["solution"].contains(answerController.text)) {
                                   await apiService.solvedTask(
                                       data["id"], data["complexity"]);
-                                  print("Right!");
                                   showToastInfo(
-                                      title: "general.info".tr(),
+                                      title: "math.right_title".tr(),
                                       description: "math.right".tr(),
                                       style:
                                           ToastNotificationStyleType.SUCCESS);
@@ -124,7 +123,7 @@ class _SolvePageState extends NyState<SolvePage> {
                                   showToastInfo(
                                       title: "math.error_title".tr(),
                                       description: "math.error".tr(arguments: {
-                                        "right": task["solution"]
+                                        "right": task["solution"][0]
                                       }),
                                       style:
                                           ToastNotificationStyleType.WARNING);

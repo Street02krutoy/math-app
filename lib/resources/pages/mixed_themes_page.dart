@@ -68,7 +68,7 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.send),
+          child: Icon(Icons.arrow_forward_sharp),
           onPressed: () {
             routeTo(SolvePage.path);
           }),

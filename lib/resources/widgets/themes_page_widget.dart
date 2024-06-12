@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/resources/pages/mixed_themes_page.dart';
 import 'package:flutter_app/resources/pages/solve_page.dart';
 import 'package:flutter_app/resources/pages/theme_info_page.dart';
-import 'package:flutter_app/resources/widgets/custom_card_widget.dart';
 import 'package:flutter_app/resources/widgets/theme_card_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
 import "package:flutter_app/app/networking/api_service.dart";
@@ -53,12 +52,14 @@ class _ThemesPageState extends NyState<ThemesPage> {
     // updateState(ThemesPage.state, data: "example payload");
   }
 
-  void showDiffDialog(BuildContext context, int id, String placeholder) {
+  void showDiffDialog(BuildContext context, int id, String placeholder,
+      {bool is_mixed = false}) {
     showDialog(
         context: context,
         builder: ((context) => PopUpDifficulty(
               id: id,
               placeholder: placeholder,
+              is_mixed: is_mixed,
             )));
   }
 
@@ -81,67 +82,60 @@ class _ThemesPageState extends NyState<ThemesPage> {
                 await themes;
               },
               child: GridView.count(
-                  crossAxisCount: 2,
-                  children: List.generate(themesList.length, (index) {
-                    if (themesList[index]["id"] != "placeholder") {
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: ThemeCard(
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: Text(themesList[index]["name"]),
-                                ),
-                                InkWell(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(100)),
-                                  onTap: () async {
-                                    apiService
-                                        .getTopicDescription(
-                                            themesList[index]["id"])
-                                        .then((value) {
-                                      routeTo(ThemeInfoPage.path, data: {
-                                        "name": themesList[index]["name"],
-                                        "description": value["description"]
-                                      });
+                crossAxisCount: 2,
+                children: List.generate(
+                  themesList.length,
+                  (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ThemeCard(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(themesList[index]["name"]),
+                              ),
+                              InkWell(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
+                                onTap: () async {
+                                  apiService
+                                      .getTopicDescription(
+                                          themesList[index]["id"])
+                                      .then((value) {
+                                    routeTo(ThemeInfoPage.path, data: {
+                                      "name": themesList[index]["name"],
+                                      "description": value["description"]
                                     });
-                                  },
-                                  child: CircleAvatar(
-                                    radius: 15,
-                                    backgroundColor:
-                                        context.theme.colorScheme.secondary,
-                                    child: Icon(
-                                      Icons.question_mark,
-                                      color: context.theme.primaryColor,
-                                    ),
+                                  });
+                                },
+                                child: CircleAvatar(
+                                  radius: 15,
+                                  backgroundColor:
+                                      context.theme.colorScheme.secondary,
+                                  child: Icon(
+                                    Icons.question_mark,
+                                    color: context.theme.primaryColor,
                                   ),
                                 ),
-                              ],
-                            ),
-                            content: Image.network(
-                              getEnv("API_BASE_URL") +
-                                  "/api/user/topic_photo/" +
-                                  themesList[index]["id"].toString(),
-                            ),
-                            onTap: () {
-                              showDiffDialog(context, themesList[index]["id"], themesList[index]["placeholder"]);
-                            },
-                            height: 100),
-                      );
-                    } else {
-                      return Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: CustomCard(
-                            title: Text("themes.mixed".tr()),
-                            content: Text("themes.mixdesc"),
-                            onTap: () {
-                              routeTo(MixedThemesPage.path);
-                            },
-                            height: 100),
-                      );
-                    }
-                  })),
+                              ),
+                            ],
+                          ),
+                          content: Image.network(
+                            getEnv("API_BASE_URL") +
+                                "/api/user/topic_photo/" +
+                                themesList[index]["id"].toString(),
+                          ),
+                          onTap: () {
+                            showDiffDialog(context, themesList[index]["id"],
+                                themesList[index]["placeholder"],
+                                is_mixed: themesList[index]["id"] == 14);
+                          },
+                          height: 100),
+                    );
+                  },
+                ),
+              ),
             );
           }
           return Center(
@@ -156,10 +150,15 @@ class _ThemesPageState extends NyState<ThemesPage> {
 }
 
 class PopUpDifficulty extends StatefulWidget {
-  PopUpDifficulty({super.key, required this.id, required this.placeholder});
+  PopUpDifficulty(
+      {super.key,
+      required this.id,
+      required this.placeholder,
+      this.is_mixed = false});
 
   final int id;
   final String placeholder;
+  final bool is_mixed;
 
   @override
   State<PopUpDifficulty> createState() => _PopUpDifficultyState();
@@ -232,11 +231,17 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
                       break;
                   }
                   Navigator.pop(context, 'OK');
-                  routeTo(SolvePage.path, data: {
-                    "complexity": complexity,
-                    "id": widget.id,
-                    "placeholder": widget.placeholder
-                  });
+                  if (!widget.is_mixed) {
+                    routeTo(SolvePage.path, data: {
+                      "complexity": complexity,
+                      "id": widget.id,
+                      "placeholder": widget.placeholder
+                    });
+                  } else {
+                    routeTo(MixedThemesPage.path, data: {
+                      "complexity": complexity,
+                    });
+                  }
                 },
           child: Text('general.ok'.tr()),
         ),

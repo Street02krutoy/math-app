@@ -43,7 +43,8 @@
     "next": "Next",
     "solve": "Solve this expression:",
     "right": "You solved this right",
-    "error": "Right solution {{right}}",
+    "right_title": "Excellent!",
+    "error": "Right solution: {{right}}",
     "error_title": "Incorrect solution",
     "placeholder": "Answer format:"
   },
@@ -87,5 +88,8 @@
     "upload": "Upload a file",
     "select": "Select",
     "file_name": "File was not chosen"
+  },
+  "mixed": {
+    "page_name": "Choose task themes"
   }
 }
