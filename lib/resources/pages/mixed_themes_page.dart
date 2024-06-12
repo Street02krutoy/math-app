@@ -19,11 +19,9 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
 
   /// Use boot if you need to load data before the [view] is rendered.
   @override
-  boot() async {
-    checkBoxes = List.generate(themeCount, (int index) => false);
-  }
+  boot() async {}
 
-  List<bool>? checkBoxes;
+  List checked = [];
   late Map _data;
   final ApiService apiService = ApiService();
   static Future? themes;
@@ -31,8 +29,6 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
   fetch() {
     themes = apiService.getMixTopics();
   }
-
-  int get themeCount => 20;
 
   @override
   Widget view(BuildContext context) {
@@ -60,7 +56,11 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
                             return InkWell(
                               onTap: () {
                                 setState(() {
-                                  checkBoxes![index] = !checkBoxes![index];
+                                  if (checked.contains(index + 1)) {
+                                    checked.remove(index + 1);
+                                  } else {
+                                    checked.add(index + 1);
+                                  }
                                 });
                               },
                               child: ListTile(
@@ -68,11 +68,14 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
                                     themeList[index]["name"],
                                   ),
                                   trailing: Checkbox(
-                                      value: checkBoxes![index],
+                                      value: checked.contains(index + 1),
                                       onChanged: (value) {
                                         setState(() {
-                                          checkBoxes![index] =
-                                              !checkBoxes![index];
+                                          if (checked.contains(index + 1)) {
+                                            checked.remove(index + 1);
+                                          } else {
+                                            checked.add(index + 1);
+                                          }
                                         });
                                       })),
                             );
@@ -93,17 +96,16 @@ class _MixedThemesPageState extends NyState<MixedThemesPage> {
                           Spacer(),
                           ElevatedButton(
                             onPressed: () {
-                              if (checkBoxes != null) {
-                                if (checkBoxes!.any((e) => e)) {
-                                  routeTo(
-                                    SolvePage.path,
-                                    data: {
-                                      "complexity": _data["complexity"],
-                                      "id": _data["id"],
-                                      "placeholder": _data["placeholder"],
-                                    },
-                                  );
-                                }
+                              if (checked.isNotEmpty) {
+                                routeTo(
+                                  SolvePage.path,
+                                  data: {
+                                    "complexity": _data["complexity"],
+                                    "id": _data["id"],
+                                    "placeholder": _data["placeholder"],
+                                    "topics": checked,
+                                  },
+                                );
                               }
                             },
                             child: Icon(Icons.arrow_forward_sharp),

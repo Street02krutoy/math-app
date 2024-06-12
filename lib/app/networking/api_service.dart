@@ -185,7 +185,7 @@ class ApiService extends NyApiService {
     });
   }
 
-  Future getTask(int id, int complexity, {List? topics = null}) async {
+  Future getTask(int id, int complexity, List? topics) async {
     String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
     return await network(request: (request) {
       return request.get(topics == null

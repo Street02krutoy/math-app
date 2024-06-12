@@ -38,7 +38,7 @@ class _SolvePageState extends NyState<SolvePage> {
   @override
   Widget view(BuildContext context) {
     var data = widget.data();
-    Future taskf = apiService.getTask(data["id"], data["complexity"]);
+    Future taskf = apiService.getTask(data["id"], data["complexity"], data["topics"]);
     return Scaffold(
       appBar: AppBar(title: Text("math.page_name".tr())),
       body: FutureBuilder(
