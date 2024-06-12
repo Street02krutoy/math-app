@@ -28,8 +28,6 @@ class _RatingPageState extends NyState<RatingPage> {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text("rating.page_name".tr()),
@@ -103,7 +101,7 @@ class _RatingPageState extends NyState<RatingPage> {
                         borderColor: Color.fromRGBO(255, 199, 0, 1),
                       ),
                     ),
-                    ListView.builder(
+                    Expanded(child: ListView.builder(
                       itemCount: userRating.length,
                       shrinkWrap: true,
                       // physics: NeverScrollableScrollPhysics(),
@@ -112,7 +110,7 @@ class _RatingPageState extends NyState<RatingPage> {
                         name: userRating[index]["username"],
                         rating: userRating[index]["rating"],
                       ),
-                    ),
+                    ),),
                   ],
                 ),
               ),
