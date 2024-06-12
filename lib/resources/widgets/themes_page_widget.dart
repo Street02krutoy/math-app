@@ -231,17 +231,13 @@ class _PopUpDifficultyState extends NyState<PopUpDifficulty> {
                       break;
                   }
                   Navigator.pop(context, 'OK');
-                  if (!widget.is_mixed) {
-                    routeTo(SolvePage.path, data: {
-                      "complexity": complexity,
-                      "id": widget.id,
-                      "placeholder": widget.placeholder
-                    });
-                  } else {
-                    routeTo(MixedThemesPage.path, data: {
-                      "complexity": complexity,
-                    });
-                  }
+                  routeTo(
+                      !widget.is_mixed ? SolvePage.path : MixedThemesPage.path,
+                      data: {
+                        "complexity": complexity,
+                        "id": widget.id,
+                        "placeholder": widget.placeholder
+                      });
                 },
           child: Text('general.ok'.tr()),
         ),

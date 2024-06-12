@@ -185,11 +185,12 @@ class ApiService extends NyApiService {
     });
   }
 
-  Future getTask(int id, int complexity) async {
+  Future getTask(int id, int complexity, {List? topics = null}) async {
     String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
     return await network(request: (request) {
-      return request
-          .get("/api/user/task/$id?lang=$lang&complexity=$complexity");
+      return request.get(topics == null
+          ? "/api/user/task/$id?lang=$lang&complexity=$complexity"
+          : "/api/user/task/$id?lang=$lang&complexity=$complexity&topics=${topics.map((x) => x.toString()).join(",")}");
     });
   }
 
@@ -211,6 +212,15 @@ class ApiService extends NyApiService {
     return await network(
       request: (request) {
         return request.get("/api/user/rating");
+      },
+    );
+  }
+
+  Future getMixTopics() async {
+    String lang = await NyStorage.read("com.srit.math.lang") ?? "ru";
+    return await network(
+      request: (request) {
+        return request.get("/api/user/topics_for_mix?lang=$lang");
       },
     );
   }
