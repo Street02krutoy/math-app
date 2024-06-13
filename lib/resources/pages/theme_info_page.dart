@@ -26,11 +26,9 @@ class _ThemeInfoPageState extends NyState<ThemeInfoPage> {
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: SingleChildScrollView(
-            child: Flexible(
-              child: Text(
-                data["description"],
-                textScaler: TextScaler.linear(2),
-              ),
+            child: Text(
+              data["description"],
+              textScaler: TextScaler.linear(2),
             ),
           ),
         ),

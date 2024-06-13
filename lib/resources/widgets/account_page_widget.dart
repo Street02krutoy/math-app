@@ -216,8 +216,7 @@ class _AccountPageState extends NyState<AccountPage> {
                         ),
                         icon: Icons.contact_support,
                         onTap: () {
-                          launchUrl(
-                              Uri.parse("https://t.me/mathushasupportbot"));
+                          launchUrl(Uri.parse("https://t.me/tmathsupportbot"));
                         },
                       ),
                     ),
