@@ -24,6 +24,7 @@ class _ProgressWidgetState extends State<ProgressWidget> {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
+      triggerMode: TooltipTriggerMode.tap,
       message: "${"progress.done.easy".tr(arguments: {
             "done": widget.done.easy.toString()
           })}, ${"progress.done.medium".tr(arguments: {
