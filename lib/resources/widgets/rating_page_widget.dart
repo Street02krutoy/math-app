@@ -23,7 +23,7 @@ class _RatingPageState extends NyState<RatingPage> {
 
   @override
   init() async {
-    if (ratingf == null) await fetch();
+    await fetch();
   }
 
   @override

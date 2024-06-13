@@ -97,6 +97,15 @@ class _SolvePageState extends NyState<SolvePage> {
                                 onPressed: () {
                                   // Skip task
                                   nextTask();
+                                  showToastInfo(
+                                      title: "math.skip_title".tr(),
+                                      description: "math.error".tr(
+                                        arguments: {
+                                          "right": task["solution"][0]
+                                        },
+                                      ),
+                                      style:
+                                          ToastNotificationStyleType.WARNING);
                                 },
                                 child: Text(
                                   "math.skip".tr(),
@@ -127,7 +136,7 @@ class _SolvePageState extends NyState<SolvePage> {
                                               "right": task["solution"][0]
                                             }),
                                         style:
-                                            ToastNotificationStyleType.WARNING);
+                                            ToastNotificationStyleType.DANGER);
                                   }
                                   nextTask();
                                 },

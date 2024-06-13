@@ -32,6 +32,7 @@ class _AchievementsPageState extends NyState<AchievementsPage> {
 
   @override
   Widget view(BuildContext context) {
+    fetch();
     return Scaffold(
         appBar: AppBar(title: Text("achievements.page_name".tr())),
         body: FutureBuilder(

@@ -41,6 +41,7 @@ class _ProgressPageState extends NyState<ProgressPage> {
 
   @override
   Widget view(BuildContext context) {
+    fetch();
     return Scaffold(
       appBar: AppBar(title: Text("progress.page_name".tr())),
       body: SafeArea(

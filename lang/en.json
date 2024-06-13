@@ -46,6 +46,8 @@
     "right_title": "Excellent!",
     "error": "Right solution: {{right}}",
     "error_title": "Incorrect solution",
+    "skip_title": "Skipped",
+
     "placeholder": "Answer format:"
   },
   "rating": {
