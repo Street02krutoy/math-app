@@ -27,7 +27,7 @@ class _AccountPageState extends NyState<AccountPage> {
 
   @override
   init() async {
-    if (userf == null) fetch();
+    fetch();
   }
 
   @override
