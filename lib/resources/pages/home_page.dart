@@ -10,6 +10,10 @@ import 'package:nylo_framework/nylo_framework.dart';
 class HomePage extends NyStatefulWidget {
   static const path = '/home-page';
 
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_HomePagePageState>()?.restartApp();
+  }
+
   HomePage({super.key}) : super(path, child: _HomePagePageState());
 }
 
@@ -25,14 +29,30 @@ class _HomePagePageState extends NyState<HomePage> {
   bool auth = false;
 
   @override
-  init() async {}
+  init() async {
+    auth = await Auth.loggedIn();
+  }
+
+  void restartApp() {
+    routeToInitial();
+    Auth.loggedIn().then((val) {
+      setState(() {
+        auth = val;
+      });
+    });
+  }
 
   // / Use boot if you need to load data before the [view] is rendered.
   @override
   boot() async {
     dynamic lang = await NyStorage.read("com.srit.math.lang");
     dump(lang);
-    if (lang != null) await changeLanguage(lang);
+    if (lang != null)
+      await changeLanguage(lang);
+    else {
+      changeLanguage("ru");
+      await NyStorage.store("com.srit.math.lang", "ru");
+    }
     auth = await Auth.loggedIn();
   }
 
@@ -63,8 +83,15 @@ class _HomePagePageState extends NyState<HomePage> {
 
   @override
   Widget view(BuildContext context) {
+    Auth.loggedIn().then((val) {
+      if (val != auth)
+        setState(() {
+          auth = val;
+        });
+    });
+    dump(auth);
     !auth ? login(context) : null;
-    if ((!auth && getEnv("AUTHORISATION"))) {
+    if (!auth && getEnv("AUTHORISATION")) {
       return Scaffold(
         appBar: AppBar(title: Text("login.page_name".tr())),
         body: SafeArea(

@@ -101,18 +101,36 @@ class _RatingPageState extends NyState<RatingPage> {
                         borderColor: Color.fromRGBO(255, 199, 0, 1),
                       ),
                     ),
-                    Expanded(child: ListView.builder(
-                      itemCount: userRating.length,
-                      shrinkWrap: true,
-                      // physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => TopListItem(
-                        place: index + 1,
-                        name: userRating[index]["username"],
-                        rating: userRating[index]["rating"],
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: userRating.length,
+                        shrinkWrap: true,
+                        // physics: NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => TopListItem(
+                          place: index + 1,
+                          name: userRating[index]["username"],
+                          rating: userRating[index]["rating"],
+                        ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            dump("value15");
+            showDialog(
+                context: context,
+                builder: (BuildContext ctx) {
+                  return AlertDialog(
+                    title: Text("general.error".tr()),
+                    content: Text(snapshot.error.toString()),
+                  );
+                });
+            return Center(
+              child: Column(
+                children: [Spacer(), CircularProgressIndicator(), Spacer()],
               ),
             );
           }

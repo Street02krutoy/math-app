@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/app/networking/dio/interceptors/example_interceptor.dart';
 import 'package:flutter_app/config/storage_keys.dart';
+import 'package:flutter_app/resources/pages/home_page.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:openid_client/openid_client_io.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -78,13 +81,16 @@ class ApiService extends NyApiService {
 
   @override
   // ignore: overridden_fields
-  final interceptors = {PrettyDioLogger: PrettyDioLogger()};
+  final interceptors = {
+    PrettyDioLogger: PrettyDioLogger(),
+    ExampleInterceptor: ExampleInterceptor()
+  };
 
-  // Future fetchTestData() async {
-  //   return await network(
-  //     request: (request) => request.get("/endpoint-path"),
-  //   );
-  // }
+  Future fetchTestData() async {
+    return await network(
+      request: (request) => request.get("/"),
+    );
+  }
 
   /* Helpers
   |-------------------------------------------------------------------------- */
@@ -157,6 +163,10 @@ class ApiService extends NyApiService {
         title: "Error",
         description: dioException.message ?? "",
         style: ToastNotificationStyleType.DANGER);
+    dump("asdddddddddddddddddddddddddddddddddddddddddddddddd");
+    if (dioException.response!.statusCode == 401) {
+      HomePage.restartApp(context);
+    }
   }
 
   // ВСЕ ЗАПРОСЫ К АПИ
@@ -247,11 +257,13 @@ class ApiService extends NyApiService {
   }
 
   Future logout() async {
-    return await Dio(BaseOptions(
-      baseUrl: getEnv("SSO_URL"),
-    )).get("/protocol/openid-connect/logout").then((respose) {
-      dump(respose.data);
-    });
+    Uri url = Uri.parse("${getEnv("SSO_URL")}/protocol/openid-connect/logout");
+    if (await canLaunchUrl(url)) {
+      launchUrl(url).then((a) async {
+        StorageKey.userToken.store(null);
+        await Auth.logout();
+      });
+    }
   }
 }
 

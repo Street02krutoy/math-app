@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '/config/toast_notification_styles.dart';
 import '/resources/widgets/loader_widget.dart';
 import '/resources/widgets/logo_widget.dart';
@@ -19,7 +20,7 @@ import 'package:nylo_framework/nylo_framework.dart';
 | -------------------------------------------------------------------------- */
 
 final TextStyle appFont = TextStyle(fontFamily: "Tinkoff-Sans");
-// e.g. final TextStyle appThemeFont = GoogleFonts.lato();
+// final TextStyle appFont = GoogleFonts.inter();
 
 /* App Logo
 |--------------------------------------------------------------------------

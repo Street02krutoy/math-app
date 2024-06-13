@@ -56,7 +56,11 @@
   },
   "progress": {
     "page_name": "Progress",
-    "done":"Done: {{done}}"
+    "done": {
+      "easy": "Easy: {{done}}",
+      "medium": "Medium: {{done}}",
+      "hard": "Hard: {{done}}"
+    }
   },
   "reference": {
     "page_name": "Reference"

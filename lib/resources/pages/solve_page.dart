@@ -38,7 +38,8 @@ class _SolvePageState extends NyState<SolvePage> {
   @override
   Widget view(BuildContext context) {
     var data = widget.data();
-    Future taskf = apiService.getTask(data["id"], data["complexity"], data["topics"]);
+    Future taskf =
+        apiService.getTask(data["id"], data["complexity"], data["topics"]);
     return Scaffold(
       appBar: AppBar(title: Text("math.page_name".tr())),
       body: FutureBuilder(
@@ -49,180 +50,178 @@ class _SolvePageState extends NyState<SolvePage> {
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(40.0),
-                child: Column(
-                  children: [
-                    Spacer(
-                      flex: 6,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomCard(
-                              title: Text("math.solve".tr(),
-                                  textScaler: TextScaler.linear(1.5)),
-                              content: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  task["problem"],
-                                  textScaler: data["id"] != 15
-                                      ? TextScaler.linear(2)
-                                      : TextScaler.linear(1),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomCard(
+                                title: Text("math.solve".tr(),
+                                    textScaler: TextScaler.linear(1.5)),
+                                content: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    task["problem"],
+                                    textScaler: data["id"] != 15
+                                        ? TextScaler.linear(2)
+                                        : TextScaler.linear(1),
+                                  ),
                                 ),
-                              ),
-                              onTap: null,
-                              height: data["id"] != 15 ? 100 : 150),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextField(
-                      controller: answerController,
-                      autofocus: true,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                          labelText: "math.placeholder".tr(),
-                          hintText: data["placeholder"],
-                          labelStyle: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                          )),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton(
-                              onPressed: () {
-                                // Skip task
-                                nextTask();
-                              },
-                              child: Text(
-                                "math.skip".tr(),
-                              )),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                // Answer task
-                                if (answerController.text.isEmpty) return;
-                                if (task["solution"].contains(answerController.text)) {
-                                  await apiService.solvedTask(
-                                      data["id"], data["complexity"]);
-                                  showToastInfo(
-                                      title: "math.right_title".tr(),
-                                      description: "math.right".tr(),
-                                      style:
-                                          ToastNotificationStyleType.SUCCESS);
-                                } else {
-                                  showToastInfo(
-                                      title: "math.error_title".tr(),
-                                      description: "math.error".tr(arguments: {
-                                        "right": task["solution"][0]
-                                      }),
-                                      style:
-                                          ToastNotificationStyleType.WARNING);
-                                }
-                                nextTask();
-                              },
-                              child: Text("math.next".tr())),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: ">",
-                            controller: answerController,
-                            context: context,
+                                onTap: null,
+                                height: data["id"] != 15 ? 100 : 150),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "≥",
-                            controller: answerController,
-                            context: context,
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextField(
+                        controller: answerController,
+                        autofocus: true,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            labelText: "math.placeholder".tr(),
+                            hintText: data["placeholder"],
+                            labelStyle: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton(
+                                onPressed: () {
+                                  // Skip task
+                                  nextTask();
+                                },
+                                child: Text(
+                                  "math.skip".tr(),
+                                )),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "≤",
-                            controller: answerController,
-                            context: context,
+                          SizedBox(
+                            width: 20,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "<",
-                            controller: answerController,
-                            context: context,
+                          Expanded(
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  // Answer task
+                                  if (answerController.text.isEmpty) return;
+                                  if (task["solution"]
+                                      .contains(answerController.text)) {
+                                    await apiService.solvedTask(
+                                        data["id"], data["complexity"]);
+                                    showToastInfo(
+                                        title: "math.right_title".tr(),
+                                        description: "math.right".tr(),
+                                        style:
+                                            ToastNotificationStyleType.SUCCESS);
+                                  } else {
+                                    showToastInfo(
+                                        title: "math.error_title".tr(),
+                                        description: "math.error".tr(
+                                            arguments: {
+                                              "right": task["solution"][0]
+                                            }),
+                                        style:
+                                            ToastNotificationStyleType.WARNING);
+                                  }
+                                  nextTask();
+                                },
+                                child: Text("math.next".tr())),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: ">",
+                              controller: answerController,
+                              context: context,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "x",
-                            controller: answerController,
-                            context: context,
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "√",
-                            controller: answerController,
-                            context: context,
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "≥",
+                              controller: answerController,
+                              context: context,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "/",
-                            controller: answerController,
-                            context: context,
+                          SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          child: KeyboardButtonWidget(
-                            text: "∞",
-                            controller: answerController,
-                            context: context,
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "≤",
+                              controller: answerController,
+                              context: context,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Spacer(
-                      flex: 6,
-                    ),
-                  ],
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "<",
+                              controller: answerController,
+                              context: context,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "x",
+                              controller: answerController,
+                              context: context,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "√",
+                              controller: answerController,
+                              context: context,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "/",
+                              controller: answerController,
+                              context: context,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: KeyboardButtonWidget(
+                              text: "∞",
+                              controller: answerController,
+                              context: context,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

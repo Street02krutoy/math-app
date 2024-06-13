@@ -27,7 +27,7 @@ class _AccountPageState extends NyState<AccountPage> {
 
   @override
   init() async {
-    fetch();
+    if (userf == null) fetch();
   }
 
   @override
@@ -36,7 +36,7 @@ class _AccountPageState extends NyState<AccountPage> {
     // updateState(AccountPage.state, data: "example payload");
   }
 
-  Future userf = Future.delayed(Duration(days: 99));
+  static Future? userf;
 
   fetch() {
     userf = apiService.getUser();
@@ -95,7 +95,9 @@ class _AccountPageState extends NyState<AccountPage> {
                               ],
                             ),
                             content: Text(
-                              Auth.user()["preferred_username"],
+                              Auth.user() != null
+                                  ? Auth.user()["preferred_username"]
+                                  : "Error",
                               textScaler: TextScaler.linear(2),
                             ),
                           ),

@@ -55,7 +55,11 @@
   },
   "progress": {
     "page_name": "Прогресс",
-    "done": "Решено: {{done}}"
+    "done": {
+      "easy": "Лёгкие: {{done}}",
+      "medium": "Cредние: {{done}}",
+      "hard": "Cложные: {{done}}"
+    }
   },
   "reference": {
     "page_name": "Справка"

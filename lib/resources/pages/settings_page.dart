@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app/app/networking/api_service.dart';
+import 'package:flutter_app/main.dart';
+import 'package:flutter_app/resources/pages/home_page.dart';
 import 'package:flutter_app/resources/widgets/profile_button_widget.dart';
 import 'package:flutter_app/util/context_ext.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:nylo_framework/nylo_framework.dart';
 import 'package:nylo_framework/theme/helper/ny_theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -130,7 +133,8 @@ class _SettingsPageState extends NyState<SettingsPage> {
                   ElevatedButton(
                       onPressed: () {
                         ApiService().logout();
-                        routeToInitial();
+
+                        HomePage.restartApp(context);
                       },
                       child: Text("settings.logout".tr())),
                   Spacer()
