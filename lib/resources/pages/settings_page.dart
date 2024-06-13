@@ -133,8 +133,8 @@ class _SettingsPageState extends NyState<SettingsPage> {
                   ElevatedButton(
                       onPressed: () {
                         ApiService().logout();
-
-                        HomePage.restartApp(context);
+                        pop();
+                        //HomePage.restartApp(context);
                       },
                       child: Text("settings.logout".tr())),
                   Spacer()
