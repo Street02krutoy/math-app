@@ -20,6 +20,7 @@ class ProgressWidget extends StatefulWidget {
 
 class _ProgressWidgetState extends State<ProgressWidget> {
   List<DoughnutData>? dataSource;
+
   @override
   Widget build(BuildContext context) {
     return Tooltip(
@@ -35,12 +36,14 @@ class _ProgressWidgetState extends State<ProgressWidget> {
           padding: const EdgeInsets.all(8.0),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text(
-              widget.title,
-              textScaler: TextScaler.linear(2),
-              style: TextStyle(
-                color: widget.color,
-                fontSize: 14,
+            Flexible(
+              child: Text(
+                widget.title,
+                textScaler: TextScaler.linear(2),
+                style: TextStyle(
+                  color: widget.color,
+                  fontSize: 14,
+                ),
               ),
             ),
             Text(
@@ -62,6 +65,7 @@ class DoneLevels {
   final int medium;
   final int hard;
   final int all;
+
   const DoneLevels(
       {required this.easy,
       required this.medium,

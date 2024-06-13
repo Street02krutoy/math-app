@@ -60,44 +60,60 @@ class _ProgressPageState extends NyState<ProgressPage> {
                       count: snapshot.data[index]["solved_tasks"],
                       color: fromHex(snapshot.data[index]["color"]));
                 });
-                return SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 200,
-                        child: SfCircularChart(
-                          series: [
-                            DoughnutSeries<DoughnutData, String>(
-                              //explode: true,
-
-                              dataSource: dataSource,
-                              pointColorMapper: (datum, int index) =>
-                                  datum.color,
-                              xValueMapper: (datum, int index) =>
-                                  "${datum.name} - ${datum.count}",
-                              yValueMapper: (datum, int index) => datum.count,
-
-                              //dataLabelSettings: DataLabelSettings(isVisible: true)
+                return Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 300,
+                          child: SfCircularChart(
+                            tooltipBehavior: TooltipBehavior(
+                              enable: true,
+                              format: "point.x",
                             ),
-                          ],
+                            series: [
+                              DoughnutSeries<DoughnutData, String>(
+                                //explode: true,
+                                dataSource: dataSource,
+                                pointColorMapper: (datum, int index) =>
+                                    datum.color,
+                                xValueMapper: (datum, int index) => datum.name,
+                                yValueMapper: (datum, int index) => datum.count,
+                                dataLabelSettings: DataLabelSettings(
+                                  isVisible: true,
+                                  showZeroValue: false,
+                                  showCumulativeValues: true,
+                                  textStyle: TextStyle(
+                                    color: Theme.of(context).canvasColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: List<Widget>.generate(10, (int index) {
-                          return ProgressWidget(
-                              color: fromHex(snapshot.data[index]["color"]),
-                              title: snapshot.data[index]["name"],
-                              done: DoneLevels(
-                                  easy: snapshot.data[index]
-                                      ["easy_solved_tasks"],
-                                  hard: snapshot.data[index]
-                                      ["hard_solved_tasks"],
-                                  medium: snapshot.data[index]
-                                      ["medium_solved_tasks"],
-                                  all: snapshot.data[index]["solved_tasks"]));
-                        }),
-                      )
-                    ],
+                        Column(
+                          children: List<Widget>.generate(
+                            snapshot.data!.length,
+                            (int index) {
+                              return ProgressWidget(
+                                  color: fromHex(snapshot.data[index]["color"]),
+                                  title: snapshot.data[index]["name"],
+                                  done: DoneLevels(
+                                      easy: snapshot.data[index]
+                                          ["easy_solved_tasks"],
+                                      hard: snapshot.data[index]
+                                          ["hard_solved_tasks"],
+                                      medium: snapshot.data[index]
+                                          ["medium_solved_tasks"],
+                                      all: snapshot.data[index]
+                                          ["solved_tasks"]));
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }
@@ -117,6 +133,7 @@ class _ProgressPageState extends NyState<ProgressPage> {
 
 class DoughnutData {
   DoughnutData({required this.name, required this.count, required this.color});
+
   final String name;
   final int count;
   final Color color;
